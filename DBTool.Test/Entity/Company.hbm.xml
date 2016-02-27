@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="NFramework.DBTool.Test">
+	<class name="NFramework.DBTool.Test.Entity.Company" table="Company">
+
+		<id name="CompanyId" column="CompanyId" type="String">
+			<generator class="uuid.hex"/>
+		</id>
+		
+		<property column="CompanyCode" type="String" name="CompanyCode" not-null="true" length="5" />
+		<property column="Name" type="String" name="Name" not-null="true" length="200" />
+		<property column="Address" type="String" name="Address" length="500" />
+		<property column="RVersion" type="Int32" name="RVersion" not-null="true" />
+		<property column="Status" type="Int32" name="Status" not-null="true" />
+		<property column="CreaterId" type="String" name="CreaterId" not-null="true" length="40" />
+		<property column="CreateTime" type="DateTime" name="CreateTime" not-null="true" />
+		<property column="UpdatorId" type="String" name="UpdatorId" not-null="true" length="40" />
+		<property column="UpdateTime" type="DateTime" name="UpdateTime" not-null="true" />
+
+        <many-to-one name="ParentCompany" column="ParentCompanyId" class="NFramework.DBTool.Test.Entity.Company" cascade="none"/>
+        
+        <set name="SubCompanyList" inverse="true" lazy="true" >
+            <key column="ParentCompanyId" foreign-key="FK_Company_Company"/>
+            <one-to-many class="NFramework.DBTool.Test.Entity.Company" />
+        </set>
+        <set name="DepartmentList" inverse="true" lazy="true" >
+            <key column="CompanyId"  foreign-key="FK_Department_Company"/>
+            <one-to-many class="NFramework.DBTool.Test.Entity.Department" />
+        </set>
+        <set name="PositionList" inverse="true" lazy="true" >
+            <key column="CompanyId"  foreign-key="FK_Position_Company"/>
+            <one-to-many class="NFramework.DBTool.Test.Entity.Position" />
+        </set>
+        <set name="EmployeeList" inverse="true" lazy="true" >
+            <key column="CompanyId"  foreign-key="FK_Employee_Company"/>
+            <one-to-many class="NFramework.DBTool.Test.Entity.Employee" />
+        </set>
+	</class>
+</hibernate-mapping>

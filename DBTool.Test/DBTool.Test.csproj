@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EFC8B95D-CCEB-41C9-99D1-F523A760A639}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NFramework.DBTool.Test</RootNamespace>
+    <AssemblyName>NFramework.DBTool.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ReferenceLib\NHibernate\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ReferenceLib\Log4Net\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ReferenceLib\MSLib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ReferenceLib\MSLib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data.SqlCe, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ReferenceLib\MSLib\Microsoft.Practices.EnterpriseLibrary.Data.SqlCe.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ReferenceLib\MSLib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ReferenceLib\MSLib\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ReferenceLib\NHibernate\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entity\Company.cs" />
+    <Compile Include="Entity\Department.cs" />
+    <Compile Include="Entity\Employee.cs" />
+    <Compile Include="Entity\Position.cs" />
+    <Compile Include="Handler\OrgHandler.cs" />
+    <Compile Include="HibernateTest\Dal\CompanyDal.cs" />
+    <Compile Include="HibernateTest\Dal\DalFactory.cs" />
+    <Compile Include="HibernateTest\Dal\DepartmentDal.cs" />
+    <Compile Include="HibernateTest\Dal\EmployeeDal.cs" />
+    <Compile Include="HibernateTest\Dal\PositionDal.cs" />
+    <Compile Include="HibernateTest\QueryTest.cs" />
+    <Compile Include="IDal\DalManager.cs" />
+    <Compile Include="IDal\ICompanyDal.cs" />
+    <Compile Include="IDal\IDalFactory.cs" />
+    <Compile Include="IDal\IDepartmentDal.cs" />
+    <Compile Include="IDal\IEmployeeDal.cs" />
+    <Compile Include="IDal\IPositionDal.cs" />
+    <Compile Include="MSSQLTest\Dal\CompanyDal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MSSQLTest\Dal\DalFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MSSQLTest\Dal\DepartmentDal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MSSQLTest\Dal\EmployeeDal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MSSQLTest\Dal\PositionDal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MSSQLTest\QueryTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Searcher\CompanySearcher.cs" />
+    <Compile Include="Searcher\DepartmentSearcher.cs" />
+    <Compile Include="Searcher\EmployeeSearcher.cs" />
+    <Compile Include="Searcher\PositionSearcher.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="README.txt" />
+    <EmbeddedResource Include="Entity\Company.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entity\Department.hbm.xml" />
+    <EmbeddedResource Include="Entity\Employee.hbm.xml" />
+    <EmbeddedResource Include="Entity\Position.hbm.xml" />
+    <Content Include="HibernateTest\NHibernate.MSSQL.cfg.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBTool\DBTool.csproj">
+      <Project>{47bbb843-2ee5-42ac-8313-cc6584ab9d8a}</Project>
+      <Name>DBTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExceptionTool\ExceptionTool.csproj">
+      <Project>{3ffb9c31-c91c-4774-8dbf-d8d764bee057}</Project>
+      <Name>ExceptionTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectTool\ObjectTool.csproj">
+      <Project>{9e36cc84-750e-40df-961c-e205340db4c2}</Project>
+      <Name>ObjectTool</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="HibernateTest\HibernateOrderTest.orderedtest">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MSSQLTest\MSSQLOrderTest.orderedtest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="NFramework.DBTool.Test">
+	<class name="NFramework.DBTool.Test.Entity.Position" table="Position">
+
+		<id name="PositionId" column="PositionId" type="String">
+			<generator class="uuid.hex"/>
+		</id>
+		
+		<property column="PositionCode" type="String" name="PositionCode" not-null="true" length="13" />
+		<property column="Name" type="String" name="Name" length="100" />
+		<property column="RVersion" type="Int32" name="RVersion" not-null="true" />
+		<property column="Status" type="Int32" name="Status" />
+		<property column="CreaterId" type="String" name="CreaterId" not-null="true" length="40" />
+		<property column="CreateTime" type="DateTime" name="CreateTime" not-null="true" />
+		<property column="UpdatorId" type="String" name="UpdatorId" not-null="true" length="40" />
+		<property column="UpdateTime" type="DateTime" name="UpdateTime" />
+
+        <many-to-one name="CurrCompany" column="CompanyId" class="NFramework.DBTool.Test.Entity.Company" cascade="none"/>
+        <many-to-one name="CurrDepartment" column="DepartmentId" class="NFramework.DBTool.Test.Entity.Department" cascade="none"/>
+        
+        <set name="EmployeeList" inverse="true" lazy="true" >
+            <key column="PositionId" foreign-key="FK_Employee_Position"/>
+            <one-to-many class="NFramework.DBTool.Test.Entity.Employee" />
+        </set>
+	</class>
+</hibernate-mapping>
