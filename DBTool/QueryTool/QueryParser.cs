@@ -2,7 +2,6 @@
 {
     #region Reference
 
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
@@ -15,45 +14,21 @@
     public abstract class QueryParser
     {
         #region Fields & Properties
-
+        
         /// <summary>
         /// 用于存储解析后的查询条件语句
         /// </summary>
-        private string conditionString = "${group}";
-        /// <summary>
-        /// 用于存储解析后的查询条件语句
-        /// </summary>
-        public string ConditionString
-        {
-            get
-            {
-                return this.conditionString;
-            }
-        }
+        public string ConditionString { get; private set; }
 
         /// <summary>
         /// 用于存储解析后的排序语句
         /// </summary>
-        private string sortString;
-        /// <summary>
-        /// 用于存储解析后的排序语句
-        /// </summary>
-        public string SortString
-        {
-            get
-            {
-                return this.sortString;
-            }
-        }
+        public string SortString { get; private set; }
 
         /// <summary>
         /// 用于存储解析后的所有参数
         /// </summary>
-        public DBParamCollection ParamCollection
-        {
-            get;
-            set;
-        }
+        public DBParamCollection ParamCollection { get; set; }
 
         #endregion
         
@@ -67,8 +42,8 @@
         {
             if (searcher == null)
             {
-                this.conditionString = string.Empty;
-                this.sortString = string.Empty;
+                this.ConditionString = string.Empty;
+                this.SortString = string.Empty;
                 return;
             }
 
@@ -76,10 +51,10 @@
             List<SearchColumn> sortColumnList = new List<SearchColumn>();
             this.ParamCollection = new DBParamCollection();
             this.ParseGroup(searcher, mainGroup, sortColumnList);
-            this.conditionString = this.ParseConditionString(mainGroup);
+            this.ConditionString = this.ParseConditionString(mainGroup);
             this.ParseSortString(sortColumnList);
 
-            this.sortString = string.IsNullOrEmpty(this.sortString) ? string.Empty : this.sortString + " ";
+            this.SortString = string.IsNullOrEmpty(this.SortString) ? string.Empty : this.SortString + " ";
         }
 
         #endregion
@@ -114,14 +89,14 @@
                 return;
             }
 
-            IList<SearchColumn> conditionColumnList = searcher.ConditionColumnList;
-            IList<Searcher> relationSearcherList = searcher.RelationSearcherList;
-            IEnumerable<ConditionGroup> mainSubGroupList = mainGroup.SubGroup;
-            IList<Condition> mainConditionList = mainGroup.ConditionCollection;
+            var conditionColumnList = searcher.ConditionColumnList;
+            var relationSearcherList = searcher.RelationSearcherList;
+            var mainSubGroupList = mainGroup.SubGroup;
+            var mainConditionList = mainGroup.ConditionCollection;
             ConditionGroup rootGroup = null;
             IList<Condition> conditionList = null;
 
-            foreach (SearchColumn column in conditionColumnList)
+            foreach (var column in conditionColumnList)
             {
                 if (column.SortOrder != SortOrder.None)
                 {
@@ -135,7 +110,7 @@
 
                 conditionList = column.ConditionCollection;
 
-                foreach (Condition condition in conditionList)
+                foreach (var condition in conditionList)
                 {
                     if (condition.Group == null)
                     {
@@ -157,7 +132,7 @@
                 rootGroup = mainGroup;
             }
 
-            foreach (Searcher relationSearcher in relationSearcherList)
+            foreach (var relationSearcher in relationSearcherList)
             {
                 this.ParseGroup(relationSearcher, rootGroup, sortColumnList);
             }
@@ -170,11 +145,11 @@
         /// <returns>返回拼接后的条件字符串</returns>
         protected string ParseConditionString(ConditionGroup group)
         {
-            List<Condition> conditionCollection = group.ConditionCollection;
-            StringBuilder currCondStr = new StringBuilder("");
-            int count = 0;
+            var conditionCollection = group.ConditionCollection;
+            var currCondStr = new StringBuilder("");
+            var count = 0;
 
-            foreach (Condition condition in conditionCollection)
+            foreach (var condition in conditionCollection)
             {
                 if (count != 0)
                 {
@@ -189,11 +164,11 @@
 
             List<ConditionGroup> sortedSubGroupList = null;
 
-            if (group.SubGroup.Count<ConditionGroup>() > 0)
+            if (group.SubGroup.Count() > 0)
             {
-                sortedSubGroupList = group.SubGroup.OrderBy(g => g.GroupIndex).ToList<ConditionGroup>();
+                sortedSubGroupList = group.SubGroup.OrderBy(g => g.GroupIndex).ToList();
 
-                foreach (ConditionGroup subGroup in sortedSubGroupList)
+                foreach (var subGroup in sortedSubGroupList)
                 {
                     if(count > 0)
                     {
@@ -225,13 +200,14 @@
                 return;
             }
 
-            sortColumnList = sortColumnList.OrderBy(col => col.SortIndex).ToList<SearchColumn>();
-            StringBuilder tmpSortString = new StringBuilder("");
-            string sortForDbTypeStr = string.Empty;
-            string colName = string.Empty;
-            int cout = 0;
+            sortColumnList = sortColumnList.OrderBy(col => col.SortIndex).ToList();
 
-            foreach (SearchColumn column in sortColumnList)
+            var tmpSortString = new StringBuilder("");
+            var sortForDbTypeStr = string.Empty;
+            var colName = string.Empty;
+            var cout = 0;
+
+            foreach (var column in sortColumnList)
             {
                 colName = column.CurrentSearcher.TableName + "." + column.ColumnName;
 
@@ -256,7 +232,7 @@
                 cout++;
             }
 
-            this.sortString = tmpSortString.ToString();
+            this.SortString = tmpSortString.ToString();
         }
 
         /// <summary>
@@ -520,7 +496,7 @@
         /// </summary>
         public QueryParser()
         {
-
+            this.ConditionString = "${group}";
         }
 
         #endregion

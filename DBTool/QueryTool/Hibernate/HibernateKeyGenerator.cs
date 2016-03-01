@@ -20,7 +20,7 @@
         /// <returns>返回主键</returns>
         public object Generate(ISessionImplementor session, object obj)
         {
-            return NFramework.DBTool.Common.KeyGenerator.GenNewGuidKey();
+            return Common.KeyGenerator.GenNewGuidKey();
         }
     }
 }

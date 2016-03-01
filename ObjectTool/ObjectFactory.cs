@@ -30,9 +30,10 @@
         /// <returns>返回序列化后的XML数据</returns>
         public static string SerializeToXML<T>(T source)
         {
-            StringBuilder xmlStr = new StringBuilder();
-            XmlSerializer xmlSer = new XmlSerializer(typeof(T));
-            XmlWriter xmlWriter = XmlWriter.Create(xmlStr);
+            var xmlStr = new StringBuilder();
+            var xmlSer = new XmlSerializer(typeof(T));
+            var xmlWriter = XmlWriter.Create(xmlStr);
+
             xmlSer.Serialize(xmlWriter, source);
             
             return xmlStr.ToString();
@@ -46,11 +47,10 @@
         /// <returns>反序列化成功返回对象</returns>
         public static T DeserializeFromXML<T>(string serXml)
         {
-            StringReader strReader = new StringReader(serXml);
-            XmlSerializer xmlSer = new XmlSerializer(typeof(T));
-            T desObj = (T)xmlSer.Deserialize(strReader);
+            var strReader = new StringReader(serXml);
+            var xmlSer = new XmlSerializer(typeof(T));
 
-            return desObj;
+            return (T)xmlSer.Deserialize(strReader);
         }
 
         /// <summary>
@@ -68,10 +68,11 @@
 
             IFormatter formatter = new BinaryFormatter();
 
-            using (MemoryStream stream = new MemoryStream())
+            using (var stream = new MemoryStream())
             {
                 formatter.Serialize(stream, source);
                 stream.Seek(0, SeekOrigin.Begin);
+
                 return (T)formatter.Deserialize(stream);
             }
         }
@@ -84,18 +85,19 @@
         /// <param name="desObject">目标对象</param>
         public static void Copy<T>(T srcObject, T desObject)
         {
-            FieldInfo[] fields = desObject.GetType().GetFields();
+            var fields = desObject.GetType().GetFields();
 
-            foreach (FieldInfo field in fields)
+            foreach (var field in fields)
             {
                 field.SetValue(desObject, field.GetValue(srcObject));
             }
 
-            PropertyInfo[] propertys = desObject.GetType().GetProperties();
+            var propertys = desObject.GetType().GetProperties();
+            PropertyInfo srcProp = null;
 
-            foreach (PropertyInfo property in propertys)
+            foreach (var property in propertys)
             {
-                PropertyInfo srcProp = srcObject.GetType().GetProperty(property.Name);
+                srcProp = srcObject.GetType().GetProperty(property.Name);
                 property.SetValue(desObject, srcProp.GetValue(srcObject, null), null);
             }
         }

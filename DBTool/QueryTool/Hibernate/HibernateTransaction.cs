@@ -18,28 +18,12 @@
         /// <summary>
         /// 当前事务使用的Session
         /// </summary>
-        private ISession currentSession;
-        /// <summary>
-        /// 当前事务使用的Session
-        /// </summary>
-        public ISession CurrentSession
-        {
-            get { return currentSession; }
-            set { currentSession = value; }
-        }
+        public ISession CurrentSession { get; set; }
 
         /// <summary>
         /// 当前打开的Hibernate的事务对象
         /// </summary>
-        private ITransaction currentTransaction;
-        /// <summary>
-        /// 当前打开的Hibernate的事务对象
-        /// </summary>
-        public ITransaction CurrentTransaction
-        {
-            get { return currentTransaction; }
-            set { currentTransaction = value; }
-        }
+        public ITransaction CurrentTransaction { get; set; }
 
         #endregion
 
@@ -51,7 +35,8 @@
         /// <param name="dalFactory">传入一个Hibernate的DalFactory对象，DalFactory对象含有Hibernate的配置对象，可用于打开一个事务</param>
         public void Begin(IDalFactoryBase dalFactory)
         {
-            ISession session = ((HibernateDalFactoryBase)dalFactory).CurrentHibernateConfig.GetCurrentSession();
+            var session = ((HibernateDalFactoryBase)dalFactory).CurrentHibernateConfig.GetCurrentSession();
+
             this.CurrentSession = session;
             this.CurrentTransaction = session.BeginTransaction();
         }

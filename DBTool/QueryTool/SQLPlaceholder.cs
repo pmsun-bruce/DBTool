@@ -14,31 +14,17 @@
         /// <summary>
         /// 字段名占位
         /// </summary>
-        private static string colName = "${col:name}";
-        /// <summary>
-        /// 字段名占位
-        /// </summary>
         public static string ColName
         {
-            get
-            {
-                return SQLPlaceholder.colName;
-            }
+            get { return "${col:name}"; }
         }
 
         /// <summary>
         /// 表名占位
         /// </summary>
-        private static string tableName = "${table:name}";
-        /// <summary>
-        /// 表名占位
-        /// </summary>
         public static string TableName
         {
-            get
-            {
-                return SQLPlaceholder.tableName;
-            }
+            get { return "${table:name}"; }
         }
 
         #endregion

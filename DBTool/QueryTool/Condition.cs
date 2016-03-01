@@ -7,7 +7,8 @@ namespace NFramework.DBTool.QueryTool
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Text;
-    using NFramework.ObjectTool;
+
+        using NFramework.ObjectTool;
 	 
 	#endregion
 
@@ -22,21 +23,7 @@ namespace NFramework.DBTool.QueryTool
         /// <summary>
         /// 条件关系，AND或OR
         /// </summary>
-        private ConditionRelation relation;
-        /// <summary>
-        /// 条件关系，AND或OR
-        /// </summary>
-        public ConditionRelation Relation
-        {
-            get
-            {
-                return this.relation;
-            }
-            set
-            {
-                this.relation = value;
-            }
-        }
+        public ConditionRelation Relation { get; set; }
 
         /// <summary>
         /// 条件分组，当前条件与那些条件分为一组，进行查询
@@ -66,23 +53,7 @@ namespace NFramework.DBTool.QueryTool
         /// 承载这个条件的字段对象，为了后期拼接查询条件时获取字段名称。
         /// SearchColumn在条件读取的时候，会自动赋值，不用用户自己赋值。
         /// </summary>
-        private SearchColumn searchColumn;
-        /// <summary>
-        /// 承载这个条件的字段对象，为了后期拼接查询条件时获取字段名称。
-        /// SearchColumn在条件读取的时候，会自动赋值，不用用户自己赋值。
-        /// </summary>
-        public SearchColumn SearchColumn
-        {
-            get
-            {
-                return this.searchColumn;
-            }
-
-            set
-            {
-                this.searchColumn = value;
-            }
-        }
+        public SearchColumn SearchColumn { get; set; }
 
         #endregion
         
@@ -94,7 +65,7 @@ namespace NFramework.DBTool.QueryTool
         /// <returns></returns>
         public Condition Clone()
         {
-            return ObjectFactory.Clone<Condition>(this);
+            return ObjectFactory.Clone(this);
         }
 
         #endregion
@@ -132,12 +103,12 @@ namespace NFramework.DBTool.QueryTool
         /// <param name="column">条件关联字段</param>
         public Condition(ConditionRelation relation, SearchColumn column)
         {
-            this.relation = relation;
+            this.Relation = relation;
 
             if (column != null)
             {
-                this.searchColumn = column;
-                this.searchColumn.ConditionCollection.Add(this);
+                this.SearchColumn = column;
+                this.SearchColumn.ConditionCollection.Add(this);
             }
         }
 

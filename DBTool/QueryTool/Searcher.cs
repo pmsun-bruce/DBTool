@@ -20,52 +20,17 @@
         /// <summary>
         /// 该查询对象所对应的表名;在多表查询时将设置成别名
         /// </summary>
-        private string tableName;
-        /// <summary>
-        /// 该查询对象所对应的表名;在多表查询时将设置成别名
-        /// </summary>
-        public string TableName
-        {
-            get
-            {
-                return this.tableName;
-            }
-
-            set
-            {
-                this.tableName = value;
-            }
-        }
+        public string TableName { get; set; }
 
         /// <summary>
         /// 有条件的字段集合
         /// </summary>
-        private IList<SearchColumn> conditionColumnList;
-        /// <summary>
-        /// 有条件的字段集合
-        /// </summary>
-        public IList<SearchColumn> ConditionColumnList
-        {
-            get
-            {
-                return this.conditionColumnList;
-            }
-        }
+        public IList<SearchColumn> ConditionColumnList { get; private set; }
 
         /// <summary>
         /// 有关联的查询对象集合
         /// </summary>
-        private IList<Searcher> relationSearcherList;
-        /// <summary>
-        /// 有关联的查询对象集合
-        /// </summary>
-        public IList<Searcher> RelationSearcherList
-        {
-            get
-            {
-                return this.relationSearcherList;
-            }
-        }
+        public IList<Searcher> RelationSearcherList { get; private set; }
 
         #endregion
 
@@ -89,9 +54,9 @@
         /// </summary>
         public Searcher()
         {
-            this.relationSearcherList = new List<Searcher>();
-            this.conditionColumnList = new List<SearchColumn>();
-            this.tableName = string.Empty; 
+            this.RelationSearcherList = new List<Searcher>();
+            this.ConditionColumnList = new List<SearchColumn>();
+            this.TableName = string.Empty;
         }
 
         /// <summary>
@@ -100,10 +65,9 @@
         /// <param name="tableName">该查询对象所对应的表名</param>
         public Searcher(string tableName) : this()
         {
-            this.tableName = tableName;
+            this.TableName = tableName;
         }
 
         #endregion
-
     }
 }

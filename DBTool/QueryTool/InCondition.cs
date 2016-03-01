@@ -17,22 +17,7 @@ namespace NFramework.DBTool.QueryTool
         /// <summary>
         /// 条件值的集合
         /// </summary>
-        private object[] paramValueList;
-        /// <summary>
-        /// 条件值的集合
-        /// </summary>
-        public object[] ParamValueList
-        {
-            get
-            {
-                return this.paramValueList;
-            }
-
-            set
-            {
-                this.paramValueList = value;
-            }
-        }
+        public object[] ParamValueList { get; set; }
 
         #endregion
         
