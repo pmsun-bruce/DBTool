@@ -74,6 +74,8 @@
     <Compile Include="Common\IDalFactoryBase.cs" />
     <Compile Include="Common\IRVersion.cs" />
     <Compile Include="Common\KeyGenerator.cs" />
+    <Compile Include="Common\SingleResult.cs" />
+    <Compile Include="QueryTool\DBColType.cs" />
     <Compile Include="QueryTool\DBParam.cs" />
     <Compile Include="QueryTool\ExistsCondition.cs" />
     <Compile Include="QueryTool\BetweenCondition.cs" />

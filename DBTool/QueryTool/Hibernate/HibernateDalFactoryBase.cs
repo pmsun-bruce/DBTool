@@ -16,7 +16,17 @@
         /// <summary>
         /// Hibernate配置对象
         /// </summary>
-        public HibernateConfig CurrentHibernateConfig { get; private set; }
+        private HibernateConfig currentHibernateConfig;
+        /// <summary>
+        /// Hibernate配置对象
+        /// </summary>
+        public HibernateConfig CurrentHibernateConfig
+        {
+            get
+            {
+                return this.currentHibernateConfig;
+            }
+        }
 
         #endregion
 
@@ -28,7 +38,7 @@
         /// <param name="hibernateConfig">传入一个具体的Hibernate配置对象，用于数据库连接</param>
         public HibernateDalFactoryBase(HibernateConfig hibernateConfig)
         {
-            this.CurrentHibernateConfig = hibernateConfig;
+            this.currentHibernateConfig = hibernateConfig;
         }
 
         #endregion
@@ -41,7 +51,6 @@
         {
             ICTransaction tran = new HibernateTransaction();
             tran.Begin(this);
-
             return tran;
         }
     }

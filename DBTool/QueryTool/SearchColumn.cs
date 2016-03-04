@@ -19,22 +19,79 @@
         /// <summary>
         /// 字段名称
         /// </summary>
-        public string ColumnName { get; set; }
+        private string columnName;
+        /// <summary>
+        /// 字段名称
+        /// </summary>
+        public string ColumnName
+        {
+            get
+            {
+                return this.columnName;
+            }
+
+            set
+            {
+                this.columnName = value;
+            }
+        }
 
         /// <summary>
         /// 自定义条件字符串
         /// </summary>
-        public string ConditionString { get; set; }
+        private string conditionString;
+        /// <summary>
+        /// 自定义条件字符串
+        /// </summary>
+        public string ConditionString
+        {
+            get
+            {
+                return this.conditionString;
+            }
+            set
+            {
+                this.conditionString = value;
+            }
+        }
 
         /// <summary>
         /// 排序条件的先后
         /// </summary>
-        public int SortIndex { get; set; }
+        private int sortIndex;
+        /// <summary>
+        /// 排序条件的先后
+        /// </summary>
+        public int SortIndex
+        {
+            get
+            {
+                return this.sortIndex;
+            }
+            set
+            {
+                this.sortIndex = value;
+            }
+        }
 
         /// <summary>
         /// 排序的条件，升序或降序
         /// </summary>
-        public SortOrder SortOrder { get; set; }
+        private SortOrder sortOrder;
+        /// <summary>
+        /// 排序的条件，升序或降序
+        /// </summary>
+        public SortOrder SortOrder
+        {
+            get
+            {
+                return this.sortOrder;
+            }
+            set
+            {
+                this.sortOrder = value;
+            }
+        }
 
         /// <summary>
         /// 自定义排序字符串，如可以使用一些SQL函数转换字段类型，再排序
@@ -60,7 +117,6 @@
         /// 可以给一个字段赋多个不同的条件
         /// </summary>
         private List<Condition> conditionCollection;
-
         /// <summary>
         /// 条件集合
         /// 可以给一个字段赋多个不同的条件
@@ -81,19 +137,59 @@
         /// <summary>
         /// 数据库字段类型
         /// </summary>
-        public DbType DBType { get; set; }
+        private DbType dbType = DbType.Object;
+        /// <summary>
+        /// 数据库字段类型
+        /// </summary>
+        public DbType DBType
+        {
+            get
+            {
+                return this.dbType;
+            }
+            set
+            {
+                this.dbType = value;
+            }
+        }
 
         /// <summary>
         /// 当前字段是否显示查询结果
         /// </summary>
-        public bool IsGet { get; set; }
+        private bool isGet = true;
+        /// <summary>
+        /// 当前字段是否显示查询结果
+        /// </summary>
+        public bool IsGet
+        {
+            get
+            {
+                return this.isGet;
+            }
+            set
+            {
+                this.isGet = value;
+            }
+        }
 
         /// <summary>
         /// 包含当前字段的查询对象
         /// 用于后期拼接查询字符串时拼接表名
         /// 此为只读属性
         /// </summary>
-        public Searcher CurrentSearcher { get; }
+        private Searcher currentSearcher;
+        /// <summary>
+        /// 包含当前字段的查询对象
+        /// 用于后期拼接查询字符串时拼接表名
+        /// 此为只读属性
+        /// </summary>
+        public Searcher CurrentSearcher
+        {
+            get
+            {
+                return this.currentSearcher;
+            }
+        }
 
 
         #endregion
@@ -121,14 +217,12 @@
         /// <param name="columnName">字段名称</param>
         public SearchColumn(Searcher searcher, string columnName)
         {
-            this.SortOrder = SortOrder.None;
-            this.SortIndex = 1;
-            this.ColumnName = columnName;
-            this.CurrentSearcher = searcher;
-            this.DBType = DbType.Object;
-            this.IsGet = true;
+            this.sortOrder = SortOrder.None;
+            this.sortIndex = 1;
+            this.columnName = columnName;
+            this.currentSearcher = searcher;
         }
 
-    #endregion
-}
+        #endregion
+    }
 }

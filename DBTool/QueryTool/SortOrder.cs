@@ -16,12 +16,10 @@ namespace NFramework.DBTool.QueryTool
         /// Œﬁ≈≈–Ú
         /// </summary>
         None = 0,
-
         /// <summary>
         /// …˝–Ú≈≈–Ú
         /// </summary>
         Asc = 1,
-
         /// <summary>
         /// Ωµ–Ú≈≈–Ú
         /// </summary>

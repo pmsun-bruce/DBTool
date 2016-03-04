@@ -19,48 +19,83 @@ namespace NFramework.DBTool.QueryTool
         /// <summary>
         /// 获取或设置参数数据类型
         /// </summary>
-        public override DbType DbType { get; set; }
+        public override DbType DbType
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 获取或设置一个值，该值指示参数是只可输入、只可输出、双向还是存储过程返回值参数。
         /// </summary>
-        public override ParameterDirection Direction { get; set; }
+        public override ParameterDirection Direction
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 获取或设置一个值，该值指示参数是否接受空值。
         /// </summary>
-        public override bool IsNullable { get; set; }
+        public override bool IsNullable
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 获取或设置 DbParameter 的名称。
         /// </summary>
-        public override string ParameterName { get; set; }
+        public override string ParameterName
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 获取或设置列中数据的最大大小（以字节为单位）。
         /// </summary>
-        public override int Size { get; set; }
+        public override int Size
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 获取或设置源列的名称，该源列映射到 DataSet 并用于加载或返回 Value。
         /// </summary>
-        public override string SourceColumn { get; set; }
+        public override string SourceColumn
+        {
+            get;
+            set;
+        }
 
         /// <summary>
-        /// 设置或获取一个值，该值指示源列是否可以为 null。
-        /// 这使得 DbCommandBuilder 能够正确地为可以为 null 的列生成 Update 语句。
+        /// 设置或获取一个值，该值指示源列是否可以为 null。这使得 DbCommandBuilder 能够正确地为可以为 null 的列生成 Update 语句。
         /// </summary>
-        public override bool SourceColumnNullMapping { get; set; }
+        public override bool SourceColumnNullMapping
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 获取或设置在加载 Value 时使用的 DataRowVersion。
         /// </summary>
-        public override DataRowVersion SourceVersion { get; set; }
+        public override DataRowVersion SourceVersion
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 获取或设置该参数的值。
         /// </summary>
-        public override object Value { get; set; }
+        public override object Value
+        {
+            get;
+            set;
+        }
 
         #endregion
 

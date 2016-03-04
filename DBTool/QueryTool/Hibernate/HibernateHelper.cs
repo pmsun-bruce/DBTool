@@ -10,6 +10,8 @@
     using NFramework.DBTool.Common;
     using NFramework.DBTool.QueryTool;
 
+    using NFramework.ExceptionTool;
+
     #endregion
 
     /// <summary>

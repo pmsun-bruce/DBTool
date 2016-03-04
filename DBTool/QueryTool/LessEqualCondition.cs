@@ -17,7 +17,22 @@ namespace NFramework.DBTool.QueryTool
         /// <summary>
         /// 条件值
         /// </summary>
-        public object ParamValue { get; set; }
+        private object paramValue;
+        /// <summary>
+        /// 条件值
+        /// </summary>
+        public object ParamValue
+        {
+            get
+            {
+                return this.paramValue;
+            }
+
+            set
+            {
+                this.paramValue = value;
+            }
+        }
 
         #endregion
         

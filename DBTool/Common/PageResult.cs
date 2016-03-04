@@ -1,5 +1,11 @@
 ﻿namespace NFramework.DBTool.Common
 {
+    #region Reference
+    
+    using NFramework.ExceptionTool;
+
+    #endregion
+
     /// <summary>
     /// 分页查询结果集，也可以是所有结果，即一页
     /// </summary>
@@ -11,17 +17,41 @@
         /// <summary>
         /// 当前页码
         /// </summary>
-        public int PageIndex { get; set; }
+        private int pageIndex;
+        /// <summary>
+        /// 当前页码
+        /// </summary>
+        public int PageIndex
+        {
+            get { return pageIndex; }
+            set { pageIndex = value; }
+        }
 
         /// <summary>
         /// 总记录条数，非当前页条数，而是所有可查询出的条数
         /// </summary>
-        public long TotalCount { get; set; }
+        private long totalCount;
+        /// <summary>
+        /// 总记录条数，非当前页条数，而是所有可查询出的条数
+        /// </summary>
+        public long TotalCount
+        {
+            get { return totalCount; }
+            set { totalCount = value; }
+        }
 
         /// <summary>
         /// 记录列表
         /// </summary>
-        public T RecordList { get; set; }
+        private T recordList;
+        /// <summary>
+        /// 记录列表
+        /// </summary>
+        public T RecordList
+        {
+            get { return recordList; }
+            set { recordList = value; }
+        }
 
         #endregion
 
@@ -32,8 +62,8 @@
         /// </summary>
         public PageResult()
         {
-            this.PageIndex = 1;
-            this.TotalCount = 0;
+            this.pageIndex = 1;
+            this.totalCount = 0;
         }
 
         /// <summary>
@@ -43,8 +73,8 @@
         /// <param name="totalCount">总记录条数，非当前页条数，而是所有可查询出的条数</param>
         public PageResult(int pageIndex, long totalCount)
         {
-            this.PageIndex = pageIndex;
-            this.TotalCount = totalCount;
+            this.pageIndex = pageIndex;
+            this.totalCount = totalCount;
         }
 
         /// <summary>
@@ -55,8 +85,8 @@
         /// <param name="recordList">查询出的记录集合</param>
         public PageResult(int pageIndex, long totalCount, T recordList)
         {
-            this.PageIndex = pageIndex;
-            this.TotalCount = totalCount;
+            this.pageIndex = pageIndex;
+            this.totalCount = totalCount;
             this.RecordList = recordList;
         }
 

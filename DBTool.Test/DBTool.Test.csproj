@@ -121,7 +121,6 @@
     <Compile Include="Searcher\PositionSearcher.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="README.txt" />
     <EmbeddedResource Include="Entity\Company.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>

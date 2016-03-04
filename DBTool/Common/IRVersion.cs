@@ -1,5 +1,11 @@
 ﻿namespace NFramework.DBTool.Common
 {
+    #region Reference
+
+    
+
+    #endregion
+
     /// <summary>
     /// 数据记录的版本接口
     /// </summary>
@@ -8,6 +14,6 @@
         /// <summary>
         /// 记录数据的版本号
         /// </summary>
-        int RVersion { get; set; }
+        int RVersion { get;set; }
     }
 }
