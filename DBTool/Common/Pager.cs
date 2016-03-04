@@ -1,11 +1,5 @@
 ﻿namespace NFramework.DBTool.Common
 {
-    #region Reference
-
-    
-
-    #endregion
-
     /// <summary>
     /// 分页对象
     /// </summary>
@@ -16,41 +10,17 @@
         /// <summary>
         /// 当前页码
         /// </summary>
-        private int currentPage = 1;
-        /// <summary>
-        /// 当前页码
-        /// </summary>
-        public int CurrentPage
-        {
-            get { return currentPage; }
-            set { currentPage = value; }
-        }
+        public int CurrentPage { get; set; }
 
         /// <summary>
         /// 默认每页的条数
         /// </summary>
-        private int pageSize = 10;
-        /// <summary>
-        /// 默认每页的条数
-        /// </summary>
-        public int PageSize
-        {
-            get { return pageSize; }
-            set { pageSize = value; }
-        }
+        public int PageSize { get; set; }
 
         /// <summary>
         /// 默认第一条开始的记录，从0开始还是从1开始
         /// </summary>
-        private int firstRecord = 0;
-        /// <summary>
-        /// 默认第一条开始的记录，从0开始还是从1开始
-        /// </summary>
-        public int FirstRecord
-        {
-            get { return firstRecord; }
-            set { firstRecord = value; }
-        }
+        public int FirstRecord { get; set; }
 
         /// <summary>
         /// 当前页数据从第几条开始
@@ -59,8 +29,22 @@
         {
             get
             {
-                return (this.CurrentPage - 1) * this.PageSize + this.firstRecord;
+                return (this.CurrentPage - 1) * this.PageSize + this.FirstRecord;
             }
+        }
+
+        #endregion
+
+        #region
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public Pager()
+        {
+            this.CurrentPage = 1;
+            this.PageSize = 10;
+            this.FirstRecord = 0;
         }
 
         #endregion

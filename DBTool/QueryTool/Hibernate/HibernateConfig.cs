@@ -22,33 +22,18 @@
         /// <summary>
         /// 当前配置的名称，用于标识一个配置对象
         /// </summary>
-        private string name;
-        /// <summary>
-        /// 当前配置的名称，用于标识一个配置对象
-        /// </summary>
-        public string Name
-        {
-            get { return this.name; }
-            set { this.name = value; }
-        }
+        public string Name { get; set; }
 
         /// <summary>
         /// 配置文件的完整路径
         /// </summary>
-        private string configFile;
-        /// <summary>
-        /// 配置文件的完整路径
-        /// </summary>
-        public string ConfigFile
-        {
-            get { return configFile; }
-            set { configFile = value; }
-        }
+        public string ConfigFile { get; set; }
 
         /// <summary>
         /// 需要进行映射的HBM文件所在的所有程序集名称的集合
         /// </summary>
         private IList<string> assemblyList;
+
         /// <summary>
         /// 需要进行映射的HBM文件所在的所有程序集名称的集合
         /// </summary>
@@ -72,15 +57,7 @@
         /// <summary>
         /// Session工厂
         /// </summary>
-        private ISessionFactory sessionFactory;
-        /// <summary>
-        /// Session工厂
-        /// </summary>
-        public ISessionFactory SessionFactory
-        {
-            get { return sessionFactory; }
-            set { sessionFactory = value; }
-        }
+        public ISessionFactory SessionFactory { get; set; }
 
         #endregion
 
@@ -119,7 +96,9 @@
         public ISession GetCurrentSession()
         {
             this.BindContext();
-            ISession session = this.SessionFactory.GetCurrentSession();
+
+            var session = this.SessionFactory.GetCurrentSession();
+
             return this.SessionFactory.GetCurrentSession();
         }
 
@@ -128,7 +107,8 @@
         /// </summary>
         public void Config()
         {
-            Configuration hbConf = new Configuration();
+            var hbConf = new Configuration();
+
             hbConf = hbConf.Configure(this.ConfigFile);
 
             if (this.AssemblyList != null)

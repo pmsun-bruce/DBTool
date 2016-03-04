@@ -1,11 +1,5 @@
 ﻿namespace NFramework.DBTool.Common
 {
-    #region Reference
-
-    
-
-    #endregion
-
     /// <summary>
     /// Dal工厂基础接口
     /// </summary>

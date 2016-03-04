@@ -1,11 +1,5 @@
 ﻿namespace NFramework.DBTool.Common
 {
-    #region Reference
-
-    
-
-    #endregion
-
     /// <summary>
     /// 数据操作基本接口，用于如中间事务(ICTransaction)等的参数传递
     /// </summary>

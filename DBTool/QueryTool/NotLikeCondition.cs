@@ -17,22 +17,7 @@ namespace NFramework.DBTool.QueryTool
         /// <summary>
         /// 用于匹配的值
         /// </summary>
-        private object paramValue;
-        /// <summary>
-        /// 用于匹配的值
-        /// </summary>
-        public object ParamValue
-        {
-            get
-            {
-                return this.paramValue;
-            }
-
-            set
-            {
-                this.paramValue = value;
-            }
-        }
+        public object ParamValue { get; set; }
 
         #endregion
         

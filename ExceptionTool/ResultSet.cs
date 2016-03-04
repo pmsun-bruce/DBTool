@@ -17,10 +17,6 @@ namespace NFramework.ExceptionTool
         /// <summary>
         /// 
         /// </summary>
-        private ResultCode resultCode;
-        /// <summary>
-        /// 
-        /// </summary>
         private IList<ResponseMessage> messages;
 
         #endregion
@@ -31,17 +27,7 @@ namespace NFramework.ExceptionTool
         /// 
         /// </summary>
         [DataMember]
-        public ResultCode ResultCode
-        {
-            get
-            {
-                return this.resultCode;
-            }
-            set
-            {
-                this.resultCode = value;
-            }
-        }
+        public ResultCode ResultCode { get; set; }
 
         /// <summary>
         /// 
