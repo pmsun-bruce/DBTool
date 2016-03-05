@@ -12,12 +12,14 @@
     public class KeyGenerator
     {
         /// <summary>
-        /// 生成一个GUID，去除了"-"，并全部转为小写
+        /// 生成一个GUID，去除了-，并全部转为小写
         /// </summary>
-        /// <returns>返回一个去除了"-"，并全部转为小写的GUID字符串</returns>
+        /// <returns>返回一个去除了-并全部转为小写的GUID字符串</returns>
         public static string GenNewGuidKey()
         {
-            return Guid.NewGuid().ToString().ToLower().Replace("-", "");
+            string newKey = string.Empty;
+            newKey = Guid.NewGuid().ToString().ToLower().Replace("-", "");
+            return newKey;
         }
     }
 }

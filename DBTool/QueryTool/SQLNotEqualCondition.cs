@@ -17,7 +17,22 @@ namespace NFramework.DBTool.QueryTool
         /// <summary>
         /// 子查询语句
         /// </summary>
-		public string SubQuery { get; set; }
+        private string sql;
+        /// <summary>
+        /// 子查询语句
+        /// </summary>
+		public string SQL
+        {
+            get
+            {
+                return this.sql;
+            }
+
+            set
+            {
+                this.sql = value;
+            }
+        }
 
         #endregion
 
@@ -61,7 +76,7 @@ namespace NFramework.DBTool.QueryTool
         public SQLNotEqualCondition(ConditionRelation relation, SearchColumn column, string sql)
             : base(relation, column)
         {
-            this.SubQuery = sql;
+            this.SQL = sql;
         }
 
         #endregion

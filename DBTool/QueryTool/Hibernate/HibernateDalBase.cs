@@ -16,7 +16,11 @@
         /// <summary>
         /// Dal工厂，使用IDalFactoryBase类型，可用于外部参数的传递。
         /// </summary>
-        public IDalFactoryBase DalFactory { get; set; }
+        public IDalFactoryBase DalFactory
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 获取当前Hibernate的配置对象

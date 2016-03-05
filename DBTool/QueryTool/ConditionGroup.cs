@@ -21,19 +21,44 @@
         /// 组号，当前条件组的唯一编号，由Guid生成
         /// 此为只读属性
         /// </summary>
-        public string GroupId { get; }
+        private string groupId;
+        /// <summary>
+        /// 组号，当前条件组的唯一编号，由Guid生成
+        /// 此为只读属性
+        /// </summary>
+        public string GroupId
+        {
+            get
+            {
+                return this.groupId;
+            }
+        }
 
         /// <summary>
         /// 组和组之间的关系
         /// </summary>
-        public ConditionRelation GroupRelation { get; set; }
+        private ConditionRelation groupRelation;
+        /// <summary>
+        /// 组和组之间的关系
+        /// </summary>
+        public ConditionRelation GroupRelation
+        {
+            get
+            {
+                return this.groupRelation;
+            }
+
+            set
+            {
+                this.groupRelation = value;
+            }
+        }
 
         /// <summary>
         /// 子条件组
         /// 此为只读属性
         /// </summary>
         private List<ConditionGroup> subGroup;
-
         /// <summary>
         /// 子条件组
         /// 此为只读属性
@@ -55,7 +80,6 @@
         /// 当前组所包含的条件
         /// </summary>
         private List<Condition> conditionCollection;
-
         /// <summary>
         /// 当前组所包含的条件
         /// </summary>
@@ -74,13 +98,42 @@
 
         /// <summary>
         /// 父组
+        /// 此为只读属性
         /// </summary>
-        public ConditionGroup ParentGroup { get; set; }
+        private ConditionGroup parentGroup;
+        /// <summary>
+        /// 父组
+        /// </summary>
+        public ConditionGroup ParentGroup
+        {
+            get
+            {
+                return this.parentGroup;
+            }
+            set
+            {
+                this.parentGroup = value;
+            }
+        }
 
         /// <summary>
         /// 组的序号，即如果有同级组，则哪个组在前，哪个组在后
         /// </summary>
-        public int GroupIndex { get; set; }
+        private int groupIndex;
+        /// <summary>
+        /// 组的序号，即如果有同级组，则哪个组在前，哪个组在后
+        /// </summary>
+        public int GroupIndex
+        {
+            get
+            {
+                return this.groupIndex;
+            }
+            set
+            {
+                this.groupIndex = value;
+            }
+        }
 
         #endregion
         
@@ -93,7 +146,7 @@
         public void AddSubGroup(ConditionGroup subGroup)
         {
             // 如果要添加的子组的ID和当前组的ID相同，则为同一个组，不能将同组加到自己的子组集合中
-            if (this.GroupId.Equals(subGroup.GroupId))
+            if (this.groupId.Equals(subGroup.GroupId))
             {
                 throw new ArgumentException("不能将当前组加到自己的子组列表中");
             }
@@ -109,7 +162,7 @@
         /// <returns>返回克隆后的分组对象</returns>
         public ConditionGroup Clone()
         {
-            return ObjectFactory.Clone(this);
+            return ObjectFactory.Clone<ConditionGroup>(this);
         }
 
         #endregion
@@ -122,11 +175,11 @@
         public ConditionGroup()
         {
             // 初始化得时候生成组号
-            this.GroupId = Guid.NewGuid().ToString().ToLower();
+            this.groupId = Guid.NewGuid().ToString().ToLower();
             // 默认组间的关系为与的关系
             this.GroupRelation = ConditionRelation.And;
             this.subGroup = new List<ConditionGroup>();
-            this.GroupIndex = 1;
+            this.groupIndex = 1;
         }
 
         /// <summary>
@@ -135,7 +188,7 @@
         /// <param name="groupIndex">组的排序序号</param>
         public ConditionGroup(int groupIndex) : this()
         {
-            this.GroupIndex = groupIndex;
+            this.groupIndex = groupIndex;
         }
 
         /// <summary>

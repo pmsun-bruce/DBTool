@@ -24,8 +24,8 @@
         /// <returns>返回解析后的条件字符串</returns>
         protected override string BetweenParse(BetweenCondition condition)
         {
-            var conditionStr = new StringBuilder(" ");
-            var queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
+            StringBuilder conditionStr = new StringBuilder(" ");
+            string queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
 
             if (string.IsNullOrEmpty(condition.SearchColumn.ConditionString))
             {
@@ -40,15 +40,13 @@
 
             if (condition.StartValue is SearchColumn)
             {
-                var tmpColumn = (SearchColumn)condition.StartValue;
-                var startValueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
-
+                SearchColumn tmpColumn = (SearchColumn)condition.StartValue;
+                string startValueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
                 conditionStr.Append(startValueColName);
             }
             else
             {
-                var startParamName = "P" + Guid.NewGuid().ToString().ToLower().Replace("-", "");
-
+                string startParamName = "P" + Guid.NewGuid().ToString().ToLower().Replace("-", "");
                 conditionStr.Append(":" + startParamName);
                 this.ParamCollection.Add(new DBParam(startParamName, condition.StartValue));
             }
@@ -57,15 +55,13 @@
 
             if (condition.EndValue is SearchColumn)
             {
-                var tmpColumn = (SearchColumn)condition.EndValue;
-                var endValueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
-
+                SearchColumn tmpColumn = (SearchColumn)condition.EndValue;
+                string endValueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
                 conditionStr.Append(endValueColName);
             }
             else
             {
-                var endParamName = "P" + Guid.NewGuid().ToString().ToLower().Replace("-", "");
-
+                string endParamName = "P" + Guid.NewGuid().ToString().ToLower().Replace("-", "");
                 conditionStr.Append(":" + endParamName);
                 this.ParamCollection.Add(new DBParam(endParamName, condition.EndValue));
             }
@@ -82,8 +78,8 @@
         /// <returns>返回解析后的条件字符串</returns>
         protected override string EqualParse(EqualCondition condition)
         {
-            var conditionStr = new StringBuilder(" ");
-            var queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
+            StringBuilder conditionStr = new StringBuilder(" ");
+            string queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
 
             if (string.IsNullOrEmpty(condition.SearchColumn.ConditionString))
             {
@@ -98,17 +94,15 @@
 
             if (condition.ParamValue is SearchColumn)
             {
-                var tmpColumn = (SearchColumn)condition.ParamValue;
-                var valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
-
+                SearchColumn tmpColumn = (SearchColumn)condition.ParamValue;
+                string valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
                 conditionStr.Append(valueColName);
             }
             else
             {
                 if (condition.ParamValue != null && !condition.ParamValue.ToString().Equals(string.Empty))
                 {
-                    var paramName = "P" + Guid.NewGuid().ToString().ToLower().Replace("-", "");
-
+                    string paramName = "P" + Guid.NewGuid().ToString().ToLower().Replace("-", "");
                     conditionStr.Append(":" + paramName);
                     ParamCollection.Add(new DBParam(paramName, condition.ParamValue));
                 }
@@ -134,8 +128,8 @@
         /// <returns>返回解析后的条件字符串</returns>
         protected override string NotEqualParse(NotEqualCondition condition)
         {
-            var conditionStr = new StringBuilder(" ");
-            var queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
+            StringBuilder conditionStr = new StringBuilder(" ");
+            string queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
 
             if (string.IsNullOrEmpty(condition.SearchColumn.ConditionString))
             {
@@ -150,15 +144,15 @@
 
             if (condition.ParamValue is SearchColumn)
             {
-                var tmpColumn = (SearchColumn)condition.ParamValue;
-                var valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
+                SearchColumn tmpColumn = (SearchColumn)condition.ParamValue;
+                string valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
                 conditionStr.Append(valueColName);
             }
             else
             {
                 if (condition.ParamValue != null && !string.IsNullOrEmpty(condition.ParamValue.ToString()))
                 {
-                    var paramName = "P" + Guid.NewGuid().ToString().ToLower().Replace("-", "");
+                    string paramName = "P" + Guid.NewGuid().ToString().ToLower().Replace("-", "");
                     conditionStr.Append(":" + paramName);
                     ParamCollection.Add(new DBParam(paramName, condition.ParamValue));
                 }
@@ -184,8 +178,8 @@
         /// <returns>返回解析后的条件字符串</returns>
         protected override string LargeEqualParse(LargeEqualCondition condition)
         {
-            var conditionStr = new StringBuilder(" ");
-            var queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
+            StringBuilder conditionStr = new StringBuilder(" ");
+            string queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
 
             if (string.IsNullOrEmpty(condition.SearchColumn.ConditionString))
             {
@@ -200,8 +194,8 @@
 
             if (condition.ParamValue is SearchColumn)
             {
-                var tmpColumn = (SearchColumn)condition.ParamValue;
-                var valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
+                SearchColumn tmpColumn = (SearchColumn)condition.ParamValue;
+                string valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
                 conditionStr.Append(valueColName);
             }
             else
@@ -223,8 +217,8 @@
         /// <returns>返回解析后的条件字符串</returns>
         protected override string LargeThanParse(LargeThanCondition condition)
         {
-            var conditionStr = new StringBuilder(" ");
-            var queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
+            StringBuilder conditionStr = new StringBuilder(" ");
+            string queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
 
             if (string.IsNullOrEmpty(condition.SearchColumn.ConditionString))
             {
@@ -239,14 +233,13 @@
 
             if (condition.ParamValue is SearchColumn)
             {
-                var tmpColumn = (SearchColumn)condition.ParamValue;
-                var valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
-
+                SearchColumn tmpColumn = (SearchColumn)condition.ParamValue;
+                string valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
                 conditionStr.Append(valueColName);
             }
             else
             {
-                var paramName = "P" + Guid.NewGuid().ToString().ToLower().Replace("-", "");
+                string paramName = "P" + Guid.NewGuid().ToString().ToLower().Replace("-", "");
                 conditionStr.Append(":" + paramName);
                 ParamCollection.Add(new DBParam(paramName, condition.ParamValue));
             }
@@ -263,8 +256,8 @@
         /// <returns>返回解析后的条件字符串</returns>
         protected override string LessEqualParse(LessEqualCondition condition)
         {
-            var conditionStr = new StringBuilder(" ");
-            var queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
+            StringBuilder conditionStr = new StringBuilder(" ");
+            string queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
 
             if (string.IsNullOrEmpty(condition.SearchColumn.ConditionString))
             {
@@ -279,9 +272,8 @@
 
             if (condition.ParamValue is SearchColumn)
             {
-                var tmpColumn = (SearchColumn)condition.ParamValue;
-                var valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
-
+                SearchColumn tmpColumn = (SearchColumn)condition.ParamValue;
+                string valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
                 conditionStr.Append(valueColName);
             }
             else
@@ -303,8 +295,8 @@
         /// <returns>返回解析后的条件字符串</returns>
         protected override string LessThanParse(LessThanCondition condition)
         {
-            var conditionStr = new StringBuilder(" ");
-            var queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
+            StringBuilder conditionStr = new StringBuilder(" ");
+            string queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
 
             if (string.IsNullOrEmpty(condition.SearchColumn.ConditionString))
             {
@@ -319,9 +311,8 @@
 
             if (condition.ParamValue is SearchColumn)
             {
-                var tmpColumn = (SearchColumn)condition.ParamValue;
-                var valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
-
+                SearchColumn tmpColumn = (SearchColumn)condition.ParamValue;
+                string valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
                 conditionStr.Append(valueColName);
             }
             else
@@ -343,8 +334,8 @@
         /// <returns>返回解析后的条件字符串</returns>
         protected override string LikeParse(LikeCondition condition)
         {
-            var conditionStr = new StringBuilder(" ");
-            var queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
+            StringBuilder conditionStr = new StringBuilder(" ");
+            string queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
 
             if (string.IsNullOrEmpty(condition.SearchColumn.ConditionString))
             {
@@ -359,9 +350,8 @@
 
             if (condition.ParamValue is SearchColumn)
             {
-                var tmpColumn = (SearchColumn)condition.ParamValue;
-                var valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
-
+                SearchColumn tmpColumn = (SearchColumn)condition.ParamValue;
+                string valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
                 conditionStr.Append("'%' +");
                 conditionStr.Append(valueColName);
                 conditionStr.Append("+ '%'");
@@ -385,8 +375,8 @@
         /// <returns>返回解析后的条件字符串</returns>
         protected override string NotLikeParse(NotLikeCondition condition)
         {
-            var conditionStr = new StringBuilder(" ");
-            var queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
+            StringBuilder conditionStr = new StringBuilder(" ");
+            string queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
 
             if (string.IsNullOrEmpty(condition.SearchColumn.ConditionString))
             {
@@ -401,17 +391,15 @@
 
             if (condition.ParamValue is SearchColumn)
             {
-                var tmpColumn = (SearchColumn)condition.ParamValue;
-                var valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
-
+                SearchColumn tmpColumn = (SearchColumn)condition.ParamValue;
+                string valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
                 conditionStr.Append("'%' +");
                 conditionStr.Append(valueColName);
                 conditionStr.Append("+ '%'");
             }
             else
             {
-                var paramName = "P" + Guid.NewGuid().ToString().ToLower().Replace("-", "");
-
+                string paramName = "P" + Guid.NewGuid().ToString().ToLower().Replace("-", "");
                 conditionStr.Append(":" + paramName);
                 this.ParamCollection.Add(new DBParam(paramName, "%" + condition.ParamValue.ToString() + "%"));
             }
@@ -428,8 +416,8 @@
         /// <returns>返回解析后的条件字符串</returns>
         protected override string InParse(InCondition condition)
         {
-            var conditionStr = new StringBuilder(" ");
-            var queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
+            StringBuilder conditionStr = new StringBuilder(" ");
+            string queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
 
             if (string.IsNullOrEmpty(condition.SearchColumn.ConditionString))
             {
@@ -442,8 +430,8 @@
 
             conditionStr.Append(" IN ( ");
 
-            var paramName = string.Empty;
-            var i = 0;
+            string paramName = string.Empty;
+            int i = 0;
 
             foreach (object pvalue in condition.ParamValueList)
             {
@@ -454,9 +442,8 @@
 
                 if (pvalue is SearchColumn)
                 {
-                    var tmpColumn = (SearchColumn)pvalue;
-                    var valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
-
+                    SearchColumn tmpColumn = (SearchColumn)pvalue;
+                    string valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
                     conditionStr.Append(valueColName);
                 }
                 else
@@ -489,8 +476,8 @@
         /// <returns>返回解析后的条件字符串</returns>
         protected override string NotInParse(NotInCondition condition)
         {
-            var conditionStr = new StringBuilder(" ");
-            var queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
+            StringBuilder conditionStr = new StringBuilder(" ");
+            string queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
 
             if (string.IsNullOrEmpty(condition.SearchColumn.ConditionString))
             {
@@ -515,9 +502,8 @@
 
                 if (pvalue is SearchColumn)
                 {
-                    var tmpColumn = (SearchColumn)pvalue;
-                    var valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
-
+                    SearchColumn tmpColumn = (SearchColumn)pvalue;
+                    string valueColName = tmpColumn.CurrentSearcher.TableName + "." + tmpColumn.ColumnName;
                     conditionStr.Append(valueColName);
                 }
                 else
@@ -550,8 +536,8 @@
         /// <returns>返回解析后的条件字符串</returns>
         protected override string SQLInParse(SQLInCondition condition)
         {
-            var conditionStr = new StringBuilder(" ");
-            var queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
+            StringBuilder conditionStr = new StringBuilder(" ");
+            string queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
 
             if (string.IsNullOrEmpty(condition.SearchColumn.ConditionString))
             {
@@ -563,7 +549,7 @@
             }
 
             conditionStr.Append(" IN ( ");
-            conditionStr.Append(condition.SubQuery);
+            conditionStr.Append(condition.SQL);
             conditionStr.Append(") ");
 
             return conditionStr.ToString();
@@ -576,8 +562,8 @@
         /// <returns>返回解析后的条件字符串</returns>
         protected override string NotSQLInParse(SQLNotInCondition condition)
         {
-            var conditionStr = new StringBuilder(" ");
-            var queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
+            StringBuilder conditionStr = new StringBuilder(" ");
+            string queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
 
             if (string.IsNullOrEmpty(condition.SearchColumn.ConditionString))
             {
@@ -589,7 +575,7 @@
             }
 
             conditionStr.Append(" NOT IN ( ");
-            conditionStr.Append(condition.SubQuery);
+            conditionStr.Append(condition.SQL);
             conditionStr.Append(") ");
 
             return conditionStr.ToString();
@@ -602,8 +588,8 @@
         /// <returns>返回解析后的条件字符串</returns>
         protected override string SQLEqualParse(SQLEqualCondition condition)
         {
-            var conditionStr = new StringBuilder(" ");
-            var queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
+            StringBuilder conditionStr = new StringBuilder(" ");
+            string queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
 
             if (string.IsNullOrEmpty(condition.SearchColumn.ConditionString))
             {
@@ -615,7 +601,7 @@
             }
 
             conditionStr.Append(" = (");
-            conditionStr.Append(condition.SubQuery);
+            conditionStr.Append(condition.SQL);
             conditionStr.Append(") ");
 
             return conditionStr.ToString();
@@ -628,8 +614,8 @@
         /// <returns>返回解析后的条件字符串</returns>
         protected override string NotSQLEqualParse(SQLNotEqualCondition condition)
         {
-            var conditionStr = new StringBuilder(" ");
-            var queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
+            StringBuilder conditionStr = new StringBuilder(" ");
+            string queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
 
             if (string.IsNullOrEmpty(condition.SearchColumn.ConditionString))
             {
@@ -641,7 +627,7 @@
             }
 
             conditionStr.Append(" <> (");
-            conditionStr.Append(condition.SubQuery);
+            conditionStr.Append(condition.SQL);
             conditionStr.Append(") ");
 
             return conditionStr.ToString();
@@ -654,8 +640,8 @@
         /// <returns>返回解析后的条件字符串</returns>
         protected override string IsNullParse(IsNullCondition condition)
         {
-            var conditionStr = new StringBuilder(" ");
-            var queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
+            StringBuilder conditionStr = new StringBuilder(" ");
+            string queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
 
             if (string.IsNullOrEmpty(condition.SearchColumn.ConditionString))
             {
@@ -678,8 +664,8 @@
         /// <returns>返回解析后的条件字符串</returns>
         protected override string IsNotNullParse(IsNotNullCondition condition)
         {
-            var conditionStr = new StringBuilder(" ");
-            var queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
+            StringBuilder conditionStr = new StringBuilder(" ");
+            string queryColName = condition.SearchColumn.CurrentSearcher.TableName + "." + condition.SearchColumn.ColumnName;
 
             if (string.IsNullOrEmpty(condition.SearchColumn.ConditionString))
             {

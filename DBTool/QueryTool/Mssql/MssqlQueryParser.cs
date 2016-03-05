@@ -552,7 +552,7 @@
             }
 
             conditionStr.Append(" IN ( ");
-            conditionStr.Append(condition.SubQuery);
+            conditionStr.Append(condition.SQL);
             conditionStr.Append(") ");
 
             return conditionStr.ToString();
@@ -578,7 +578,7 @@
             }
 
             conditionStr.Append(" NOT IN ( ");
-            conditionStr.Append(condition.SubQuery);
+            conditionStr.Append(condition.SQL);
             conditionStr.Append(") ");
 
             return conditionStr.ToString();
@@ -604,7 +604,7 @@
             }
 
             conditionStr.Append(" = (");
-            conditionStr.Append(condition.SubQuery);
+            conditionStr.Append(condition.SQL);
             conditionStr.Append(") ");
 
             return conditionStr.ToString();
@@ -630,7 +630,7 @@
             }
 
             conditionStr.Append(" <> (");
-            conditionStr.Append(condition.SubQuery);
+            conditionStr.Append(condition.SQL);
             conditionStr.Append(") ");
 
             return conditionStr.ToString();

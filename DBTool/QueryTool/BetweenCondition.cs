@@ -21,12 +21,42 @@ namespace NFramework.DBTool.QueryTool
         /// <summary>
         /// 开始的值
         /// </summary>
-        public object StartValue { get; set; }
+		private object startValue;
+        /// <summary>
+        /// 开始的值
+        /// </summary>
+        public object StartValue
+        {
+            get
+            {
+                return startValue;
+            }
+
+            set
+            {
+                startValue = value;
+            }
+        }
 
         /// <summary>
         /// 结束的值
         /// </summary>
-        public object EndValue { get; set; }
+        private object endValue;
+        /// <summary>
+        /// 结束的值
+        /// </summary>
+        public object EndValue
+        {
+            get
+            {
+                return endValue;
+            }
+
+            set
+            {
+                endValue = value;
+            }
+        }
 
 
         #endregion

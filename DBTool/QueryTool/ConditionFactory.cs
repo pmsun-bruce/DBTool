@@ -21,7 +21,8 @@
         /// <returns>返回Between条件对象</returns>
         public static BetweenCondition Between(object stratVal, object endVal)
         {
-            return new BetweenCondition(stratVal, endVal);
+            BetweenCondition cond = new BetweenCondition(stratVal, endVal);
+            return cond;
         }
 
         /// <summary>
@@ -33,7 +34,8 @@
         /// <returns>返回Between条件对象</returns>
         public static BetweenCondition Between(SearchColumn column, object stratVal, object endVal)
         {
-            return new BetweenCondition(column, stratVal, endVal);
+            BetweenCondition cond = new BetweenCondition(column, stratVal, endVal);
+            return cond;
         }
 
         /// <summary>
@@ -45,7 +47,8 @@
         /// <returns>返回Between条件对象</returns>
         public static BetweenCondition Between(ConditionRelation relation, object stratVal, object endVal)
         {
-            return new BetweenCondition(relation, stratVal, endVal);
+            BetweenCondition cond = new BetweenCondition(relation, stratVal, endVal);
+            return cond;
         }
 
         /// <summary>
@@ -58,7 +61,8 @@
         /// <returns>返回Between条件对象</returns>
         public static BetweenCondition Between(ConditionRelation relation, SearchColumn column, object stratVal, object endVal)
         {
-            return new BetweenCondition(relation, column, stratVal, endVal);
+            BetweenCondition cond = new BetweenCondition(relation, column, stratVal, endVal);
+            return cond;
         }
 
         /// <summary>
@@ -68,7 +72,8 @@
         /// <returns>返回等于条件对象</returns>
         public static EqualCondition Equal(object paramVal)
         {
-            return new EqualCondition(paramVal);
+            EqualCondition cond = new EqualCondition(paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -79,7 +84,8 @@
         /// <returns>返回等于条件对象</returns>
         public static EqualCondition Equal(ConditionRelation relation, object paramVal)
         {
-            return new EqualCondition(relation, paramVal);
+            EqualCondition cond = new EqualCondition(relation, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -90,7 +96,8 @@
         /// <returns>返回等于条件对象</returns>
         public static EqualCondition Equal(SearchColumn column, object paramVal)
         {
-            return new EqualCondition(column, paramVal);
+            EqualCondition cond = new EqualCondition(column, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -102,7 +109,8 @@
         /// <returns>返回等于条件对象</returns>
         public static EqualCondition Equal(ConditionRelation relation, SearchColumn column, object paramVal)
         {
-            return new EqualCondition(relation, column, paramVal);
+            EqualCondition cond = new EqualCondition(relation, column, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -112,7 +120,8 @@
         /// <returns>返回不等于条件对象</returns>
         public static NotEqualCondition NotEqual(object paramVal)
         {
-            return new NotEqualCondition(paramVal);
+            NotEqualCondition cond = new NotEqualCondition(paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -123,7 +132,8 @@
         /// <returns>返回不等于条件对象</returns>
         public static NotEqualCondition NotEqual(SearchColumn column, object paramVal)
         {
-            return new NotEqualCondition(column, paramVal);
+            NotEqualCondition cond = new NotEqualCondition(column, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -134,7 +144,8 @@
         /// <returns>返回不等于条件对象</returns>
         public static NotEqualCondition NotEqual(ConditionRelation relation, object paramVal)
         {
-            return new NotEqualCondition(relation, paramVal);
+            NotEqualCondition cond = new NotEqualCondition(relation, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -146,7 +157,8 @@
         /// <returns>返回不等于条件对象</returns>
         public static NotEqualCondition NotEqual(ConditionRelation relation, SearchColumn column, object paramVal)
         {
-            return new NotEqualCondition(relation, column, paramVal);
+            NotEqualCondition cond = new NotEqualCondition(relation, column, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -156,7 +168,8 @@
         /// <returns>返回集合条件对象</returns>
         public static InCondition In(object[] paramValueList)
         {
-            return new InCondition(paramValueList);
+            InCondition cond = new InCondition(paramValueList);
+            return cond;
         }
 
         /// <summary>
@@ -167,7 +180,8 @@
         /// <returns>返回集合条件对象</returns>
         public static InCondition In(ConditionRelation relation, object[] paramValueList)
         {
-            return new InCondition(relation, paramValueList);
+            InCondition cond = new InCondition(relation, paramValueList);
+            return cond;
         }
 
         /// <summary>
@@ -178,7 +192,8 @@
         /// <returns>返回集合条件对象</returns>
         public static InCondition In(SearchColumn column, object[] paramValueList)
         {
-            return new InCondition(column, paramValueList);
+            InCondition cond = new InCondition(column, paramValueList);
+            return cond;
         }
 
         /// <summary>
@@ -190,7 +205,8 @@
         /// <returns>返回集合条件对象</returns>
         public static InCondition In(ConditionRelation relation, SearchColumn column, object[] paramValueList)
         {
-            return new InCondition(relation, column, paramValueList);
+            InCondition cond = new InCondition(relation, column, paramValueList);
+            return cond;
         }
 
         /// <summary>
@@ -200,7 +216,8 @@
         /// <returns>返回非包含集合条件对象</returns>
         public static NotInCondition NotIn(object[] paramValueList)
         {
-            return new NotInCondition(paramValueList);
+            NotInCondition cond = new NotInCondition(paramValueList);
+            return cond;
         }
 
         /// <summary>
@@ -211,7 +228,8 @@
         /// <returns>返回非包含集合条件对象</returns>
         public static NotInCondition NotIn(ConditionRelation relation, object[] paramValueList)
         {
-            return new NotInCondition(relation, paramValueList);
+            NotInCondition cond = new NotInCondition(relation, paramValueList);
+            return cond;
         }
 
         /// <summary>
@@ -222,7 +240,8 @@
         /// <returns>返回非包含集合条件对象</returns>
         public static NotInCondition NotIn(SearchColumn column, object[] paramValueList)
         {
-            return new NotInCondition(column, paramValueList);
+            NotInCondition cond = new NotInCondition(column, paramValueList);
+            return cond;
         }
 
         /// <summary>
@@ -234,7 +253,8 @@
         /// <returns>返回非包含集合条件对象</returns>
         public static NotInCondition NotIn(ConditionRelation relation, SearchColumn column, object[] paramValueList)
         {
-            return new NotInCondition(relation, column, paramValueList);
+            NotInCondition cond = new NotInCondition(relation, column, paramValueList);
+            return cond;
         }
 
         /// <summary>
@@ -243,7 +263,8 @@
         /// <returns>返回空条件对象</returns>
         public static IsNullCondition IsNull()
         {
-            return new IsNullCondition();
+            IsNullCondition cond = new IsNullCondition();
+            return cond;
         }
 
         /// <summary>
@@ -253,7 +274,8 @@
         /// <returns>返回空条件对象</returns>
         public static IsNullCondition IsNull(ConditionRelation relation)
         {
-            return new IsNullCondition(relation);
+            IsNullCondition cond = new IsNullCondition(relation);
+            return cond;
         }
 
         /// <summary>
@@ -263,7 +285,8 @@
         /// <returns>返回空条件对象</returns>
         public static IsNullCondition IsNull(SearchColumn column)
         {
-            return new IsNullCondition(column);
+            IsNullCondition cond = new IsNullCondition(column);
+            return cond;
         }
 
         /// <summary>
@@ -274,7 +297,8 @@
         /// <returns>返回空条件对象</returns>
         public static IsNullCondition IsNull(ConditionRelation relation, SearchColumn column)
         {
-            return new IsNullCondition(relation, column);
+            IsNullCondition cond = new IsNullCondition(relation, column);
+            return cond;
         }
 
         /// <summary>
@@ -283,7 +307,8 @@
         /// <returns>返回非空条件对象</returns>
         public static IsNotNullCondition IsNotNull()
         {
-            return new IsNotNullCondition();
+            IsNotNullCondition cond = new IsNotNullCondition();
+            return cond;
         }
 
         /// <summary>
@@ -293,7 +318,8 @@
         /// <returns>返回非空条件对象</returns>
         public static IsNotNullCondition IsNotNull(ConditionRelation relation)
         {
-            return new IsNotNullCondition(relation);
+            IsNotNullCondition cond = new IsNotNullCondition(relation);
+            return cond;
         }
 
         /// <summary>
@@ -303,7 +329,8 @@
         /// <returns>返回非空条件对象</returns>
         public static IsNotNullCondition IsNotNull(SearchColumn column)
         {
-            return new IsNotNullCondition(column);
+            IsNotNullCondition cond = new IsNotNullCondition(column);
+            return cond;
         }
 
         /// <summary>
@@ -314,7 +341,8 @@
         /// <returns>返回非空条件对象</returns>
         public static IsNotNullCondition IsNotNull(ConditionRelation relation, SearchColumn column)
         {
-            return new IsNotNullCondition(relation, column);
+            IsNotNullCondition cond = new IsNotNullCondition(relation, column);
+            return cond;
         }
 
         /// <summary>
@@ -324,7 +352,8 @@
         /// <returns>返回大于等于条件对象</returns>
         public static LargeEqualCondition LargeEqual(object paramVal)
         {
-            return new LargeEqualCondition(paramVal);
+            LargeEqualCondition cond = new LargeEqualCondition(paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -335,7 +364,8 @@
         /// <returns>返回大于等于条件对象</returns>
         public static LargeEqualCondition LargeEqual(ConditionRelation relation, object paramVal)
         {
-            return new LargeEqualCondition(relation, paramVal);
+            LargeEqualCondition cond = new LargeEqualCondition(relation, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -346,7 +376,8 @@
         /// <returns>返回大于等于条件对象</returns>
         public static LargeEqualCondition LargeEqual(SearchColumn column, object paramVal)
         {
-            return new LargeEqualCondition(column, paramVal);
+            LargeEqualCondition cond = new LargeEqualCondition(column, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -358,7 +389,8 @@
         /// <returns>返回大于等于条件对象</returns>
         public static LargeEqualCondition LargeEqual(ConditionRelation relation, SearchColumn column, object paramVal)
         {
-            return new LargeEqualCondition(relation, column, paramVal);
+            LargeEqualCondition cond = new LargeEqualCondition(relation, column, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -368,7 +400,8 @@
         /// <returns>返回大于条件对象</returns>
         public static LargeThanCondition LargeThan(object paramVal)
         {
-            return new LargeThanCondition(paramVal);
+            LargeThanCondition cond = new LargeThanCondition(paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -379,7 +412,8 @@
         /// <returns>返回大于条件对象</returns>
         public static LargeThanCondition LargeThan(ConditionRelation relation, object paramVal)
         {
-            return new LargeThanCondition(relation, paramVal);
+            LargeThanCondition cond = new LargeThanCondition(relation, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -390,7 +424,8 @@
         /// <returns>返回大于条件对象</returns>
         public static LargeThanCondition LargeThan(SearchColumn column, object paramVal)
         {
-            return new LargeThanCondition(column, paramVal);
+            LargeThanCondition cond = new LargeThanCondition(column, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -402,7 +437,8 @@
         /// <returns>返回大于条件对象</returns>
         public static LargeThanCondition LargeThan(ConditionRelation relation, SearchColumn column, object paramVal)
         {
-            return new LargeThanCondition(relation, column, paramVal);
+            LargeThanCondition cond = new LargeThanCondition(relation, column, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -412,7 +448,8 @@
         /// <returns>返回小于等于条件对象</returns>
         public static LessEqualCondition LessEqual(object paramVal)
         {
-            return new LessEqualCondition(paramVal);
+            LessEqualCondition cond = new LessEqualCondition(paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -423,7 +460,8 @@
         /// <returns>返回小于等于条件对象</returns>
         public static LessEqualCondition LessEqual(ConditionRelation relation, object paramVal)
         {
-            return new LessEqualCondition(relation, paramVal);
+            LessEqualCondition cond = new LessEqualCondition(relation, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -434,7 +472,8 @@
         /// <returns>返回小于等于条件对象</returns>
         public static LessEqualCondition LessEqual(SearchColumn column, object paramVal)
         {
-            return new LessEqualCondition(column, paramVal);
+            LessEqualCondition cond = new LessEqualCondition(column, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -446,7 +485,8 @@
         /// <returns>返回小于等于条件对象</returns>
         public static LessEqualCondition LessEqual(ConditionRelation relation, SearchColumn column, object paramVal)
         {
-            return new LessEqualCondition(relation, column, paramVal);
+            LessEqualCondition cond = new LessEqualCondition(relation, column, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -456,7 +496,8 @@
         /// <returns>返回小于条件对象</returns>
         public static LessThanCondition LessThan(object paramVal)
         {
-            return new LessThanCondition(paramVal);
+            LessThanCondition cond = new LessThanCondition(paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -467,7 +508,8 @@
         /// <returns>返回小于条件对象</returns>
         public static LessThanCondition LessThan(ConditionRelation relation, object paramVal)
         {
-            return new LessThanCondition(relation, paramVal);
+            LessThanCondition cond = new LessThanCondition(relation, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -478,7 +520,8 @@
         /// <returns>返回小于条件对象</returns>
         public static LessThanCondition LessThan(SearchColumn column, object paramVal)
         {
-            return new LessThanCondition(column, paramVal);
+            LessThanCondition cond = new LessThanCondition(column, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -490,7 +533,8 @@
         /// <returns>返回小于条件对象</returns>
         public static LessThanCondition LessThan(ConditionRelation relation, SearchColumn column, object paramVal)
         {
-            return new LessThanCondition(relation, column, paramVal);
+            LessThanCondition cond = new LessThanCondition(relation, column, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -500,7 +544,8 @@
         /// <returns>返回相似条件对象</returns>
         public static LikeCondition Like(object paramVal)
         {
-            return new LikeCondition(paramVal);
+            LikeCondition cond = new LikeCondition(paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -511,7 +556,8 @@
         /// <returns>返回相似条件对象</returns>
         public static LikeCondition Like(ConditionRelation relation, object paramVal)
         {
-            return new LikeCondition(relation, paramVal);
+            LikeCondition cond = new LikeCondition(relation, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -522,7 +568,8 @@
         /// <returns>返回相似条件对象</returns>
         public static LikeCondition Like(SearchColumn column, object paramVal)
         {
-            return new LikeCondition(column, paramVal);
+            LikeCondition cond = new LikeCondition(column, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -534,7 +581,8 @@
         /// <returns>返回相似条件对象</returns>
         public static LikeCondition Like(ConditionRelation relation, SearchColumn column, object paramVal)
         {
-            return new LikeCondition(relation, column, paramVal);
+            LikeCondition cond = new LikeCondition(relation, column, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -544,7 +592,8 @@
         /// <returns>返回非相似条件对象</returns>
         public static NotLikeCondition NotLike(object paramVal)
         {
-            return new NotLikeCondition(paramVal);
+            NotLikeCondition cond = new NotLikeCondition(paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -555,7 +604,8 @@
         /// <returns>返回非相似条件对象</returns>
         public static NotLikeCondition NotLike(ConditionRelation relation, object paramVal)
         {
-            return new NotLikeCondition(relation, paramVal);
+            NotLikeCondition cond = new NotLikeCondition(relation, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -566,7 +616,8 @@
         /// <returns>返回非相似条件对象</returns>
         public static NotLikeCondition NotLike(SearchColumn column, object paramVal)
         {
-            return new NotLikeCondition(column, paramVal);
+            NotLikeCondition cond = new NotLikeCondition(column, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -578,7 +629,8 @@
         /// <returns>返回非相似条件对象</returns>
         public static NotLikeCondition NotLike(ConditionRelation relation, SearchColumn column, object paramVal)
         {
-            return new NotLikeCondition(relation, column, paramVal);
+            NotLikeCondition cond = new NotLikeCondition(relation, column, paramVal);
+            return cond;
         }
 
         /// <summary>
@@ -588,7 +640,8 @@
         /// <returns>返回子查询包含条件对象</returns>
         public static SQLInCondition SQLIn(string sql)
         {
-            return new SQLInCondition(sql);
+            SQLInCondition cond = new SQLInCondition(sql);
+            return cond;
         }
 
         /// <summary>
@@ -599,7 +652,8 @@
         /// <returns>返回子查询包含条件对象</returns>
         public static SQLInCondition SQLIn(ConditionRelation relation, string sql)
         {
-            return new SQLInCondition(relation, sql);
+            SQLInCondition cond = new SQLInCondition(relation, sql);
+            return cond;
         }
 
         /// <summary>
@@ -610,7 +664,8 @@
         /// <returns>返回子查询包含条件对象</returns>
         public static SQLInCondition SQLIn(SearchColumn column, string sql)
         {
-            return new SQLInCondition(column, sql);
+            SQLInCondition cond = new SQLInCondition(column, sql);
+            return cond;
         }
 
         /// <summary>
@@ -622,7 +677,8 @@
         /// <returns>返回子查询包含条件对象</returns>
         public static SQLInCondition SQLIn(ConditionRelation relation, SearchColumn column, string sql)
         {
-            return new SQLInCondition(relation, column, sql);
+            SQLInCondition cond = new SQLInCondition(relation, column, sql);
+            return cond;
         }
 
         /// <summary>
@@ -632,7 +688,8 @@
         /// <returns>返回子查询非包含条件对象</returns>
         public static SQLNotInCondition SQLNotIn(string sql)
         {
-            return new SQLNotInCondition(sql);
+            SQLNotInCondition cond = new SQLNotInCondition(sql);
+            return cond;
         }
 
         /// <summary>
@@ -643,7 +700,8 @@
         /// <returns>返回子查询非包含条件对象</returns>
         public static SQLNotInCondition SQLNotIn(ConditionRelation relation, string sql)
         {
-            return new SQLNotInCondition(relation, sql);
+            SQLNotInCondition cond = new SQLNotInCondition(relation, sql);
+            return cond;
         }
 
         /// <summary>
@@ -654,7 +712,8 @@
         /// <returns>返回子查询非包含条件对象</returns>
         public static SQLNotInCondition SQLNotIn(SearchColumn column, string sql)
         {
-            return new SQLNotInCondition(column, sql);
+            SQLNotInCondition cond = new SQLNotInCondition(column, sql);
+            return cond;
         }
 
         /// <summary>
@@ -666,7 +725,8 @@
         /// <returns>返回子查询非包含条件对象</returns>
         public static SQLNotInCondition SQLNotIn(ConditionRelation relation, SearchColumn column, string sql)
         {
-            return new SQLNotInCondition(relation, column, sql);
+            SQLNotInCondition cond = new SQLNotInCondition(relation, column, sql);
+            return cond;
         }
 
         /// <summary>
@@ -676,7 +736,8 @@
         /// <returns>返回子查询等于条件对象</returns>
         public static SQLEqualCondition SQLEqual(string sql)
         {
-            return new SQLEqualCondition(sql);
+            SQLEqualCondition cond = new SQLEqualCondition(sql);
+            return cond;
         }
 
         /// <summary>
@@ -687,7 +748,8 @@
         /// <returns>返回子查询等于条件对象</returns>
         public static SQLEqualCondition SQLEqual(ConditionRelation relation, string sql)
         {
-            return new SQLEqualCondition(relation, sql);
+            SQLEqualCondition cond = new SQLEqualCondition(relation, sql);
+            return cond;
         }
 
         /// <summary>
@@ -698,7 +760,8 @@
         /// <returns>返回子查询等于条件对象</returns>
         public static SQLEqualCondition SQLEqual(SearchColumn column, string sql)
         {
-            return new SQLEqualCondition(column, sql);
+            SQLEqualCondition cond = new SQLEqualCondition(column, sql);
+            return cond;
         }
 
         /// <summary>
@@ -710,7 +773,8 @@
         /// <returns>返回子查询等于条件对象</returns>
         public static SQLEqualCondition SQLEqual(ConditionRelation relation, SearchColumn column, string sql)
         {
-            return new SQLEqualCondition(relation, column, sql);
+            SQLEqualCondition cond = new SQLEqualCondition(relation, column, sql);
+            return cond;
         }
 
         /// <summary>
@@ -720,7 +784,8 @@
         /// <returns>返回子查询不等于条件对象</returns>
         public static SQLNotEqualCondition SQLNotEqual(string sql)
         {
-            return new SQLNotEqualCondition(sql);
+            SQLNotEqualCondition cond = new SQLNotEqualCondition(sql);
+            return cond;
         }
 
         /// <summary>
@@ -731,7 +796,8 @@
         /// <returns>返回子查询不等于条件对象</returns>
         public static SQLNotEqualCondition SQLNotEqual(ConditionRelation relation, string sql)
         {
-            return new SQLNotEqualCondition(relation, sql);
+            SQLNotEqualCondition cond = new SQLNotEqualCondition(relation, sql);
+            return cond;
         }
 
         /// <summary>
@@ -742,7 +808,8 @@
         /// <returns>返回子查询不等于条件对象</returns>
         public static SQLNotEqualCondition SQLNotEqual(SearchColumn column, string sql)
         {
-            return new SQLNotEqualCondition(column, sql);
+            SQLNotEqualCondition cond = new SQLNotEqualCondition(column, sql);
+            return cond;
         }
         
         /// <summary>
@@ -754,7 +821,8 @@
         /// <returns>返回子查询不等于条件对象</returns>
         public static SQLNotEqualCondition SQLNotEqual(ConditionRelation relation, SearchColumn column, string sql)
         {
-            return new SQLNotEqualCondition(relation, column, sql);
+            SQLNotEqualCondition cond = new SQLNotEqualCondition(relation, column, sql);
+            return cond;
         }
 
         /// <summary>
@@ -765,7 +833,8 @@
         /// <returns></returns>
         public static ConditionGroup Group(ICondition condition, params ICondition[] conditions)
         {
-            return new ConditionGroup(condition, conditions);
+            ConditionGroup group = new ConditionGroup(condition, conditions);
+            return group;
         }
 
         /// <summary>
@@ -777,7 +846,8 @@
         /// <returns></returns>
         public static ConditionGroup Group(ConditionRelation relation, ICondition condition, params ICondition[] conditions)
         {
-            return new ConditionGroup(relation, condition, conditions);
+            ConditionGroup group = new ConditionGroup(relation, condition, conditions);
+            return group;
         }
 
         #endregion
