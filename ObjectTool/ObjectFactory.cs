@@ -91,9 +91,9 @@
                 field.SetValue(desObject, field.GetValue(srcObject));
             }
 
-            PropertyInfo[] propertys = desObject.GetType().GetProperties();
+            PropertyInfo[] properties = desObject.GetType().GetProperties();
 
-            foreach (PropertyInfo property in propertys)
+            foreach (PropertyInfo property in properties)
             {
                 PropertyInfo srcProp = srcObject.GetType().GetProperty(property.Name);
                 property.SetValue(desObject, srcProp.GetValue(srcObject, null), null);
