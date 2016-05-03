@@ -14,6 +14,6 @@
         /// <summary>
         /// 记录数据的版本号
         /// </summary>
-        int RVersion { get;set; }
+        int RVersion { get; set; }
     }
 }

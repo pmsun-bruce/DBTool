@@ -7,21 +7,21 @@ namespace NFramework.DBTool.QueryTool
 	#endregion
 
     /// <summary>
-    /// еепР
+    /// Ф▌▓Е╨▐
     /// </summary>
     [Serializable]
     public enum SortOrder : int
     {
         /// <summary>
-        /// нчеепР
+        /// Ф°╙Ф▄┤Е╝ 
         /// </summary>
         None = 0,
         /// <summary>
-        /// иЩпРеепР
+        /// Ф╜ёЕ╨▐
         /// </summary>
         Asc = 1,
         /// <summary>
-        /// ╫╣пРеепР
+        /// И─├Е╨▐
         /// </summary>
         Desc = 2
     }
