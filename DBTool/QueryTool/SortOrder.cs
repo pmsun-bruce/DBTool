@@ -1,4 +1,4 @@
-﻿namespace NFramework.DBTool.QueryTool
+namespace NFramework.DBTool.QueryTool
 {
 	#region Reference
 	
@@ -13,15 +13,15 @@
     public enum SortOrder : int
     {
         /// <summary>
-        /// 无排序
+        /// 未指定
         /// </summary>
         None = 0,
         /// <summary>
-        /// 升序排序
+        /// 正序
         /// </summary>
         Asc = 1,
         /// <summary>
-        /// 降序排序
+        /// 逆序
         /// </summary>
         Desc = 2
     }

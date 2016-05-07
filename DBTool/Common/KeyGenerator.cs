@@ -17,9 +17,7 @@
         /// <returns>返回一个去除了-并全部转为小写的GUID字符串</returns>
         public static string GenNewGuidKey()
         {
-            string newKey = string.Empty;
-            newKey = Guid.NewGuid().ToString().ToLower().Replace("-", "");
-            return newKey;
+            return Guid.NewGuid().ToString("N");
         }
     }
 }
