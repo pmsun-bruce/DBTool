@@ -1,4 +1,4 @@
-namespace NFramework.DBTool.QueryTool
+ï»¿namespace NFramework.DBTool.QueryTool
 {
 	#region Reference
 	
@@ -7,7 +7,7 @@ namespace NFramework.DBTool.QueryTool
 	#endregion
 
 	/// <summary>
-	/// Îª¿ÕÅĞ¶ÏÌõ¼ş
+	/// ä¸ºç©ºåˆ¤æ–­æ¡ä»¶
 	/// </summary>
     [Serializable]
     public class IsNullCondition : Condition
@@ -15,7 +15,7 @@ namespace NFramework.DBTool.QueryTool
         #region Public Constructors
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
         public IsNullCondition()
             : this(ConditionRelation.And, null)
@@ -24,9 +24,9 @@ namespace NFramework.DBTool.QueryTool
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="column">²éÑ¯×Ö¶Î¶ÔÏó</param>
+        /// <param name="column">æŸ¥è¯¢å­—æ®µå¯¹è±¡</param>
         public IsNullCondition(SearchColumn column)
             : this(ConditionRelation.And, column)
         {
@@ -34,19 +34,19 @@ namespace NFramework.DBTool.QueryTool
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="relation">¹ØÁª¹ØÏµ</param>
+        /// <param name="relation">å…³è”å…³ç³»</param>
         public IsNullCondition(ConditionRelation relation)
             : this(relation, null)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="relation">¹ØÁª¹ØÏµ</param>
-        /// <param name="column">²éÑ¯×Ö¶Î¶ÔÏó</param>
+        /// <param name="relation">å…³è”å…³ç³»</param>
+        /// <param name="column">æŸ¥è¯¢å­—æ®µå¯¹è±¡</param>
         public IsNullCondition(ConditionRelation relation, SearchColumn column)
             : base(relation, column)
         {

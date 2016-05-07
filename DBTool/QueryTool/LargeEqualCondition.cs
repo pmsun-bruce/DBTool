@@ -1,4 +1,4 @@
-namespace NFramework.DBTool.QueryTool
+ï»¿namespace NFramework.DBTool.QueryTool
 {
 	#region Reference
 	
@@ -7,7 +7,7 @@ namespace NFramework.DBTool.QueryTool
 	#endregion
 
 	/// <summary>
-	/// ´óÓÚµÈÓÚÌõ¼ş
+	/// å¤§äºç­‰äºæ¡ä»¶
 	/// </summary>
     [Serializable]
     public class LargeEqualCondition : Condition
@@ -15,11 +15,11 @@ namespace NFramework.DBTool.QueryTool
         #region Fields & Properties
 
         /// <summary>
-        /// Ìõ¼şÖµ
+        /// æ¡ä»¶å€¼
         /// </summary>
         private object paramValue;
         /// <summary>
-        /// Ìõ¼şÖµ
+        /// æ¡ä»¶å€¼
         /// </summary>
         public object ParamValue
         {
@@ -39,40 +39,40 @@ namespace NFramework.DBTool.QueryTool
         #region Public Constructors
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="paramValue">Ìõ¼şµÄÖµ</param>
+        /// <param name="paramValue">æ¡ä»¶çš„å€¼</param>
         public LargeEqualCondition(object paramValue) 
             : this(ConditionRelation.And, null, paramValue)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="column">²éÑ¯×Ö¶Î¶ÔÏó</param>
-        /// <param name="paramValue">Ìõ¼şµÄÖµ</param>
+        /// <param name="column">æŸ¥è¯¢å­—æ®µå¯¹è±¡</param>
+        /// <param name="paramValue">æ¡ä»¶çš„å€¼</param>
         public LargeEqualCondition(SearchColumn column, object paramValue)
             : this(ConditionRelation.And, column, paramValue)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="relation">¹ØÁª¹ØÏµ</param>
-        /// <param name="paramValue">Ìõ¼şµÄÖµ</param>
+        /// <param name="relation">å…³è”å…³ç³»</param>
+        /// <param name="paramValue">æ¡ä»¶çš„å€¼</param>
         public LargeEqualCondition(ConditionRelation relation, object paramValue)
             : this(relation, null, paramValue)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="relation">¹ØÁª¹ØÏµ</param>
-        /// <param name="column">²éÑ¯×Ö¶Î¶ÔÏó</param>
-        /// <param name="paramValue">Ìõ¼şµÄÖµ</param>
+        /// <param name="relation">å…³è”å…³ç³»</param>
+        /// <param name="column">æŸ¥è¯¢å­—æ®µå¯¹è±¡</param>
+        /// <param name="paramValue">æ¡ä»¶çš„å€¼</param>
         public LargeEqualCondition(ConditionRelation relation, SearchColumn column, object paramValue)
             : base(relation, column)
         {

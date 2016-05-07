@@ -1,4 +1,4 @@
-namespace NFramework.DBTool.QueryTool
+ï»¿namespace NFramework.DBTool.QueryTool
 {
     #region Reference
 
@@ -9,7 +9,7 @@ namespace NFramework.DBTool.QueryTool
     #endregion
 
     /// <summary>
-    /// Ìõ¼ş²ÎÊı¶ÔÏó
+    /// æ¡ä»¶å‚æ•°å¯¹è±¡
     /// </summary>
     [Serializable]
     public class DBParam : DbParameter
@@ -17,7 +17,7 @@ namespace NFramework.DBTool.QueryTool
         #region Fields & Properties
 
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃ²ÎÊıÊı¾İÀàĞÍ
+        /// è·å–æˆ–è®¾ç½®å‚æ•°æ•°æ®ç±»å‹
         /// </summary>
         public override DbType DbType
         {
@@ -26,7 +26,7 @@ namespace NFramework.DBTool.QueryTool
         }
 
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÒ»¸öÖµ£¬¸ÃÖµÖ¸Ê¾²ÎÊıÊÇÖ»¿ÉÊäÈë¡¢Ö»¿ÉÊä³ö¡¢Ë«Ïò»¹ÊÇ´æ´¢¹ı³Ì·µ»ØÖµ²ÎÊı¡£
+        /// è·å–æˆ–è®¾ç½®ä¸€ä¸ªå€¼ï¼Œè¯¥å€¼æŒ‡ç¤ºå‚æ•°æ˜¯åªå¯è¾“å…¥ã€åªå¯è¾“å‡ºã€åŒå‘è¿˜æ˜¯å­˜å‚¨è¿‡ç¨‹è¿”å›å€¼å‚æ•°ã€‚
         /// </summary>
         public override ParameterDirection Direction
         {
@@ -35,7 +35,7 @@ namespace NFramework.DBTool.QueryTool
         }
 
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÒ»¸öÖµ£¬¸ÃÖµÖ¸Ê¾²ÎÊıÊÇ·ñ½ÓÊÜ¿ÕÖµ¡£
+        /// è·å–æˆ–è®¾ç½®ä¸€ä¸ªå€¼ï¼Œè¯¥å€¼æŒ‡ç¤ºå‚æ•°æ˜¯å¦æ¥å—ç©ºå€¼ã€‚
         /// </summary>
         public override bool IsNullable
         {
@@ -44,7 +44,7 @@ namespace NFramework.DBTool.QueryTool
         }
 
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃ DbParameter µÄÃû³Æ¡£
+        /// è·å–æˆ–è®¾ç½® DbParameter çš„åç§°ã€‚
         /// </summary>
         public override string ParameterName
         {
@@ -53,7 +53,7 @@ namespace NFramework.DBTool.QueryTool
         }
 
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÁĞÖĞÊı¾İµÄ×î´ó´óĞ¡£¨ÒÔ×Ö½ÚÎªµ¥Î»£©¡£
+        /// è·å–æˆ–è®¾ç½®åˆ—ä¸­æ•°æ®çš„æœ€å¤§å¤§å°ï¼ˆä»¥å­—èŠ‚ä¸ºå•ä½ï¼‰ã€‚
         /// </summary>
         public override int Size
         {
@@ -62,7 +62,7 @@ namespace NFramework.DBTool.QueryTool
         }
 
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÔ´ÁĞµÄÃû³Æ£¬¸ÃÔ´ÁĞÓ³Éäµ½ DataSet ²¢ÓÃÓÚ¼ÓÔØ»ò·µ»Ø Value¡£
+        /// è·å–æˆ–è®¾ç½®æºåˆ—çš„åç§°ï¼Œè¯¥æºåˆ—æ˜ å°„åˆ° DataSet å¹¶ç”¨äºåŠ è½½æˆ–è¿”å› Valueã€‚
         /// </summary>
         public override string SourceColumn
         {
@@ -71,7 +71,7 @@ namespace NFramework.DBTool.QueryTool
         }
 
         /// <summary>
-        /// ÉèÖÃ»ò»ñÈ¡Ò»¸öÖµ£¬¸ÃÖµÖ¸Ê¾Ô´ÁĞÊÇ·ñ¿ÉÒÔÎª null¡£ÕâÊ¹µÃ DbCommandBuilder ÄÜ¹»ÕıÈ·µØÎª¿ÉÒÔÎª null µÄÁĞÉú³É Update Óï¾ä¡£
+        /// è®¾ç½®æˆ–è·å–ä¸€ä¸ªå€¼ï¼Œè¯¥å€¼æŒ‡ç¤ºæºåˆ—æ˜¯å¦å¯ä»¥ä¸º nullã€‚è¿™ä½¿å¾— DbCommandBuilder èƒ½å¤Ÿæ­£ç¡®åœ°ä¸ºå¯ä»¥ä¸º null çš„åˆ—ç”Ÿæˆ Update è¯­å¥ã€‚
         /// </summary>
         public override bool SourceColumnNullMapping
         {
@@ -80,7 +80,7 @@ namespace NFramework.DBTool.QueryTool
         }
 
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÔÚ¼ÓÔØ Value Ê±Ê¹ÓÃµÄ DataRowVersion¡£
+        /// è·å–æˆ–è®¾ç½®åœ¨åŠ è½½ Value æ—¶ä½¿ç”¨çš„ DataRowVersionã€‚
         /// </summary>
         public override DataRowVersion SourceVersion
         {
@@ -89,7 +89,7 @@ namespace NFramework.DBTool.QueryTool
         }
 
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃ¸Ã²ÎÊıµÄÖµ¡£
+        /// è·å–æˆ–è®¾ç½®è¯¥å‚æ•°çš„å€¼ã€‚
         /// </summary>
         public override object Value
         {
@@ -102,7 +102,7 @@ namespace NFramework.DBTool.QueryTool
         #region Public Methods
 
         /// <summary>
-        /// ½« DbType ÊôĞÔÖØÖÃÎªÆäÔ­Ê¼ÉèÖÃ¡£
+        /// å°† DbType å±æ€§é‡ç½®ä¸ºå…¶åŸå§‹è®¾ç½®ã€‚
         /// </summary>
         public override void ResetDbType()
         {
@@ -114,10 +114,10 @@ namespace NFramework.DBTool.QueryTool
         #region Public Constructors
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="paramName">²ÎÊıÃû³Æ</param>
-        /// <param name="paramValue">²ÎÊıÖµ</param>
+        /// <param name="paramName">å‚æ•°åç§°</param>
+        /// <param name="paramValue">å‚æ•°å€¼</param>
         public DBParam(string paramName, object paramValue)
         {
             this.ParameterName = paramName;
@@ -128,146 +128,146 @@ namespace NFramework.DBTool.QueryTool
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="paramName">²ÎÊıÃû³Æ</param>
-        /// <param name="paramValue">²ÎÊıÖµ</param>
-        /// <param name="dbType">Êı¾İÀàĞÍ</param>
+        /// <param name="paramName">å‚æ•°åç§°</param>
+        /// <param name="paramValue">å‚æ•°å€¼</param>
+        /// <param name="dbType">æ•°æ®ç±»å‹</param>
         public DBParam(string paramName, object paramValue, DbType dbType) : this(paramName, paramValue)
         {
             this.DbType = dbType;
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="paramName">²ÎÊıÃû³Æ</param>
-        /// <param name="paramValue">²ÎÊıÖµ</param>
-        /// <param name="dbType">Êı¾İÀàĞÍ</param>
-        /// <param name="isNullable">ÊÇ·ñÎª¿Õ</param>
+        /// <param name="paramName">å‚æ•°åç§°</param>
+        /// <param name="paramValue">å‚æ•°å€¼</param>
+        /// <param name="dbType">æ•°æ®ç±»å‹</param>
+        /// <param name="isNullable">æ˜¯å¦ä¸ºç©º</param>
         public DBParam(string paramName, object paramValue, DbType dbType, bool isNullable) : this(paramName, paramValue, dbType)
         {
             this.IsNullable = isNullable;
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="paramName">²ÎÊıÃû³Æ</param>
-        /// <param name="paramValue">²ÎÊıÖµ</param>
-        /// <param name="dbType">Êı¾İÀàĞÍ</param>
-        /// <param name="size">²ÎÊı´óĞ¡</param>
+        /// <param name="paramName">å‚æ•°åç§°</param>
+        /// <param name="paramValue">å‚æ•°å€¼</param>
+        /// <param name="dbType">æ•°æ®ç±»å‹</param>
+        /// <param name="size">å‚æ•°å¤§å°</param>
         public DBParam(string paramName, object paramValue, DbType dbType, int size) : this(paramName, paramValue, dbType, true)
         {
             this.Size = size;
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="paramName">²ÎÊıÃû³Æ</param>
-        /// <param name="paramValue">²ÎÊıÖµ</param>
-        /// <param name="dbType">Êı¾İÀàĞÍ</param>
-        /// <param name="size">²ÎÊı´óĞ¡</param>
-        /// <param name="isNullable">ÊÇ·ñÎª¿Õ</param>
+        /// <param name="paramName">å‚æ•°åç§°</param>
+        /// <param name="paramValue">å‚æ•°å€¼</param>
+        /// <param name="dbType">æ•°æ®ç±»å‹</param>
+        /// <param name="size">å‚æ•°å¤§å°</param>
+        /// <param name="isNullable">æ˜¯å¦ä¸ºç©º</param>
         public DBParam(string paramName, object paramValue, DbType dbType, int size, bool isNullable) : this(paramName, paramValue, dbType, size)
         {
             this.IsNullable = isNullable;
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="paramName">²ÎÊıÃû³Æ</param>
-        /// <param name="paramValue">²ÎÊıÖµ</param>
-        /// <param name="dbType">Êı¾İÀàĞÍ</param>
-        /// <param name="size">²ÎÊı´óĞ¡</param>
-        /// <param name="sourceColumn">Ô´ÁĞµÄÃû³Æ</param>
+        /// <param name="paramName">å‚æ•°åç§°</param>
+        /// <param name="paramValue">å‚æ•°å€¼</param>
+        /// <param name="dbType">æ•°æ®ç±»å‹</param>
+        /// <param name="size">å‚æ•°å¤§å°</param>
+        /// <param name="sourceColumn">æºåˆ—çš„åç§°</param>
         public DBParam(string paramName, object paramValue, DbType dbType, int size, string sourceColumn) : this(paramName, paramValue, dbType, size)
         {
             this.SourceColumn = sourceColumn;
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="paramName">²ÎÊıÃû³Æ</param>
-        /// <param name="paramValue">²ÎÊıÖµ</param>
-        /// <param name="dbType">Êı¾İÀàĞÍ</param>
-        /// <param name="size">²ÎÊı´óĞ¡</param>
-        /// <param name="isNullable">ÊÇ·ñÎª¿Õ</param>
-        /// <param name="sourceColumn">Ô´ÁĞµÄÃû³Æ</param>
+        /// <param name="paramName">å‚æ•°åç§°</param>
+        /// <param name="paramValue">å‚æ•°å€¼</param>
+        /// <param name="dbType">æ•°æ®ç±»å‹</param>
+        /// <param name="size">å‚æ•°å¤§å°</param>
+        /// <param name="isNullable">æ˜¯å¦ä¸ºç©º</param>
+        /// <param name="sourceColumn">æºåˆ—çš„åç§°</param>
         public DBParam(string paramName, object paramValue, DbType dbType, int size, bool isNullable, string sourceColumn) : this(paramName, paramValue, dbType, size, isNullable)
         {
             this.SourceColumn = sourceColumn;
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="paramName">²ÎÊıÃû³Æ</param>
-        /// <param name="paramValue">²ÎÊıÖµ</param>
-        /// <param name="dbType">Êı¾İÀàĞÍ</param>
-        /// <param name="size">²ÎÊı´óĞ¡</param>
-        /// <param name="paramDirection">²ÎÊı·½Ïò</param>
+        /// <param name="paramName">å‚æ•°åç§°</param>
+        /// <param name="paramValue">å‚æ•°å€¼</param>
+        /// <param name="dbType">æ•°æ®ç±»å‹</param>
+        /// <param name="size">å‚æ•°å¤§å°</param>
+        /// <param name="paramDirection">å‚æ•°æ–¹å‘</param>
         public DBParam(string paramName, object paramValue, DbType dbType, int size, ParameterDirection paramDirection) : this(paramName, paramValue, dbType, size, true)
         {
             this.Direction = paramDirection;
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="paramName">²ÎÊıÃû³Æ</param>
-        /// <param name="paramValue">²ÎÊıÖµ</param>
-        /// <param name="dbType">Êı¾İÀàĞÍ</param>
-        /// <param name="size">²ÎÊı´óĞ¡</param>
-        /// <param name="isNullable">ÊÇ·ñÎª¿Õ</param>
-        /// <param name="paramDirection">²ÎÊı·½Ïò</param>
+        /// <param name="paramName">å‚æ•°åç§°</param>
+        /// <param name="paramValue">å‚æ•°å€¼</param>
+        /// <param name="dbType">æ•°æ®ç±»å‹</param>
+        /// <param name="size">å‚æ•°å¤§å°</param>
+        /// <param name="isNullable">æ˜¯å¦ä¸ºç©º</param>
+        /// <param name="paramDirection">å‚æ•°æ–¹å‘</param>
         public DBParam(string paramName, object paramValue, DbType dbType, int size, bool isNullable, ParameterDirection paramDirection) : this(paramName, paramValue, dbType, size, isNullable)
         {
             this.Direction = paramDirection;
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="paramName">²ÎÊıÃû³Æ</param>
-        /// <param name="paramValue">²ÎÊıÖµ</param>
-        /// <param name="dbType">Êı¾İÀàĞÍ</param>
-        /// <param name="size">²ÎÊı´óĞ¡</param>
-        /// <param name="paramDirection">²ÎÊı·½Ïò</param>
-        /// <param name="sourceColumn">Ô´ÁĞµÄÃû³Æ</param>
+        /// <param name="paramName">å‚æ•°åç§°</param>
+        /// <param name="paramValue">å‚æ•°å€¼</param>
+        /// <param name="dbType">æ•°æ®ç±»å‹</param>
+        /// <param name="size">å‚æ•°å¤§å°</param>
+        /// <param name="paramDirection">å‚æ•°æ–¹å‘</param>
+        /// <param name="sourceColumn">æºåˆ—çš„åç§°</param>
         public DBParam(string paramName, object paramValue, DbType dbType, int size, string sourceColumn, ParameterDirection paramDirection) : this(paramName, paramValue, dbType, size, true, sourceColumn)
         {
             this.Direction = paramDirection;
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="paramName">²ÎÊıÃû³Æ</param>
-        /// <param name="paramValue">²ÎÊıÖµ</param>
-        /// <param name="dbType">Êı¾İÀàĞÍ</param>
-        /// <param name="size">²ÎÊı´óĞ¡</param>
-        /// <param name="isNullable">ÊÇ·ñÎª¿Õ</param>
-        /// <param name="sourceColumn">Ô´ÁĞµÄÃû³Æ</param>
-        /// <param name="paramDirection">²ÎÊı·½Ïò</param>
+        /// <param name="paramName">å‚æ•°åç§°</param>
+        /// <param name="paramValue">å‚æ•°å€¼</param>
+        /// <param name="dbType">æ•°æ®ç±»å‹</param>
+        /// <param name="size">å‚æ•°å¤§å°</param>
+        /// <param name="isNullable">æ˜¯å¦ä¸ºç©º</param>
+        /// <param name="sourceColumn">æºåˆ—çš„åç§°</param>
+        /// <param name="paramDirection">å‚æ•°æ–¹å‘</param>
         public DBParam(string paramName, object paramValue, DbType dbType, int size, bool isNullable, string sourceColumn, ParameterDirection paramDirection) : this(paramName, paramValue, dbType, size, isNullable, sourceColumn)
         {
             this.Direction = paramDirection;
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="paramName">²ÎÊıÃû³Æ</param>
-        /// <param name="paramValue">²ÎÊıÖµ</param>
-        /// <param name="dbType">Êı¾İÀàĞÍ</param>
-        /// <param name="size">²ÎÊı´óĞ¡</param>
-        /// <param name="isNullable">ÊÇ·ñÎª¿Õ</param>
-        /// <param name="sourceColumn">Ô´ÁĞµÄÃû³Æ</param>
-        /// <param name="paramDirection">²ÎÊı·½Ïò</param>
+        /// <param name="paramName">å‚æ•°åç§°</param>
+        /// <param name="paramValue">å‚æ•°å€¼</param>
+        /// <param name="dbType">æ•°æ®ç±»å‹</param>
+        /// <param name="size">å‚æ•°å¤§å°</param>
+        /// <param name="isNullable">æ˜¯å¦ä¸ºç©º</param>
+        /// <param name="sourceColumn">æºåˆ—çš„åç§°</param>
+        /// <param name="paramDirection">å‚æ•°æ–¹å‘</param>
         /// <param name="sourceVersion">paramDirection</param>
         public DBParam(string paramName, object paramValue, DbType dbType, int size, bool isNullable, string sourceColumn, ParameterDirection paramDirection, DataRowVersion sourceVersion) : this(paramName, paramValue, dbType, size, isNullable, sourceColumn, paramDirection)
         {

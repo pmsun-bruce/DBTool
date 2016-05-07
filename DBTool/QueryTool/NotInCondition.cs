@@ -1,4 +1,4 @@
-namespace NFramework.DBTool.QueryTool
+ï»¿namespace NFramework.DBTool.QueryTool
 {
 	#region Reference
 	
@@ -7,7 +7,7 @@ namespace NFramework.DBTool.QueryTool
 	#endregion
 
 	/// <summary>
-	/// ÅÅ³ıµÄ·¶Î§Ìõ¼ş
+	/// æ’é™¤çš„èŒƒå›´æ¡ä»¶
 	/// </summary>
     [Serializable]
 	public class NotInCondition : Condition
@@ -15,11 +15,11 @@ namespace NFramework.DBTool.QueryTool
         #region Fields & Properties
 
         /// <summary>
-        /// ĞèÒªÅÅ³ıµÄÖµµÄ¼¯ºÏ
+        /// éœ€è¦æ’é™¤çš„å€¼çš„é›†åˆ
         /// </summary>
         private object [] paramValueList;
         /// <summary>
-        /// ĞèÒªÅÅ³ıµÄÖµµÄ¼¯ºÏ
+        /// éœ€è¦æ’é™¤çš„å€¼çš„é›†åˆ
         /// </summary>
 		public object[] ParamValueList
         {
@@ -38,40 +38,40 @@ namespace NFramework.DBTool.QueryTool
         
         #region Public Constructors
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="paramValueList">ĞèÒªÅÅ³ıµÄÖµµÄ¼¯ºÏ</param>
+        /// <param name="paramValueList">éœ€è¦æ’é™¤çš„å€¼çš„é›†åˆ</param>
         public NotInCondition(object[] paramValueList)
             : this(ConditionRelation.And, null, paramValueList)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="column">²éÑ¯×Ö¶Î¶ÔÏó</param>
-        /// <param name="paramValueList">ĞèÒªÅÅ³ıµÄÖµµÄ¼¯ºÏ</param>
+        /// <param name="column">æŸ¥è¯¢å­—æ®µå¯¹è±¡</param>
+        /// <param name="paramValueList">éœ€è¦æ’é™¤çš„å€¼çš„é›†åˆ</param>
         public NotInCondition(SearchColumn column, object[] paramValueList)
             : this(ConditionRelation.And, column, paramValueList)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="relation">¹ØÁª¹ØÏµ</param>
-        /// <param name="paramValueList">ĞèÒªÅÅ³ıµÄÖµµÄ¼¯ºÏ</param>
+        /// <param name="relation">å…³è”å…³ç³»</param>
+        /// <param name="paramValueList">éœ€è¦æ’é™¤çš„å€¼çš„é›†åˆ</param>
         public NotInCondition(ConditionRelation relation, object[] paramValueList)
             : this(relation, null, paramValueList)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="relation">¹ØÁª¹ØÏµ</param>
-        /// <param name="column">²éÑ¯×Ö¶Î¶ÔÏó</param>
-        /// <param name="paramValueList">ĞèÒªÅÅ³ıµÄÖµµÄ¼¯ºÏ</param>
+        /// <param name="relation">å…³è”å…³ç³»</param>
+        /// <param name="column">æŸ¥è¯¢å­—æ®µå¯¹è±¡</param>
+        /// <param name="paramValueList">éœ€è¦æ’é™¤çš„å€¼çš„é›†åˆ</param>
         public NotInCondition(ConditionRelation relation, SearchColumn column, object[] paramValueList)
             : base(relation, column)
         {

@@ -1,4 +1,4 @@
-namespace NFramework.DBTool.QueryTool
+ï»¿namespace NFramework.DBTool.QueryTool
 {
 	#region Reference
 	
@@ -7,21 +7,21 @@ namespace NFramework.DBTool.QueryTool
 	#endregion
 
     /// <summary>
-    /// ÅÅĞò
+    /// æ’åº
     /// </summary>
     [Serializable]
     public enum SortOrder : int
     {
         /// <summary>
-        /// ÎŞÅÅĞò
+        /// æ— æ’åº
         /// </summary>
         None = 0,
         /// <summary>
-        /// ÉıĞòÅÅĞò
+        /// å‡åºæ’åº
         /// </summary>
         Asc = 1,
         /// <summary>
-        /// ½µĞòÅÅĞò
+        /// é™åºæ’åº
         /// </summary>
         Desc = 2
     }

@@ -1,4 +1,4 @@
-namespace NFramework.DBTool.QueryTool
+ï»¿namespace NFramework.DBTool.QueryTool
 {
 	#region Reference
 	
@@ -7,7 +7,7 @@ namespace NFramework.DBTool.QueryTool
 	#endregion
 
 	/// <summary>
-	/// ÏàµÈÌõ¼şÀà
+	/// ç›¸ç­‰æ¡ä»¶ç±»
 	/// </summary>
     [Serializable]
     public class EqualCondition : Condition
@@ -15,11 +15,11 @@ namespace NFramework.DBTool.QueryTool
         #region Fields & Properties
 
         /// <summary>
-        /// µÈÓÚµÄÖµ
+        /// ç­‰äºçš„å€¼
         /// </summary>
         private object paramValue;
         /// <summary>
-        /// µÈÓÚµÄÖµ
+        /// ç­‰äºçš„å€¼
         /// </summary>
         public object ParamValue
         {
@@ -39,40 +39,40 @@ namespace NFramework.DBTool.QueryTool
         #region Public Constructors
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="paramValue">²ÎÊıµÄÖµ</param>
+        /// <param name="paramValue">å‚æ•°çš„å€¼</param>
         public EqualCondition(object paramValue)
             : this(ConditionRelation.And, null, paramValue)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="column">²éÑ¯×Ö¶Î¶ÔÏó</param>
-        /// <param name="paramValue">²ÎÊıµÄÖµ</param>
+        /// <param name="column">æŸ¥è¯¢å­—æ®µå¯¹è±¡</param>
+        /// <param name="paramValue">å‚æ•°çš„å€¼</param>
         public EqualCondition(SearchColumn column, object paramValue)
             : this(ConditionRelation.And, column, paramValue)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="relation">¹ØÁª¹ØÏµ</param>
-        /// <param name="paramValue">²ÎÊıµÄÖµ</param>
+        /// <param name="relation">å…³è”å…³ç³»</param>
+        /// <param name="paramValue">å‚æ•°çš„å€¼</param>
         public EqualCondition(ConditionRelation relation, object paramValue)
             : this(relation, null, paramValue)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="relation">¹ØÁª¹ØÏµ</param>
-        /// <param name="column">²éÑ¯×Ö¶Î¶ÔÏó</param>
-        /// <param name="paramValue">²ÎÊıµÄÖµ</param>
+        /// <param name="relation">å…³è”å…³ç³»</param>
+        /// <param name="column">æŸ¥è¯¢å­—æ®µå¯¹è±¡</param>
+        /// <param name="paramValue">å‚æ•°çš„å€¼</param>
         public EqualCondition(ConditionRelation relation, SearchColumn column, object paramValue)
             : base(relation, column)
         {

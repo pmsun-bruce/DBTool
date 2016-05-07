@@ -1,4 +1,4 @@
-namespace NFramework.DBTool.QueryTool
+ï»¿namespace NFramework.DBTool.QueryTool
 {
 	#region Reference
 	
@@ -12,7 +12,7 @@ namespace NFramework.DBTool.QueryTool
 	#endregion
 
     /// <summary>
-    /// Ìõ¼ş¶ÔÏó¸¸Àà
+    /// æ¡ä»¶å¯¹è±¡çˆ¶ç±»
     /// </summary>
     [Serializable]
     public abstract class Condition : ICondition
@@ -20,11 +20,11 @@ namespace NFramework.DBTool.QueryTool
         #region Fields & Properties
 
         /// <summary>
-        /// Ìõ¼ş¹ØÏµ£¬AND»òOR
+        /// æ¡ä»¶å…³ç³»ï¼ŒANDæˆ–OR
         /// </summary>
         private ConditionRelation relation;
         /// <summary>
-        /// Ìõ¼ş¹ØÏµ£¬AND»òOR
+        /// æ¡ä»¶å…³ç³»ï¼ŒANDæˆ–OR
         /// </summary>
         public ConditionRelation Relation
         {
@@ -39,11 +39,11 @@ namespace NFramework.DBTool.QueryTool
         }
 
         /// <summary>
-        /// Ìõ¼ş·Ö×é£¬µ±Ç°Ìõ¼şÓëÄÇĞ©Ìõ¼ş·ÖÎªÒ»×é£¬½øĞĞ²éÑ¯
+        /// æ¡ä»¶åˆ†ç»„ï¼Œå½“å‰æ¡ä»¶ä¸é‚£äº›æ¡ä»¶åˆ†ä¸ºä¸€ç»„ï¼Œè¿›è¡ŒæŸ¥è¯¢
         /// </summary>
         private ConditionGroup group;
         /// <summary>
-        /// Ìõ¼ş·Ö×é£¬µ±Ç°Ìõ¼şÓëÄÇĞ©Ìõ¼ş·ÖÎªÒ»×é£¬½øĞĞ²éÑ¯
+        /// æ¡ä»¶åˆ†ç»„ï¼Œå½“å‰æ¡ä»¶ä¸é‚£äº›æ¡ä»¶åˆ†ä¸ºä¸€ç»„ï¼Œè¿›è¡ŒæŸ¥è¯¢
         /// </summary>
         public ConditionGroup Group
         {
@@ -63,13 +63,13 @@ namespace NFramework.DBTool.QueryTool
         }
 
         /// <summary>
-        /// ³ĞÔØÕâ¸öÌõ¼şµÄ×Ö¶Î¶ÔÏó£¬ÎªÁËºóÆÚÆ´½Ó²éÑ¯Ìõ¼şÊ±»ñÈ¡×Ö¶ÎÃû³Æ¡£
-        /// SearchColumnÔÚÌõ¼ş¶ÁÈ¡µÄÊ±ºò£¬»á×Ô¶¯¸³Öµ£¬²»ÓÃÓÃ»§×Ô¼º¸³Öµ¡£
+        /// æ‰¿è½½è¿™ä¸ªæ¡ä»¶çš„å­—æ®µå¯¹è±¡ï¼Œä¸ºäº†åæœŸæ‹¼æ¥æŸ¥è¯¢æ¡ä»¶æ—¶è·å–å­—æ®µåç§°ã€‚
+        /// SearchColumnåœ¨æ¡ä»¶è¯»å–çš„æ—¶å€™ï¼Œä¼šè‡ªåŠ¨èµ‹å€¼ï¼Œä¸ç”¨ç”¨æˆ·è‡ªå·±èµ‹å€¼ã€‚
         /// </summary>
         private SearchColumn searchColumn;
         /// <summary>
-        /// ³ĞÔØÕâ¸öÌõ¼şµÄ×Ö¶Î¶ÔÏó£¬ÎªÁËºóÆÚÆ´½Ó²éÑ¯Ìõ¼şÊ±»ñÈ¡×Ö¶ÎÃû³Æ¡£
-        /// SearchColumnÔÚÌõ¼ş¶ÁÈ¡µÄÊ±ºò£¬»á×Ô¶¯¸³Öµ£¬²»ÓÃÓÃ»§×Ô¼º¸³Öµ¡£
+        /// æ‰¿è½½è¿™ä¸ªæ¡ä»¶çš„å­—æ®µå¯¹è±¡ï¼Œä¸ºäº†åæœŸæ‹¼æ¥æŸ¥è¯¢æ¡ä»¶æ—¶è·å–å­—æ®µåç§°ã€‚
+        /// SearchColumnåœ¨æ¡ä»¶è¯»å–çš„æ—¶å€™ï¼Œä¼šè‡ªåŠ¨èµ‹å€¼ï¼Œä¸ç”¨ç”¨æˆ·è‡ªå·±èµ‹å€¼ã€‚
         /// </summary>
         public SearchColumn SearchColumn
         {
@@ -89,7 +89,7 @@ namespace NFramework.DBTool.QueryTool
         #region Public Methods
 
         /// <summary>
-        /// ¿ËÂ¡µ±Ç°µÄÌõ¼ş
+        /// å…‹éš†å½“å‰çš„æ¡ä»¶
         /// </summary>
         /// <returns></returns>
         public Condition Clone()
@@ -102,34 +102,34 @@ namespace NFramework.DBTool.QueryTool
         #region Public Constructors
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
         public Condition(): this(ConditionRelation.And, null)
         {
-            // Ä¬ÈÏµÄÌõ¼ş¹ØÏµÎªÓëµÄ¹ØÏµ
+            // é»˜è®¤çš„æ¡ä»¶å…³ç³»ä¸ºä¸çš„å…³ç³»
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="relation">Ìõ¼ş¹ØÁª¹ØÏµ</param>
+        /// <param name="relation">æ¡ä»¶å…³è”å…³ç³»</param>
         public Condition(ConditionRelation relation) : this(relation, null)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="column">Ìõ¼ş¹ØÁª×Ö¶Î</param>
+        /// <param name="column">æ¡ä»¶å…³è”å­—æ®µ</param>
         public Condition(SearchColumn column) : this(ConditionRelation.And, column)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="relation">Ìõ¼ş¹ØÁª¹ØÏµ</param>
-        /// <param name="column">Ìõ¼ş¹ØÁª×Ö¶Î</param>
+        /// <param name="relation">æ¡ä»¶å…³è”å…³ç³»</param>
+        /// <param name="column">æ¡ä»¶å…³è”å­—æ®µ</param>
         public Condition(ConditionRelation relation, SearchColumn column)
         {
             this.relation = relation;

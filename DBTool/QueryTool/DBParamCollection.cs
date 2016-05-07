@@ -1,4 +1,4 @@
-namespace NFramework.DBTool.QueryTool
+ï»¿namespace NFramework.DBTool.QueryTool
 {
     #region Reference
 
@@ -9,7 +9,7 @@ namespace NFramework.DBTool.QueryTool
     #endregion
 
     /// <summary>
-    /// Êı¾İ¿â²ÎÊı¼¯ºÏ
+    /// æ•°æ®åº“å‚æ•°é›†åˆ
     /// </summary>
     [Serializable]
 	public class DBParamCollection : List<DbParameter>
@@ -17,9 +17,9 @@ namespace NFramework.DBTool.QueryTool
         #region Public Methods
 
         /// <summary>
-        /// ºÏ²¢DBParamCollection¼¯ºÏ
+        /// åˆå¹¶DBParamCollectioné›†åˆ
         /// </summary>
-        /// <param name="dbParamCollection">±»ºÏ²¢µÄDBParamCollection¼¯ºÏ</param>
+        /// <param name="dbParamCollection">è¢«åˆå¹¶çš„DBParamCollectioné›†åˆ</param>
         public void Merge(DBParamCollection dbParamCollection)
         {
             if (dbParamCollection == null)
@@ -35,7 +35,7 @@ namespace NFramework.DBTool.QueryTool
         #region Public Constructors
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
         public DBParamCollection()
         {

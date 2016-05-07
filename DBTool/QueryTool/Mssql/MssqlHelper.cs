@@ -22,6 +22,24 @@
     /// </summary>
     public class MssqlHelper
     {
+        #region Fields & Properties
+
+        /// <summary>
+        /// 锁对象
+        /// </summary>
+        private static object lockKey = new object();
+
+        /// <summary>
+        /// 数据库连接池
+        /// </summary>
+        private static Dictionary<string, Database> DbBasePool
+        {
+            get;
+            set;
+        }
+
+        #endregion
+
         #region Public Static Methods
 
         #region Connection Control
@@ -33,7 +51,7 @@
         /// <returns>返回连接对象</returns>
         public static DbConnection OpenNewConnection(string connectionString)
         {
-            Database dbBase = new SqlDatabase(connectionString);
+            Database dbBase = GetDatabase(connectionString);
             DbConnection dbConn = dbBase.CreateConnection();
             dbConn.Open();
             return dbConn;
@@ -110,7 +128,7 @@
         public static int ExecuteNonQuery(string connectionString, CommandType commandType, string query, DBParamCollection dbParamCollection)
         {
             int result = 0;
-            Database dbBase = new SqlDatabase(connectionString);
+            Database dbBase = GetDatabase(connectionString);
             DbCommand dbCommand = null;
 
             if (commandType == CommandType.Text)
@@ -151,7 +169,7 @@
         public static int ExecuteNonQuery(DbTransaction tran, CommandType commandType, string query, DBParamCollection dbParamCollection)
         {
             int result = 0;
-            Database dbBase = new SqlDatabase(tran.Connection.ConnectionString);
+            Database dbBase = GetDatabase(tran.Connection.ConnectionString);
             DbCommand dbCommand = null;
 
             if (commandType == CommandType.Text)
@@ -196,7 +214,7 @@
         public static object ExecuteScalar(string connectionString, CommandType commandType, string query, DBParamCollection dbParamCollection)
         {
             object result = null;
-            Database dbBase = new SqlDatabase(connectionString);
+            Database dbBase = GetDatabase(connectionString);
             DbCommand dbCommand = null;
 
             if (commandType == CommandType.Text)
@@ -237,7 +255,7 @@
         public static object ExecuteScalar(DbTransaction tran, CommandType commandType, string query, DBParamCollection dbParamCollection)
         {
             object result = null;
-            Database dbBase = new SqlDatabase(tran.Connection.ConnectionString);
+            Database dbBase = GetDatabase(tran.Connection.ConnectionString);
             DbCommand dbCommand = null;
 
             if (commandType == CommandType.Text)
@@ -313,7 +331,7 @@
         public static DataSet ExecuteDataSet(string connectionString, CommandType commandType, string query, Pager page, string srcTableName, DBParamCollection dbParamCollection)
         {
             DataSet result = new DataSet();
-            Database dbBase = new SqlDatabase(connectionString);
+            Database dbBase = GetDatabase(connectionString);
             DbCommand dbCommand = null;
 
             if (commandType == CommandType.Text)
@@ -398,9 +416,9 @@
         public static DataSet ExecuteDataSet(DbTransaction tran, CommandType commandType, string query, Pager page, string srcTableName, DBParamCollection dbParamCollection)
         {
             DataSet result = new DataSet();
-            Database dbBase = new SqlDatabase(tran.Connection.ConnectionString);
+            Database dbBase = GetDatabase(tran.Connection.ConnectionString);
             DbCommand dbCommand = null;
-
+            
             if (commandType == CommandType.Text)
             {
                 dbCommand = dbBase.GetSqlStringCommand(query);
@@ -602,6 +620,36 @@
 
         #region Private Static Methods
 
+        #region Connection Methods
+
+        /// <summary>
+        /// 获取一个数据库连接
+        /// </summary>
+        /// <param name="connectionString">数据库连接字符串</param>
+        /// <returns>返回一个数据库连接对象</returns>
+        private static Database GetDatabase(string connectionString)
+        {
+            lock (lockKey)
+            {
+                if (DbBasePool == null)
+                {
+                    DbBasePool = new Dictionary<string, Database>();
+                }
+
+                if (DbBasePool.ContainsKey(connectionString))
+                {
+                    return DbBasePool[connectionString];
+                }
+
+                Database dbBase = new SqlDatabase(connectionString);
+                DbBasePool.Add(connectionString, dbBase);
+
+                return dbBase;
+            }
+        }
+
+        #endregion
+
         #region Params Methods
 
         /// <summary>
@@ -634,7 +682,7 @@
         /// </summary>
         private MssqlHelper()
         {
-
+            
         }
 
         #endregion

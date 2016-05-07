@@ -1,4 +1,4 @@
-namespace NFramework.DBTool.QueryTool
+ï»¿namespace NFramework.DBTool.QueryTool
 {
 	#region Reference
 	
@@ -11,7 +11,7 @@ namespace NFramework.DBTool.QueryTool
 	#endregion
 
 	/// <summary>
-	/// BetweenÌõ¼ş
+	/// Betweenæ¡ä»¶
 	/// </summary>
     [Serializable]
     public class BetweenCondition : Condition
@@ -19,11 +19,11 @@ namespace NFramework.DBTool.QueryTool
         #region Fields & Properties
 
         /// <summary>
-        /// ¿ªÊ¼µÄÖµ
+        /// å¼€å§‹çš„å€¼
         /// </summary>
 		private object startValue;
         /// <summary>
-        /// ¿ªÊ¼µÄÖµ
+        /// å¼€å§‹çš„å€¼
         /// </summary>
         public object StartValue
         {
@@ -39,11 +39,11 @@ namespace NFramework.DBTool.QueryTool
         }
 
         /// <summary>
-        /// ½áÊøµÄÖµ
+        /// ç»“æŸçš„å€¼
         /// </summary>
         private object endValue;
         /// <summary>
-        /// ½áÊøµÄÖµ
+        /// ç»“æŸçš„å€¼
         /// </summary>
         public object EndValue
         {
@@ -64,44 +64,44 @@ namespace NFramework.DBTool.QueryTool
         #region Public Constructors
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="startValue">¸³Öµ¿ªÊ¼µÄÖµ</param>
-        /// <param name="endValue">¸³Öµ½áÊøµÄÖµ</param>
+        /// <param name="startValue">èµ‹å€¼å¼€å§‹çš„å€¼</param>
+        /// <param name="endValue">èµ‹å€¼ç»“æŸçš„å€¼</param>
         public BetweenCondition(object startValue, object endValue) 
             : this(ConditionRelation.And, null, startValue, endValue)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="relation">¹ØÁª¹ØÏµ</param>
-        /// <param name="startValue">¸³Öµ¿ªÊ¼µÄÖµ</param>
-        /// <param name="endValue">¸³Öµ½áÊøµÄÖµ</param>
+        /// <param name="relation">å…³è”å…³ç³»</param>
+        /// <param name="startValue">èµ‹å€¼å¼€å§‹çš„å€¼</param>
+        /// <param name="endValue">èµ‹å€¼ç»“æŸçš„å€¼</param>
         public BetweenCondition(ConditionRelation relation, object startValue, object endValue)
             : this(relation, null, startValue, endValue)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="column">²éÑ¯×Ö¶Î¶ÔÏó</param>
-        /// <param name="startValue">¸³Öµ¿ªÊ¼µÄÖµ</param>
-        /// <param name="endValue">¸³Öµ½áÊøµÄÖµ</param>
+        /// <param name="column">æŸ¥è¯¢å­—æ®µå¯¹è±¡</param>
+        /// <param name="startValue">èµ‹å€¼å¼€å§‹çš„å€¼</param>
+        /// <param name="endValue">èµ‹å€¼ç»“æŸçš„å€¼</param>
         public BetweenCondition(SearchColumn column, object startValue, object endValue)
             : this(ConditionRelation.And, column, startValue, endValue)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="relation">¹ØÁª¹ØÏµ</param>
-        /// <param name="column">²éÑ¯×Ö¶Î¶ÔÏó</param>
-        /// <param name="startValue">¸³Öµ¿ªÊ¼µÄÖµ</param>
-        /// <param name="endValue">¸³Öµ½áÊøµÄÖµ</param>
+        /// <param name="relation">å…³è”å…³ç³»</param>
+        /// <param name="column">æŸ¥è¯¢å­—æ®µå¯¹è±¡</param>
+        /// <param name="startValue">èµ‹å€¼å¼€å§‹çš„å€¼</param>
+        /// <param name="endValue">èµ‹å€¼ç»“æŸçš„å€¼</param>
         public BetweenCondition(ConditionRelation relation, SearchColumn column, object startValue, object endValue)
             : base(relation, column)
         {

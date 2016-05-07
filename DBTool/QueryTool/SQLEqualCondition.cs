@@ -1,4 +1,4 @@
-namespace NFramework.DBTool.QueryTool
+ï»¿namespace NFramework.DBTool.QueryTool
 {
 	#region Reference
 
@@ -7,7 +7,7 @@ namespace NFramework.DBTool.QueryTool
 	#endregion
 
 	/// <summary>
-	/// ×Ó²éÑ¯µÈÓÚÌõ¼ş
+	/// å­æŸ¥è¯¢ç­‰äºæ¡ä»¶
 	/// </summary>
     [Serializable]
     public class SQLEqualCondition : Condition
@@ -15,11 +15,11 @@ namespace NFramework.DBTool.QueryTool
         #region Fields & Properties
 
         /// <summary>
-        /// ×Ó²éÑ¯SQL
+        /// å­æŸ¥è¯¢SQL
         /// </summary>
         private string sql;
         /// <summary>
-        /// ×Ó²éÑ¯SQL
+        /// å­æŸ¥è¯¢SQL
         /// </summary>
         public string SQL
         {
@@ -39,40 +39,40 @@ namespace NFramework.DBTool.QueryTool
         #region Public Constructors
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="sql">×Ó²éÑ¯Óï¾ä</param>
+        /// <param name="sql">å­æŸ¥è¯¢è¯­å¥</param>
         public SQLEqualCondition(string sql)
             : this(ConditionRelation.And, null, sql)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="column">²éÑ¯×Ö¶Î¶ÔÏó</param>
-        /// <param name="sql">×Ó²éÑ¯Óï¾ä</param>
+        /// <param name="column">æŸ¥è¯¢å­—æ®µå¯¹è±¡</param>
+        /// <param name="sql">å­æŸ¥è¯¢è¯­å¥</param>
         public SQLEqualCondition(SearchColumn column, string sql)
             : this(ConditionRelation.And, column, sql)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="relation">¹ØÁª¹ØÏµ</param>
-        /// <param name="sql">×Ó²éÑ¯Óï¾ä</param>
+        /// <param name="relation">å…³è”å…³ç³»</param>
+        /// <param name="sql">å­æŸ¥è¯¢è¯­å¥</param>
         public SQLEqualCondition(ConditionRelation relation, string sql)
             : this(relation, null, sql)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="relation">¹ØÁª¹ØÏµ</param>
-        /// <param name="column">²éÑ¯×Ö¶Î¶ÔÏó</param>
-        /// <param name="sql">×Ó²éÑ¯sqlÓï¾ä</param>
+        /// <param name="relation">å…³è”å…³ç³»</param>
+        /// <param name="column">æŸ¥è¯¢å­—æ®µå¯¹è±¡</param>
+        /// <param name="sql">å­æŸ¥è¯¢sqlè¯­å¥</param>
         public SQLEqualCondition(ConditionRelation relation, SearchColumn column, string sql)
             : base(relation, column)
         {

@@ -1,4 +1,4 @@
-namespace NFramework.DBTool.QueryTool
+ï»¿namespace NFramework.DBTool.QueryTool
 {
 	#region Reference
 	
@@ -7,7 +7,7 @@ namespace NFramework.DBTool.QueryTool
 	#endregion
 
 	/// <summary>
-	/// ²»ÏàËÆÌõ¼ş
+	/// ä¸ç›¸ä¼¼æ¡ä»¶
 	/// </summary>
     [Serializable]
     public class NotLikeCondition : Condition
@@ -15,11 +15,11 @@ namespace NFramework.DBTool.QueryTool
         #region Fields & Properties
 
         /// <summary>
-        /// ÓÃÓÚÆ¥ÅäµÄÖµ
+        /// ç”¨äºåŒ¹é…çš„å€¼
         /// </summary>
         private object paramValue;
         /// <summary>
-        /// ÓÃÓÚÆ¥ÅäµÄÖµ
+        /// ç”¨äºåŒ¹é…çš„å€¼
         /// </summary>
         public object ParamValue
         {
@@ -39,40 +39,40 @@ namespace NFramework.DBTool.QueryTool
         #region Public Constructors
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="paramValue">Ìõ¼şµÄÖµ</param>
+        /// <param name="paramValue">æ¡ä»¶çš„å€¼</param>
         public NotLikeCondition(object paramValue)
             : this(ConditionRelation.And, null, paramValue)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="column">²éÑ¯×Ö¶Î¶ÔÏó</param>
-        /// <param name="paramValue">Ìõ¼şµÄÖµ</param>
+        /// <param name="column">æŸ¥è¯¢å­—æ®µå¯¹è±¡</param>
+        /// <param name="paramValue">æ¡ä»¶çš„å€¼</param>
         public NotLikeCondition(SearchColumn column, object paramValue)
             : this(ConditionRelation.And, column, paramValue)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="relation">¹ØÁª¹ØÏµ</param>
-        /// <param name="paramValue">Ìõ¼şµÄÖµ</param>
+        /// <param name="relation">å…³è”å…³ç³»</param>
+        /// <param name="paramValue">æ¡ä»¶çš„å€¼</param>
         public NotLikeCondition(ConditionRelation relation, object paramValue)
             : this(relation, null, paramValue)
         {
         }
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı
+        /// æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="relation">¹ØÁª¹ØÏµ</param>
-        /// <param name="column">²éÑ¯×Ö¶Î¶ÔÏó</param>
-        /// <param name="paramValue">Ìõ¼şµÄÖµ</param>
+        /// <param name="relation">å…³è”å…³ç³»</param>
+        /// <param name="column">æŸ¥è¯¢å­—æ®µå¯¹è±¡</param>
+        /// <param name="paramValue">æ¡ä»¶çš„å€¼</param>
         public NotLikeCondition(ConditionRelation relation, SearchColumn column, object paramValue)
             : base(relation, column)
         {
