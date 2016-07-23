@@ -26,40 +26,44 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>R:\NFramework\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\NFramework.DBTool.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>NFramework.Key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReferenceLib\NHibernate\Iesi.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\ReferenceLib\Log4Net\log4net.dll</HintPath>
+    <Reference Include="Iesi.Collections">
+      <HintPath>R:\ThirdLib\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReferenceLib\MSLib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+      <HintPath>R:\ThirdLib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReferenceLib\MSLib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+      <HintPath>R:\ThirdLib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data.SqlCe, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReferenceLib\MSLib\Microsoft.Practices.EnterpriseLibrary.Data.SqlCe.dll</HintPath>
+      <HintPath>R:\ThirdLib\Microsoft.Practices.EnterpriseLibrary.Data.SqlCe.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReferenceLib\NHibernate\NHibernate.dll</HintPath>
+      <HintPath>R:\ThirdLib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>R:\ThirdLib\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>R:\ThirdLib\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -124,21 +128,21 @@
     <Compile Include="QueryTool\SearchColumn.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ExceptionTool\ExceptionTool.csproj">
+      <Project>{3FFB9C31-C91C-4774-8DBF-D8D764BEE057}</Project>
+      <Name>ExceptionTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectTool\ObjectTool.csproj">
+      <Project>{9E36CC84-750E-40DF-961C-E205340DB4C2}</Project>
+      <Name>ObjectTool</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="NFramework.Key.snk" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="QueryTool\Mysql\" />
     <Folder Include="QueryTool\Oracle\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ExceptionTool\ExceptionTool.csproj">
-      <Project>{3ffb9c31-c91c-4774-8dbf-d8d764bee057}</Project>
-      <Name>ExceptionTool</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ObjectTool\ObjectTool.csproj">
-      <Project>{9e36cc84-750e-40df-961c-e205340db4c2}</Project>
-      <Name>ObjectTool</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

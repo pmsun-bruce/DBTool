@@ -108,7 +108,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             log4net.ILog logger = log4net.LogManager.GetLogger("DBTool MSSQL Test");
             logger.Debug("Start Test");
 
-            string connectionString = @"Persist Security Info=False;User ID=devuser;Pwd=1qazxsw2;Initial Catalog=DBToolSampleDB;Data Source=(local)";
+            string connectionString = @"Persist Security Info=False;User ID=devuser;Pwd=aura1;Initial Catalog=DBToolSampleDB;Data Source=(local)";
             IDalFactory dalFactory = new DalFactory(connectionString);
             NFramework.DBTool.Test.IDal.DalManager.Load(dalFactory);
         }

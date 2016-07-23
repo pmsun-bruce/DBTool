@@ -5,6 +5,10 @@
     using System.Data.SqlClient;
 
     using NFramework.DBTool.Common;
+    using System.Text;
+    using System.Data;
+    using System.Data.Common;
+    using System;
 
     #endregion
 
@@ -52,6 +56,84 @@
             ICTransaction tran = new MssqlTransaction();
             tran.Begin(this);
             return tran;
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public bool IsExistTable(string tableName)
+        {
+            return IsExistTable(tableName, null);
+        }
+
+        public bool IsExistTable(string tableName, ICTransaction tran)
+        {
+            StringBuilder query = new StringBuilder();
+            query.AppendLine(@"SELECT ");
+            query.AppendLine(@"  OBJECT_ID(@TableName) ");
+
+            DBParamCollection paramCollection = new DBParamCollection();
+            paramCollection.Add(new DBParam("@TableName", tableName, DbType.String, 100));
+
+            object result = null;
+
+            if (tran == null)
+            {
+                result = MssqlHelper.ExecuteScalar(this.CurrentConnectionString, CommandType.Text, query.ToString(), paramCollection);
+            }
+            else
+            {
+                DbTransaction dbTran = ((MssqlTransaction)tran).CurrentTransaction;
+                result = MssqlHelper.ExecuteScalar(dbTran, CommandType.Text, query.ToString(), paramCollection);
+            }
+
+            if (result is DBNull)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool IsExistColumn(string tableName, string columnName)
+        {
+            return IsExistColumn(tableName, columnName, null);
+        }
+
+        public bool IsExistColumn(string tableName, string columnName, ICTransaction tran)
+        {
+            StringBuilder query = new StringBuilder();
+            query.AppendLine(@"SELECT ");
+            query.AppendLine(@"  COUNT(*) AS Num ");
+            query.AppendLine(@"FROM ");
+            query.AppendLine(@"  syscolumns ");
+            query.AppendLine(@"WHERE ");
+            query.AppendLine(@"  id = OBJECT_ID(@TableName) ");
+            query.AppendLine(@"AND ");
+            query.AppendLine(@"  name = @ColumnName ");
+
+            DBParamCollection paramCollection = new DBParamCollection();
+            paramCollection.Add(new DBParam("@TableName", tableName, DbType.String, 100));
+            paramCollection.Add(new DBParam("@ColumnName", columnName, DbType.String, 100));
+            object result = null;
+
+            if (tran == null)
+            {
+                result = MssqlHelper.ExecuteScalar(this.CurrentConnectionString, CommandType.Text, query.ToString(), paramCollection);
+            }
+            else
+            {
+                DbTransaction dbTran = ((MssqlTransaction)tran).CurrentTransaction;
+                result = MssqlHelper.ExecuteScalar(dbTran, CommandType.Text, query.ToString(), paramCollection);
+            }
+
+            if (result is DBNull || Convert.ToInt32(result) == 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         #endregion
