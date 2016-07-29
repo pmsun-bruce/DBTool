@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\NFramework.DBTool.Test.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,36 +36,36 @@
   <ItemGroup>
     <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReferenceLib\NHibernate\Iesi.Collections.dll</HintPath>
+      <HintPath>R:\ThirdLib\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReferenceLib\Log4Net\log4net.dll</HintPath>
+      <HintPath>R:\ThirdLib\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReferenceLib\MSLib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+      <HintPath>R:\ThirdLib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReferenceLib\MSLib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+      <HintPath>R:\ThirdLib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data.SqlCe, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReferenceLib\MSLib\Microsoft.Practices.EnterpriseLibrary.Data.SqlCe.dll</HintPath>
+      <HintPath>R:\ThirdLib\Microsoft.Practices.EnterpriseLibrary.Data.SqlCe.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReferenceLib\MSLib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <HintPath>R:\ThirdLib\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReferenceLib\MSLib\Microsoft.Practices.Unity.dll</HintPath>
+      <HintPath>R:\ThirdLib\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReferenceLib\NHibernate\NHibernate.dll</HintPath>
+      <HintPath>R:\ThirdLib\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -121,6 +122,7 @@
     <Compile Include="Searcher\PositionSearcher.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="README.txt" />
     <EmbeddedResource Include="Entity\Company.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -132,18 +134,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DBTool\DBTool.csproj">
-      <Project>{47bbb843-2ee5-42ac-8313-cc6584ab9d8a}</Project>
-      <Name>DBTool</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ExceptionTool\ExceptionTool.csproj">
-      <Project>{3ffb9c31-c91c-4774-8dbf-d8d764bee057}</Project>
-      <Name>ExceptionTool</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ObjectTool\ObjectTool.csproj">
-      <Project>{9e36cc84-750e-40df-961c-e205340db4c2}</Project>
-      <Name>ObjectTool</Name>
-    </ProjectReference>
+    <Folder Include="Log\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -153,6 +144,28 @@
     <None Include="MSSQLTest\MSSQLOrderTest.orderedtest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConfigTool\ConfigTool.csproj">
+      <Project>{36645a7c-ecc4-4e64-89bb-3a6adb6ab5b1}</Project>
+      <Name>ConfigTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBTool\DBTool.csproj">
+      <Project>{47bbb843-2ee5-42ac-8313-cc6584ab9d8a}</Project>
+      <Name>DBTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExceptionTool\ExceptionTool.csproj">
+      <Project>{3ffb9c31-c91c-4774-8dbf-d8d764bee057}</Project>
+      <Name>ExceptionTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LogTool\LogTool.csproj">
+      <Project>{8395cce3-43f9-428f-b43d-b6a969878fb9}</Project>
+      <Name>LogTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectTool\ObjectTool.csproj">
+      <Project>{9e36cc84-750e-40df-961c-e205340db4c2}</Project>
+      <Name>ObjectTool</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

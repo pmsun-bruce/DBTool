@@ -53,5 +53,29 @@
             tran.Begin(this);
             return tran;
         }
+
+        #region Public Methods
+
+        public bool IsExistTable(string tableName)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool IsExistTable(string tableName, ICTransaction tran)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool IsExistColumn(string tableName, string columnName)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool IsExistColumn(string tableName, string columnName, ICTransaction tran)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        #endregion
     }
 }
