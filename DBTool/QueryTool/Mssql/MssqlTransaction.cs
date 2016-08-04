@@ -30,6 +30,15 @@
             set { currentTransaction = value; }
         }
 
+        /// <summary>
+        /// 当前事务的数据库链接
+        /// </summary>
+        private DbConnection CurrentConnection
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region Public Methods
@@ -40,7 +49,8 @@
         /// <param name="dalFactory">传入一个MSSQL的DalFactory对象，可用于打开一个事务</param>
         public void Begin(IDalFactoryBase dalFactory)
         {
-            this.CurrentTransaction = MssqlHelper.OpenNewTransaction(((MssqlDalFactoryBase)dalFactory).CurrentConnectionString);
+            this.CurrentConnection = MssqlHelper.OpenNewConnection(((MssqlDalFactoryBase)dalFactory).CurrentConnectionString);
+            this.CurrentTransaction = this.CurrentConnection.BeginTransaction();
         }
 
         /// <summary>
@@ -49,6 +59,7 @@
         public void Commit()
         {
             this.CurrentTransaction.Commit();
+            MssqlHelper.CloseConnection(this.CurrentConnection);
         }
 
         /// <summary>
@@ -57,6 +68,7 @@
         public void RollBack()
         {
             this.CurrentTransaction.Rollback();
+            MssqlHelper.CloseConnection(this.CurrentConnection);
         }
 
         #endregion
