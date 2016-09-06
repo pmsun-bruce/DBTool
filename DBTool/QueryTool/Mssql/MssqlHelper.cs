@@ -73,33 +73,6 @@
             dbConn = null;
         }
 
-        /// <summary>
-        /// 开启新的数据库事务
-        /// </summary>
-        /// <param name="connectionString">数据库连接字符串</param>
-        /// <returns>返回事务对象</returns>
-        public static DbTransaction OpenNewTransaction(string connectionString)
-        {
-            DbConnection dbCon = OpenNewConnection(connectionString);
-            return dbCon.BeginTransaction();
-        }
-
-        /// <summary>
-        /// 关闭事务
-        /// </summary>
-        /// <param name="tran">需要关闭的事务对象</param>
-        public static void CloseTransaction(DbTransaction tran)
-        {
-            if (tran == null)
-            {
-                return;
-            }
-
-            CloseConnection(tran.Connection);
-            tran.Dispose();
-            tran = null;
-        }
-
         #endregion
 
         #region ExecuteNonQuery
@@ -343,19 +316,24 @@
                 dbCommand = dbBase.GetStoredProcCommand(query);
             }
 
-            dbCommand.Connection = dbBase.CreateConnection();
-            dbCommand.Connection.Open();
             AddParamToCommand(dbBase, dbCommand, dbParamCollection);
-            DbDataAdapter dataAdapter = dbBase.GetDataAdapter();
-            dataAdapter.SelectCommand = dbCommand;
-
+            
             if (page != null)
             {
-                dataAdapter.Fill(result, page.StartRecord, page.PageSize, srcTableName);
+                using (DbDataAdapter dataAdapter = dbBase.GetDataAdapter())
+				{
+					dbCommand.Connection = dbBase.CreateConnection();
+					dbCommand.Connection.Open();
+					dataAdapter.SelectCommand = dbCommand;
+					dataAdapter.Fill(result, page.StartRecord, page.PageSize, srcTableName);
+					CloseConnection(dbCommand.Connection);
+					dbCommand.Dispose();
+					dbCommand = null;
+				}
             }
             else
             {
-                dataAdapter.Fill(result);
+                result = dbBase.ExecuteDataSet(dbCommand);
             }
 
             return result;
@@ -428,19 +406,21 @@
                 dbCommand = dbBase.GetStoredProcCommand(query);
             }
 
-            dbCommand.Connection = tran.Connection;
-            dbCommand.Transaction = tran;
             AddParamToCommand(dbBase, dbCommand, dbParamCollection);
-            DbDataAdapter dataAdapter = dbBase.GetDataAdapter();
-            dataAdapter.SelectCommand = dbCommand;
-
+            
             if (page != null)
             {
-                dataAdapter.Fill(result, page.StartRecord, page.PageSize, srcTableName);
+                using (DbDataAdapter dataAdapter = dbBase.GetDataAdapter())
+				{
+					dataAdapter.SelectCommand = dbCommand;
+					dbCommand.Connection = tran.Connection;
+					dbCommand.Transaction = tran;
+					dataAdapter.Fill(result, page.StartRecord, page.PageSize, srcTableName);
+				}
             }
             else
             {
-                dataAdapter.Fill(result);
+                result = dbBase.ExecuteDataSet(dbCommand, tran);
             }
 
             return result;
