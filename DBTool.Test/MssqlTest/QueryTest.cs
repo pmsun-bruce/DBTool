@@ -16,6 +16,8 @@ using NFramework.DBTool.Test.Handler;
 using NFramework.DBTool.Test.IDal;
 using NFramework.DBTool.Test.MSSQLTest.Dal;
 using NFramework.DBTool.Test.Searcher;
+using System.Data;
+using NFramework.ObjectTool;
 
 namespace NFramework.DBTool.Test.MSSQLTest
 {
@@ -108,7 +110,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             log4net.ILog logger = log4net.LogManager.GetLogger("DBTool MSSQL Test");
             logger.Debug("Start Test");
 
-            string connectionString = @"Persist Security Info=False;User ID=devuser;Pwd=aura1;Initial Catalog=DBToolSampleDB;Data Source=(local)";
+            string connectionString = @"Server=IT11001312P1\SQLEX2008R2;database=DBToolSampleDB;User Id=sa;Pwd=1qazxsw2;";
             IDalFactory dalFactory = new DalFactory(connectionString);
             NFramework.DBTool.Test.IDal.DalManager.Load(dalFactory);
         }
@@ -343,7 +345,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
             empSearcher.CurrPosition = new PositionSearcher();
-            empSearcher.CurrPosition.PositionCode.AddCondition(ConditionFactory.Equal("3102010003"));
+            empSearcher.CurrPosition.PositionCode.Equal("3102010003");
             Pager pager = new Pager();
             pager.CurrentPage = 2;
             pager.PageSize = 15;
@@ -362,7 +364,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByBetweenTest()
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
-            empSearcher.Birthday.AddCondition(ConditionFactory.Between(Convert.ToDateTime("1995-10-01"), Convert.ToDateTime("1995-11-01")));
+            empSearcher.Birthday.Between(Convert.ToDateTime("1995-10-01"), Convert.ToDateTime("1995-11-01"));
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int exCount = 1;
             Assert.AreEqual(exCount, employeeList == null ? 0 : employeeList.Count);
@@ -377,7 +379,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             EmployeeSearcher empSearcher = new EmployeeSearcher();
             // 这句应该写入Dal进行控制，这里用于测试
             empSearcher.Birthday.ConditionString = "MONTH(" + SQLPlaceholder.ColName + ")";
-            empSearcher.Birthday.AddCondition(ConditionFactory.Between(10, 11));
+            empSearcher.Birthday.Between(10, 11);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int exCount = 1;
             Assert.AreEqual(exCount, employeeList == null ? 0 : employeeList.Count);
@@ -390,7 +392,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByBetweenColumnTest()
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
-            empSearcher.JoinDate.AddCondition(ConditionFactory.Between(empSearcher.StartWorkDate, empSearcher.CreateTime));
+            empSearcher.JoinDate.Between(empSearcher.StartWorkDate, empSearcher.CreateTime);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             bool isSucc = employeeList == null ? false : (employeeList.Count >= 1 && employeeList.Count <= 780 ? true : false);
             Assert.AreEqual(true, isSucc);
@@ -404,7 +406,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
             empSearcher.CurrPosition = new PositionSearcher();
-            empSearcher.CurrPosition.PositionCode.AddCondition(ConditionFactory.Equal("3102010003"));
+            empSearcher.CurrPosition.PositionCode.Equal("3102010003");
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 30;
             Assert.AreEqual(allCount, employeeList.Count);
@@ -419,7 +421,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             EmployeeSearcher empSearcher = new EmployeeSearcher();
             // 这句应该写入Dal进行控制，这里用于测试
             empSearcher.Birthday.ConditionString = "MONTH(" + SQLPlaceholder.ColName + ")";
-            empSearcher.Birthday.AddCondition(ConditionFactory.Equal(10));
+            empSearcher.Birthday.Equal(10);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int exCount = 1;
             Assert.AreEqual(exCount, employeeList == null ? 0 : employeeList.Count);
@@ -432,7 +434,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByEqualColumnTest()
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
-            empSearcher.StartWorkDate.AddCondition(ConditionFactory.Equal(empSearcher.JoinDate));
+            empSearcher.StartWorkDate.Equal(empSearcher.JoinDate);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             bool isSucc = employeeList == null ? false : (employeeList.Count > 1 ? true : false);
             Assert.AreEqual(true, isSucc);
@@ -446,7 +448,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
             empSearcher.CurrPosition = new PositionSearcher();
-            empSearcher.CurrPosition.PositionCode.AddCondition(ConditionFactory.NotEqual("3102010003"));
+            empSearcher.CurrPosition.PositionCode.NotEqual("3102010003");
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 750;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -461,7 +463,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             EmployeeSearcher empSearcher = new EmployeeSearcher();
             // 这句应该写入Dal进行控制，这里用于测试
             empSearcher.Birthday.ConditionString = "MONTH(" + SQLPlaceholder.ColName + ")";
-            empSearcher.Birthday.AddCondition(ConditionFactory.NotEqual(10));
+            empSearcher.Birthday.NotEqual(10);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 779;
             Assert.AreEqual(allCount, 779);
@@ -474,7 +476,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByNotEqualColumnTest()
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
-            empSearcher.StartWorkDate.AddCondition(ConditionFactory.NotEqual(empSearcher.JoinDate));
+            empSearcher.StartWorkDate.NotEqual(empSearcher.JoinDate);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             bool isSucc = employeeList == null ? false : (employeeList.Count >= 1 ? true : false);
             Assert.AreEqual(true, isSucc);
@@ -487,7 +489,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByInTest()
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
-            empSearcher.EmployeeCode.AddCondition(ConditionFactory.In(QueryTest.EmployeeCodeList.ToArray()));
+            empSearcher.EmployeeCode.In(QueryTest.EmployeeCodeList.ToArray());
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 10;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -502,7 +504,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             EmployeeSearcher empSearcher = new EmployeeSearcher();
             // 这句应该写入Dal进行控制，这里用于测试
             empSearcher.EmployeeCode.ConditionString = "LOWER(" + SQLPlaceholder.ColName + ")";
-            empSearcher.EmployeeCode.AddCondition(ConditionFactory.In(QueryTest.EmployeeCodeList.ToArray()));
+            empSearcher.EmployeeCode.In(QueryTest.EmployeeCodeList.ToArray());
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             Assert.AreEqual(10, employeeList == null ? 0 : employeeList.Count);
         }
@@ -514,7 +516,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByInColumnTest()
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
-            empSearcher.JoinDate.AddCondition(ConditionFactory.In(new SearchColumn[] { empSearcher.StartWorkDate }));
+            empSearcher.JoinDate.In(new SearchColumn[] { empSearcher.StartWorkDate });
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             bool isSucc = employeeList == null ? false : (employeeList.Count >= 1 ? true : false);
             Assert.AreEqual(true, isSucc);
@@ -527,7 +529,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByNotInTest()
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
-            empSearcher.EmployeeCode.AddCondition(ConditionFactory.NotIn(QueryTest.EmployeeCodeList.ToArray()));
+            empSearcher.EmployeeCode.NotIn(QueryTest.EmployeeCodeList.ToArray());
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 770;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -542,7 +544,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             EmployeeSearcher empSearcher = new EmployeeSearcher();
             // 这句应该写入Dal进行控制，这里用于测试
             empSearcher.EmployeeCode.ConditionString = "LOWER(" + SQLPlaceholder.ColName + ")";
-            empSearcher.EmployeeCode.AddCondition(ConditionFactory.NotIn(QueryTest.EmployeeCodeList.ToArray()));
+            empSearcher.EmployeeCode.NotIn(QueryTest.EmployeeCodeList.ToArray());
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             Assert.AreEqual(770, employeeList == null ? 0 : employeeList.Count);
         }
@@ -554,7 +556,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByNotInColumnTest()
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
-            empSearcher.JoinDate.AddCondition(ConditionFactory.NotIn(new SearchColumn[] { empSearcher.StartWorkDate }));
+            empSearcher.JoinDate.NotIn(new SearchColumn[] { empSearcher.StartWorkDate });
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             bool isSucc = employeeList == null ? false : (employeeList.Count >= 1 ? true : false);
             Assert.AreEqual(true, isSucc);
@@ -567,7 +569,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByLargeEqualTest()
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
-            empSearcher.Rand.AddCondition(ConditionFactory.LargeEqual(15));
+            empSearcher.Rand.LargeEqual(15);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 30;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -582,7 +584,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             EmployeeSearcher empSearcher = new EmployeeSearcher();
             // 这句应该写入Dal进行控制，这里用于测试
             empSearcher.Birthday.ConditionString = "MONTH(" + SQLPlaceholder.ColName + ")";
-            empSearcher.Birthday.AddCondition(ConditionFactory.LargeEqual(10));
+            empSearcher.Birthday.LargeEqual(10);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 1;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -595,7 +597,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByLargeEqualColumnTest()
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
-            empSearcher.StartWorkDate.AddCondition(ConditionFactory.LargeEqual(empSearcher.JoinDate));
+            empSearcher.StartWorkDate.LargeEqual(empSearcher.JoinDate);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             bool isSucc = employeeList == null ? false : (employeeList.Count >= 1 ? true : false);
             Assert.AreEqual(true, isSucc);
@@ -608,7 +610,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByLargeThanTest()
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
-            empSearcher.Rand.AddCondition(ConditionFactory.LargeThan(14));
+            empSearcher.Rand.LargeThan(14);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 30;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -623,7 +625,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             EmployeeSearcher empSearcher = new EmployeeSearcher();
             // 这句应该写入Dal进行控制，这里用于测试
             empSearcher.Birthday.ConditionString = "MONTH(" + SQLPlaceholder.ColName + ")";
-            empSearcher.Birthday.AddCondition(ConditionFactory.LargeThan(9));
+            empSearcher.Birthday.LargeThan(9);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 1;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -636,7 +638,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByLargeThanColumnTest()
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
-            empSearcher.JoinDate.AddCondition(ConditionFactory.LargeThan(empSearcher.StartWorkDate));
+            empSearcher.JoinDate.LargeThan(empSearcher.StartWorkDate);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             bool isSucc = employeeList == null ? false : (employeeList.Count >= 1 ? true : false);
             Assert.AreEqual(true, isSucc);
@@ -649,7 +651,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByLessEqualTest()
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
-            empSearcher.Rand.AddCondition(ConditionFactory.LessEqual(14));
+            empSearcher.Rand.LessEqual(14);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 750;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -664,7 +666,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             EmployeeSearcher empSearcher = new EmployeeSearcher();
             // 这句应该写入Dal进行控制，这里用于测试
             empSearcher.Birthday.ConditionString = "MONTH(" + SQLPlaceholder.ColName + ")";
-            empSearcher.Birthday.AddCondition(ConditionFactory.LessEqual(10));
+            empSearcher.Birthday.LessEqual(10);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 780;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -677,7 +679,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByLessEqualColumnTest()
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
-            empSearcher.StartWorkDate.AddCondition(ConditionFactory.LessEqual(empSearcher.JoinDate));
+            empSearcher.StartWorkDate.LessEqual(empSearcher.JoinDate);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             bool isSucc = employeeList == null ? false : (employeeList.Count >= 1 ? true : false);
             Assert.AreEqual(true, isSucc);
@@ -690,7 +692,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByLessThanTest()
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
-            empSearcher.Rand.AddCondition(ConditionFactory.LessThan(15));
+            empSearcher.Rand.LessThan(15);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 750;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -705,7 +707,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             EmployeeSearcher empSearcher = new EmployeeSearcher();
             // 这句应该写入Dal进行控制，这里用于测试
             empSearcher.Birthday.ConditionString = "MONTH(" + SQLPlaceholder.ColName + ")";
-            empSearcher.Birthday.AddCondition(ConditionFactory.LessThan(10));
+            empSearcher.Birthday.LessThan(10);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 779;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -718,7 +720,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByLessThanColumnTest()
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
-            empSearcher.StartWorkDate.AddCondition(ConditionFactory.LessThan(empSearcher.JoinDate));
+            empSearcher.StartWorkDate.LessThan(empSearcher.JoinDate);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             bool isSucc = employeeList == null ? false : (employeeList.Count >= 1 ? true : false);
             Assert.AreEqual(true, isSucc);
@@ -731,13 +733,13 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByLikeTest()
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
-            empSearcher.Name.AddCondition(ConditionFactory.Like("Emp"));
+            empSearcher.Name.Like("Emp");
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 780;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
 
             empSearcher = new EmployeeSearcher();
-            empSearcher.EmployeeCode.AddCondition(ConditionFactory.Like("510201"));
+            empSearcher.EmployeeCode.Like("510201");
             employeeList = OrgHandler.FindEmployeeList(empSearcher);
             allCount = 156;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -752,7 +754,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             EmployeeSearcher empSearcher = new EmployeeSearcher();
             // 这句应该写入Dal进行控制，这里用于测试
             empSearcher.Name.ConditionString = "LOWER(" + SQLPlaceholder.ColName + ")";
-            empSearcher.Name.AddCondition(ConditionFactory.Like("emp"));
+            empSearcher.Name.Like("emp");
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             Assert.AreEqual(780, employeeList == null ? 0 : employeeList.Count);
         }
@@ -765,7 +767,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
             empSearcher.CurrCompany = new CompanySearcher();
-            empSearcher.EmployeeCode.AddCondition(ConditionFactory.Like(empSearcher.CurrCompany.CompanyCode));
+            empSearcher.EmployeeCode.Like(empSearcher.CurrCompany.CompanyCode);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 780;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -778,7 +780,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByNotLikeTest()
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
-            empSearcher.Name.AddCondition(ConditionFactory.NotLike("Emp"));
+            empSearcher.Name.NotLike("Emp");
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 0;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -793,7 +795,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             EmployeeSearcher empSearcher = new EmployeeSearcher();
             // 这句应该写入Dal进行控制，这里用于测试
             empSearcher.Name.ConditionString = "LOWER(" + SQLPlaceholder.ColName + ")";
-            empSearcher.Name.AddCondition(ConditionFactory.NotLike("emp"));
+            empSearcher.Name.NotLike("emp");
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 0;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -807,7 +809,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
             empSearcher.CurrCompany = new CompanySearcher();
-            empSearcher.EmployeeCode.AddCondition(ConditionFactory.NotLike(empSearcher.CurrCompany.CompanyCode));
+            empSearcher.EmployeeCode.NotLike(empSearcher.CurrCompany.CompanyCode);
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 0;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -830,7 +832,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             subQuery.Append("  Company CSub ON(CSub.CompanyId=DSub.CompanyId) ");
             subQuery.Append("WHERE ");
             subQuery.Append("  CSub.CompanyCode = '10401' ");
-            empSearcher.DepartmentId.AddCondition(ConditionFactory.SQLIn(subQuery.ToString()));
+            empSearcher.DepartmentId.SQLIn(subQuery.ToString());
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 156;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -854,7 +856,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             subQuery.Append("WHERE ");
             subQuery.Append("  CSub.CompanyCode = '10401' ");
             empSearcher.DepartmentId.ConditionString = "LOWER(" + SQLPlaceholder.ColName + ")";
-            empSearcher.DepartmentId.AddCondition(ConditionFactory.SQLIn(subQuery.ToString()));
+            empSearcher.DepartmentId.SQLIn(subQuery.ToString());
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 156;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -877,7 +879,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             subQuery.Append("  Company CSub ON(CSub.CompanyId=DSub.CompanyId) ");
             subQuery.Append("WHERE ");
             subQuery.Append("  CSub.CompanyCode = '10401' ");
-            empSearcher.DepartmentId.AddCondition(ConditionFactory.SQLNotIn(subQuery.ToString()));
+            empSearcher.DepartmentId.SQLNotIn(subQuery.ToString());
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 624;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -902,7 +904,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             subQuery.Append("  CSub.CompanyCode = '10401' ");
             empSearcher.CurrDepartment = new DepartmentSearcher();
             empSearcher.CurrDepartment.DepartmentId.ConditionString = "LOWER(" + SQLPlaceholder.ColName + ")";
-            empSearcher.CurrDepartment.DepartmentId.AddCondition(ConditionFactory.SQLNotIn(subQuery.ToString()));
+            empSearcher.CurrDepartment.DepartmentId.SQLNotIn(subQuery.ToString());
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 624;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -923,7 +925,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             subQuery.Append("  Department DSub ");
             subQuery.Append("WHERE ");
             subQuery.Append("  DSub.DepartmentCode = '2104010005' ");
-            empSearcher.CompanyId.AddCondition(ConditionFactory.SQLEqual(subQuery.ToString()));
+            empSearcher.CompanyId.SQLEqual(subQuery.ToString());
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 156;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -947,7 +949,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             subQuery.Append("WHERE ");
             subQuery.Append("  DSub.DepartmentCode = '2104010005' ");
             empSearcher.EmployeeCode.ConditionString = "SUBSTRING(" + SQLPlaceholder.ColName + ", 2, 5)";
-            empSearcher.EmployeeCode.AddCondition(ConditionFactory.SQLEqual(subQuery.ToString()));
+            empSearcher.EmployeeCode.SQLEqual(subQuery.ToString());
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 156;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -968,7 +970,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             subQuery.Append("  Department DSub ");
             subQuery.Append("WHERE ");
             subQuery.Append("  DSub.DepartmentCode = '2104010005' ");
-            empSearcher.CompanyId.AddCondition(ConditionFactory.SQLNotEqual(subQuery.ToString()));
+            empSearcher.CompanyId.SQLNotEqual(subQuery.ToString());
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 624;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -992,7 +994,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             subQuery.Append("WHERE ");
             subQuery.Append("  DSub.DepartmentCode = '2104010005' ");
             empSearcher.EmployeeCode.ConditionString = "SUBSTRING(" + SQLPlaceholder.ColName + ", 2, 5)";
-            empSearcher.EmployeeCode.AddCondition(ConditionFactory.SQLNotEqual(subQuery.ToString()));
+            empSearcher.EmployeeCode.SQLNotEqual(subQuery.ToString());
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
             int allCount = 624;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
@@ -1006,14 +1008,14 @@ namespace NFramework.DBTool.Test.MSSQLTest
         {
             EmployeeSearcher empSearcher = new EmployeeSearcher();
             empSearcher.CurrCompany = new CompanySearcher();
-            empSearcher.EmployeeCode.AddCondition(ConditionFactory.Equal(ConditionRelation.Or, QueryTest.EmployeeCodeList[0]));
-            empSearcher.EmployeeCode.AddCondition(ConditionFactory.Equal(ConditionRelation.Or, QueryTest.EmployeeCodeList[1]));
-            empSearcher.EmployeeCode.AddCondition(ConditionFactory.Equal(ConditionRelation.Or, QueryTest.EmployeeCodeList[2]));
-            empSearcher.CurrCompany.CompanyCode.AddCondition(ConditionFactory.Equal(ConditionRelation.Or, "10203"));
-            empSearcher.Rand.AddCondition(ConditionFactory.LargeEqual(14));
+            empSearcher.EmployeeCode.Equal(ConditionRelation.Or, QueryTest.EmployeeCodeList[0]);
+            empSearcher.EmployeeCode.Equal(ConditionRelation.Or, QueryTest.EmployeeCodeList[1]);
+            empSearcher.EmployeeCode.Equal(ConditionRelation.Or, QueryTest.EmployeeCodeList[2]);
+            empSearcher.CurrCompany.CompanyCode.Equal(ConditionRelation.Or, "10203");
+            empSearcher.Rand.LargeEqual(14);
 
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(empSearcher);
-            int allCount = 158;
+            int allCount = 9;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
         }
 
@@ -1024,93 +1026,16 @@ namespace NFramework.DBTool.Test.MSSQLTest
         public void FindEmployeeByConditionGroupTest1()
         {
             EmployeeSearcher employeeSearcher = new EmployeeSearcher();
-            Condition condition = null;
-
-            #region No Group
-
-            condition = ConditionFactory.Equal(QueryTest.EmployeeCodeList[4]);
-            condition.Relation = ConditionRelation.Or;
-            employeeSearcher.EmployeeCode.AddCondition(condition);
-
-            condition = ConditionFactory.Equal(QueryTest.EmployeeCodeList[5]);
-            condition.Relation = ConditionRelation.Or;
-            employeeSearcher.EmployeeCode.AddCondition(condition);
-
-            #endregion
-
-            #region Group1
-
-            ConditionGroup group1 = new ConditionGroup();
-            group1.GroupRelation = ConditionRelation.Or;
-            group1.GroupIndex = 1;
-            condition = ConditionFactory.Equal(QueryTest.EmployeeCodeList[0]);
-            condition.Relation = ConditionRelation.Or;
-            condition.Group = group1;
-            employeeSearcher.EmployeeCode.AddCondition(condition);
-
-            condition = ConditionFactory.Equal(QueryTest.EmployeeCodeList[1]);
-            condition.Relation = ConditionRelation.Or;
-            condition.Group = group1;
-            employeeSearcher.EmployeeCode.AddCondition(condition);
-
-            #region Sub Group 1 1
-
-            ConditionGroup subGroup11 = new ConditionGroup();
-            group1.AddSubGroup(subGroup11);
-            subGroup11.GroupRelation = ConditionRelation.And;
-            subGroup11.GroupIndex = 1;
-            condition = ConditionFactory.Equal(QueryTest.EmployeeCodeList[2]);
-            condition.Relation = ConditionRelation.Or;
-            condition.Group = subGroup11;
-            employeeSearcher.EmployeeCode.AddCondition(condition);
-
-            condition = ConditionFactory.Equal(QueryTest.EmployeeCodeList[3]);
-            condition.Relation = ConditionRelation.Or;
-            condition.Group = subGroup11;
-            employeeSearcher.EmployeeCode.AddCondition(condition);
-
-            #endregion
-
-            #endregion
-
-            #region Group2
-
             employeeSearcher.CurrCompany = new CompanySearcher();
-            ConditionGroup group2 = new ConditionGroup();
-            group2.GroupRelation = ConditionRelation.Or;
-            group2.GroupIndex = 2;
-            condition = ConditionFactory.Equal("10201");
-            condition.Relation = ConditionRelation.Or;
-            condition.Group = group2;
-            employeeSearcher.CurrCompany.CompanyCode.AddCondition(condition);
-
-            condition = ConditionFactory.Equal("10301");
-            condition.Relation = ConditionRelation.Or;
-            condition.Group = group2;
-            employeeSearcher.CurrCompany.CompanyCode.AddCondition(condition);
-
-            #region Sub Group 2 1
-
-            ConditionGroup subGroup21 = new ConditionGroup();
-            group2.AddSubGroup(subGroup21);
-            subGroup21.GroupRelation = ConditionRelation.Or;
-            subGroup21.GroupIndex = 1;
-            condition = ConditionFactory.Equal(QueryTest.EmployeeCodeList[6]);
-            condition.Relation = ConditionRelation.Or;
-            condition.Group = subGroup21;
-            employeeSearcher.EmployeeCode.AddCondition(condition);
-
-            condition = ConditionFactory.Equal(QueryTest.EmployeeCodeList[7]);
-            condition.Relation = ConditionRelation.Or;
-            condition.Group = subGroup21;
-            employeeSearcher.EmployeeCode.AddCondition(condition);
-
-            #endregion
-
-            #endregion
+            
+            Group.And(Group.Or(employeeSearcher.EmployeeCode.Equal(QueryTest.EmployeeCodeList[4]), employeeSearcher.EmployeeCode.Equal(QueryTest.EmployeeCodeList[5]),
+                               Group.Or(employeeSearcher.EmployeeCode.Equal(QueryTest.EmployeeCodeList[0]), employeeSearcher.EmployeeCode.Equal(QueryTest.EmployeeCodeList[1])),
+                               Group.Or(employeeSearcher.EmployeeCode.Equal(QueryTest.EmployeeCodeList[2]), employeeSearcher.EmployeeCode.Equal(QueryTest.EmployeeCodeList[3]))),
+                      Group.Or(employeeSearcher.CurrCompany.CompanyCode.Equal("10201"), employeeSearcher.CurrCompany.CompanyCode.Equal("10301"),
+                               Group.Or(employeeSearcher.EmployeeCode.Equal(QueryTest.EmployeeCodeList[6]), employeeSearcher.EmployeeCode.Equal(QueryTest.EmployeeCodeList[7]))));
 
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(employeeSearcher);
-            int allCount = 312;
+            int allCount = 6;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
         }
 
@@ -1122,13 +1047,15 @@ namespace NFramework.DBTool.Test.MSSQLTest
         {
             EmployeeSearcher employeeSearcher = new EmployeeSearcher();
             employeeSearcher.CurrCompany = new CompanySearcher();
-            ConditionGroup group = ConditionFactory.Group(ConditionRelation.And, ConditionFactory.Equal(employeeSearcher.EmployeeCode, QueryTest.EmployeeCodeList[0]),
-                                                                                 ConditionFactory.Equal(ConditionRelation.Or, employeeSearcher.EmployeeCode, QueryTest.EmployeeCodeList[1]),
-                                                                                 ConditionFactory.Group(ConditionRelation.Or, ConditionFactory.Equal(ConditionRelation.Or, employeeSearcher.CurrCompany.CompanyCode, "10201"),
-                                                                                                                              ConditionFactory.Equal(ConditionRelation.Or, employeeSearcher.CurrCompany.CompanyCode, "10301")));
+
+            Group.And(Group.Or(employeeSearcher.EmployeeCode.Equal(QueryTest.EmployeeCodeList[4]), employeeSearcher.EmployeeCode.Equal(QueryTest.EmployeeCodeList[5]),
+                               Group.Or(employeeSearcher.EmployeeCode.Equal(QueryTest.EmployeeCodeList[0]), employeeSearcher.EmployeeCode.Equal(QueryTest.EmployeeCodeList[1])),
+                               Group.Or(employeeSearcher.EmployeeCode.Equal(QueryTest.EmployeeCodeList[2]), employeeSearcher.EmployeeCode.Equal(QueryTest.EmployeeCodeList[3]))),
+                      Group.Or(employeeSearcher.CurrCompany.CompanyCode.Equal("10201"), employeeSearcher.CurrCompany.CompanyCode.Equal("10301"),
+                               Group.Or(employeeSearcher.EmployeeCode.Equal(QueryTest.EmployeeCodeList[6]), employeeSearcher.EmployeeCode.Equal(QueryTest.EmployeeCodeList[7]))));
 
             IList<Employee> employeeList = OrgHandler.FindEmployeeList(employeeSearcher);
-            int allCount = 312;
+            int allCount = 6;
             Assert.AreEqual(allCount, employeeList == null ? 0 : employeeList.Count);
         }
 
@@ -1297,7 +1224,7 @@ namespace NFramework.DBTool.Test.MSSQLTest
             newEmployee.Rand = 11;
             OrgHandler.AddEmployee(newEmployee, tran);
 
-            tran.RollBack();
+            tran.Rollback();
 
             long allCountPosEx = 56;
             long allCountPos = OrgHandler.CountPosition(new PositionSearcher());
@@ -1335,12 +1262,562 @@ namespace NFramework.DBTool.Test.MSSQLTest
         {
             EmployeeSearcher employeeSearcher = new EmployeeSearcher();
             employeeSearcher.CurrCompany = new CompanySearcher();
-            employeeSearcher.CurrCompany.CompanyCode.AddCondition(ConditionFactory.Equal("10401"));
+            employeeSearcher.CurrCompany.CompanyCode.Equal("10401");
             OrgHandler.DeleteEmployee(employeeSearcher);
 
             long count = OrgHandler.CountEmployee(employeeSearcher);
             Assert.AreEqual(0, count);
         }
 
+        private TableInfo FillTable()
+        {
+            TableInfo tableInfo = new TableInfo();
+            tableInfo.TableName = "TestTbl1";
+            tableInfo.Remarks = "测试表1";
+
+            ColumnInfo colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col1";
+            colInfo.IsPK = true;
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "主键字段1";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col11";
+            colInfo.IsPK = true;
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "主键字段11";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col2";
+            colInfo.IsUnique = true;
+            colInfo.UniqueConstraintName = "Col2";
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "唯一字段1";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col3";
+            colInfo.IsUnique = true;
+            colInfo.UniqueConstraintName = "Col34";
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "唯一字段34";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col4";
+            colInfo.IsUnique = true;
+            colInfo.UniqueConstraintName = "Col34";
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "唯一字段34";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col5";
+            colInfo.DBType = DbType.DateTime;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段5";
+            colInfo.DefaultValue = "1753-01-01";
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col6";
+            colInfo.DBType = DbType.Int32;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段6";
+            colInfo.DefaultValue = 100;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col7";
+            colInfo.DBType = DbType.Decimal;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段7";
+            colInfo.DefaultValue = 100.32;
+            colInfo.Precision = 10;
+            colInfo.Scale = 2;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col99";
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段99";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            return tableInfo;
+        }
+
+        static TableInfo tableInfo = null;
+
+        [TestMethod]
+        public void CreateTableTest()
+        {
+            tableInfo = FillTable();
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.DropTable(tableInfo.TableName);
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.CreateTable(tableInfo);
+        }
+
+        [TestMethod]
+        public void EditTableTest()
+        {
+            tableInfo.Remarks = tableInfo.Remarks + "22";
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.EditTable(tableInfo, tableInfo);
+        }
+
+        [TestMethod]
+        public void AddColumnTest()
+        {
+            // 增加一般字段
+            ColumnInfo colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col8";
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段8";
+            colInfo.MaxLength = 40;
+            colInfo.DefaultValue = "1134";
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.AddColumn(tableInfo, colInfo);
+            tableInfo.Columns.Add(colInfo);
+
+            // 已存在字段
+            try
+            {
+                colInfo = new ColumnInfo();
+                colInfo.ColumnName = "Col2";
+                colInfo.IsUnique = true;
+                colInfo.UniqueConstraintName = "Col2";
+                colInfo.DBType = DbType.AnsiString;
+                colInfo.CurrTable = tableInfo;
+                colInfo.Remarks = "唯一字段1";
+                colInfo.MaxLength = 40;
+
+                NFramework.DBTool.Test.IDal.DalManager.DalFactory.AddColumn(tableInfo, colInfo);
+                Assert.IsTrue(false);
+            }
+            catch(Exception ex)
+            {
+                Assert.IsTrue(true);
+            }
+
+            // 增加同组唯一字段
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col9";
+            colInfo.IsUnique = true;
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段9";
+            colInfo.MaxLength = 40;
+            colInfo.DefaultValue = "1134";
+            colInfo.UniqueConstraintName = "Col34";
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.AddColumn(tableInfo, colInfo);
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col10";
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段10";
+            colInfo.MaxLength = 40;
+            colInfo.DefaultValue = "1010";
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.AddColumn(tableInfo, colInfo);
+            tableInfo.Columns.Add(colInfo);
+
+            // 增加主键字段
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col111";
+            colInfo.IsPK = true;
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "主键字段111";
+            colInfo.MaxLength = 40;
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.AddColumn(tableInfo, colInfo);
+            tableInfo.Columns.Add(colInfo);
+        }
+
+        [TestMethod]
+        public void EditColumnTest()
+        {
+            // 修改备注
+            ColumnInfo oldColInfo = tableInfo.Columns.FirstOrDefault<ColumnInfo>(ci => ci.ColumnName.Equals("Col8"));
+            ColumnInfo newColInfo = oldColInfo;
+            oldColInfo = ObjectFactory.Clone<ColumnInfo>(newColInfo);
+            newColInfo.Remarks = "字段89999111";
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.EditColumn(tableInfo, oldColInfo, newColInfo);
+
+            // 修改默认值
+            oldColInfo.Remarks = "字段89999111";
+            newColInfo.Remarks = "字段89999222";
+            newColInfo.DefaultValue = "1000";
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.EditColumn(tableInfo, oldColInfo, newColInfo);
+
+            // 增加主键
+            oldColInfo = ObjectFactory.Clone<ColumnInfo>(newColInfo);
+            newColInfo.IsPK = true;
+            newColInfo.IsNullable = true;
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.EditColumn(tableInfo, oldColInfo, newColInfo);
+
+            // 增加唯一项
+            oldColInfo = tableInfo.Columns.FirstOrDefault<ColumnInfo>(ci => ci.ColumnName.Equals("Col10"));
+            newColInfo = oldColInfo;
+            oldColInfo = ObjectFactory.Clone<ColumnInfo>(newColInfo);
+            newColInfo.IsUnique = true;
+            newColInfo.UniqueConstraintName = "Col34";
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.EditColumn(tableInfo, oldColInfo, newColInfo);
+
+            // 修改列名
+            oldColInfo = tableInfo.Columns.FirstOrDefault<ColumnInfo>(ci => ci.ColumnName.Equals("Col5"));
+            newColInfo = oldColInfo;
+            oldColInfo = ObjectFactory.Clone<ColumnInfo>(newColInfo);
+            newColInfo.ColumnName = "Col55";
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.EditColumn(tableInfo, oldColInfo, newColInfo);
+
+            // 修改长度
+            oldColInfo = tableInfo.Columns.FirstOrDefault<ColumnInfo>(ci => ci.ColumnName.Equals("Col99"));
+            newColInfo = oldColInfo;
+            oldColInfo = ObjectFactory.Clone<ColumnInfo>(newColInfo);
+            newColInfo.MaxLength = 100;
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.EditColumn(tableInfo, oldColInfo, newColInfo);
+
+            // 修改类型
+            oldColInfo = ObjectFactory.Clone<ColumnInfo>(newColInfo);
+            newColInfo.DBType = DbType.Int32;
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.EditColumn(tableInfo, oldColInfo, newColInfo);
+
+            // 修改列名和类型
+            oldColInfo = ObjectFactory.Clone<ColumnInfo>(newColInfo);
+            newColInfo.ColumnName = "Col555";
+            newColInfo.DBType = DbType.String;
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.EditColumn(tableInfo, oldColInfo, newColInfo);
+
+            // 删除唯一性
+            oldColInfo = tableInfo.Columns.FirstOrDefault<ColumnInfo>(ci => ci.ColumnName.Equals("Col3"));
+            newColInfo = oldColInfo;
+            oldColInfo = ObjectFactory.Clone<ColumnInfo>(newColInfo);
+            newColInfo.IsUnique = false;
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.EditColumn(tableInfo, oldColInfo, newColInfo);
+
+            // 增加唯一性
+            oldColInfo = ObjectFactory.Clone<ColumnInfo>(newColInfo);
+            newColInfo.IsUnique = true;
+            newColInfo.UniqueConstraintName = "Col34";
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.EditColumn(tableInfo, oldColInfo, newColInfo);
+
+            // 修改类型和唯一性
+            oldColInfo = newColInfo;
+            newColInfo = ObjectFactory.Clone<ColumnInfo>(oldColInfo);
+            newColInfo.IsUnique = false;
+            newColInfo.ColumnName = "Col33";
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.EditColumn(tableInfo, oldColInfo, newColInfo);
+            oldColInfo.IsUnique = false;
+            oldColInfo.ColumnName = "Col33";
+            oldColInfo.UniqueConstraintName = string.Empty;
+        }
+
+        [TestMethod]
+        public void DropColumnTest()
+        {
+            ColumnInfo colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col9";
+            colInfo.IsUnique = true;
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段9";
+            colInfo.MaxLength = 40;
+            colInfo.DefaultValue = "1134";
+            colInfo.UniqueConstraintName = "Col34";
+
+            NFramework.DBTool.Test.IDal.DalManager.DalFactory.DropColumn(tableInfo, colInfo);
+        }
+        
+        private TableInfo FillTable2()
+        {
+            TableInfo tableInfo = new TableInfo();
+            tableInfo.TableName = "TestTbl2";
+            tableInfo.Remarks = "测试表2";
+
+            ColumnInfo colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col1";
+            colInfo.IsPK = true;
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "主键字段1";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col11";
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段11";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col2";
+            colInfo.IsUnique = true;
+            colInfo.UniqueConstraintName = "Col2";
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "唯一字段1";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col3";
+            colInfo.IsUnique = true;
+            colInfo.UniqueConstraintName = "Col34";
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "唯一字段34";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col4";
+            colInfo.IsUnique = true;
+            colInfo.UniqueConstraintName = "Col34";
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "唯一字段34";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col5";
+            colInfo.DBType = DbType.DateTime;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段5";
+            colInfo.DefaultValue = "1753-01-01";
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col6";
+            colInfo.DBType = DbType.Int32;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段6";
+            colInfo.DefaultValue = 100;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col7";
+            colInfo.DBType = DbType.Decimal;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段7";
+            colInfo.DefaultValue = 100.32;
+            colInfo.Precision = 10;
+            colInfo.Scale = 2;
+            tableInfo.Columns.Add(colInfo);
+
+            return tableInfo;
+        }
+
+        private TableInfo FillTable3()
+        {
+            TableInfo tableInfo = new TableInfo();
+            tableInfo.TableName = "TestTbl3";
+            tableInfo.Remarks = "测试表3";
+
+            ColumnInfo colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col1";
+            colInfo.IsPK = true;
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "主键字段1";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col11";
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段11";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col2";
+            colInfo.IsUnique = true;
+            colInfo.UniqueConstraintName = "Col2";
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "唯一字段1";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col3";
+            colInfo.IsUnique = true;
+            colInfo.UniqueConstraintName = "Col34";
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "唯一字段34";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col4";
+            colInfo.IsUnique = true;
+            colInfo.UniqueConstraintName = "Col34";
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "唯一字段34";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col5";
+            colInfo.DBType = DbType.DateTime;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段5";
+            colInfo.DefaultValue = "1753-01-01";
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col6";
+            colInfo.DBType = DbType.Int32;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段6";
+            colInfo.DefaultValue = 100;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col7";
+            colInfo.DBType = DbType.Decimal;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段7";
+            colInfo.DefaultValue = 100.32;
+            colInfo.Precision = 10;
+            colInfo.Scale = 2;
+            tableInfo.Columns.Add(colInfo);
+
+            return tableInfo;
+        }
+
+        private TableInfo FillTable4()
+        {
+            TableInfo tableInfo = new TableInfo();
+            tableInfo.TableName = "TestTbl4";
+            tableInfo.Remarks = "测试表4";
+
+            ColumnInfo colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col1";
+            colInfo.IsPK = true;
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "主键字段1";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "FKCol1";
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "外键1";
+            colInfo.MaxLength = 40;
+            colInfo.IsFK = true;
+            colInfo.RefTableName = "TestTbl2";
+            colInfo.RefColumnName = "Col1";
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "FKCol2";
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "外键2";
+            colInfo.MaxLength = 40;
+            colInfo.IsFK = true;
+            colInfo.RefTableName = "TestTbl3";
+            colInfo.RefColumnName = "Col1";
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col3";
+            colInfo.IsUnique = true;
+            colInfo.UniqueConstraintName = "Col34";
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "唯一字段34";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col4";
+            colInfo.IsUnique = true;
+            colInfo.UniqueConstraintName = "Col34";
+            colInfo.DBType = DbType.AnsiString;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "唯一字段34";
+            colInfo.MaxLength = 40;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col5";
+            colInfo.DBType = DbType.DateTime;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段5";
+            colInfo.DefaultValue = "1753-01-01";
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col6";
+            colInfo.DBType = DbType.Int32;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段6";
+            colInfo.DefaultValue = 100;
+            tableInfo.Columns.Add(colInfo);
+
+            colInfo = new ColumnInfo();
+            colInfo.ColumnName = "Col7";
+            colInfo.DBType = DbType.Decimal;
+            colInfo.CurrTable = tableInfo;
+            colInfo.Remarks = "字段7";
+            colInfo.DefaultValue = 100.32;
+            colInfo.Precision = 10;
+            colInfo.Scale = 2;
+            tableInfo.Columns.Add(colInfo);
+
+            return tableInfo;
+        }
+
+        [TestMethod]
+        public void AddFKTest()
+        {
+            TableInfo fkTableInfo = FillTable4();
+            TableInfo refTableInfo1 = FillTable2();
+            TableInfo refTableInfo2 = FillTable3();
+            DalManager.DalFactory.DropTable(fkTableInfo.TableName);
+            DalManager.DalFactory.DropTable(refTableInfo1.TableName);
+            DalManager.DalFactory.DropTable(refTableInfo2.TableName);
+            DalManager.DalFactory.CreateTable(refTableInfo1);
+            DalManager.DalFactory.CreateTable(refTableInfo2);
+            DalManager.DalFactory.CreateTable(fkTableInfo);
+            //ColumnInfo fkColumnInfo = fkTableInfo.Columns.FirstOrDefault<ColumnInfo>(ci=>ci.ColumnName.Equals("FKCol1"));
+            //DalManager.DalFactory.AddFK(fkTableInfo, refTableInfo.TableName, fkColumnInfo, "Col1");
+        }
+
+        [TestMethod]
+        public void DropFKTest()
+        {
+            TableInfo fkTableInfo = FillTable4();
+            TableInfo refTableInfo1 = FillTable2();
+            TableInfo refTableInfo2 = FillTable3();
+            ColumnInfo fkColumnInfo1 = fkTableInfo.Columns.FirstOrDefault<ColumnInfo>(ci => ci.ColumnName.Equals("FKCol1"));
+            ColumnInfo fkColumnInfo2 = fkTableInfo.Columns.FirstOrDefault<ColumnInfo>(ci => ci.ColumnName.Equals("FKCol2"));
+            DalManager.DalFactory.DropColumn(fkTableInfo, fkColumnInfo1);
+            DalManager.DalFactory.DropColumn(fkTableInfo, fkColumnInfo2);
+            //DalManager.DalFactory.DropFK(fkTableInfo, fkColumnInfo, "Col1");
+        }
     }
 }

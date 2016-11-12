@@ -26,9 +26,13 @@
         #region DB Code
 
         /// <summary>
-        /// 有外键关联约束存在
+        /// 有外键关联错误
         /// </summary>
-        FKError = -2146232060,
+        FKError = 547,
+        /// <summary>
+        /// 唯一键错误
+        /// </summary>
+        UQError = 2627,
         /// <summary>
         /// 版本已更改
         /// </summary>
@@ -48,8 +52,22 @@
         /// <summary>
         /// 查找的数据不存在
         /// </summary>
-        NoDataExists = 110005
+        NoDataExists = 110005,
         
+        #endregion
+
+        #region Validate Code
+
+        ValidError = 210001,
+
+        #endregion
+
+        #region Sys Error
+
+        Warning = 100,
+
+        Error = 300
+
         #endregion
     }
 }

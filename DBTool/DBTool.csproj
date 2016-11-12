@@ -40,33 +40,38 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Iesi.Collections">
-      <HintPath>R:\ThirdLib\Iesi.Collections.dll</HintPath>
+      <HintPath>..\..\..\..\ReferenceLib\ThirdLib\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>R:\ThirdLib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+      <HintPath>..\..\..\..\ReferenceLib\ThirdLib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>R:\ThirdLib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+      <HintPath>..\..\..\..\ReferenceLib\ThirdLib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data.SqlCe, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>R:\ThirdLib\Microsoft.Practices.EnterpriseLibrary.Data.SqlCe.dll</HintPath>
+      <HintPath>..\..\..\..\ReferenceLib\ThirdLib\Microsoft.Practices.EnterpriseLibrary.Data.SqlCe.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>R:\ThirdLib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <HintPath>..\..\..\..\ReferenceLib\ThirdLib\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>R:\ThirdLib\Microsoft.Practices.Unity.dll</HintPath>
+      <HintPath>..\..\..\..\ReferenceLib\ThirdLib\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReferenceLib\ThirdLib\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
-      <HintPath>R:\ThirdLib\NHibernate.dll</HintPath>
+      <HintPath>..\..\..\..\ReferenceLib\ThirdLib\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -74,15 +79,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ColumnInfo.cs" />
     <Compile Include="Common\ICTransaction.cs" />
     <Compile Include="Common\IDalFactoryBase.cs" />
     <Compile Include="Common\IRVersion.cs" />
     <Compile Include="Common\KeyGenerator.cs" />
+    <Compile Include="Common\TableInfo.cs" />
+    <Compile Include="QueryTool\ConditionMaxIndex.cs" />
     <Compile Include="QueryTool\DBParam.cs" />
+    <Compile Include="QueryTool\Mysql\MysqlDalBase.cs" />
+    <Compile Include="QueryTool\Mysql\MysqlDalFactoryBase.cs" />
+    <Compile Include="QueryTool\Mysql\MysqlQueryParser.cs" />
+    <Compile Include="QueryTool\Mysql\MysqlTransaction.cs" />
+    <Compile Include="QueryTool\NotExistsCondition.cs" />
     <Compile Include="QueryTool\ExistsCondition.cs" />
     <Compile Include="QueryTool\BetweenCondition.cs" />
     <Compile Include="QueryTool\Condition.cs" />
     <Compile Include="Common\IDalBase.cs" />
+    <Compile Include="QueryTool\Group.cs" />
     <Compile Include="QueryTool\Hibernate\HibernateConfig.cs" />
     <Compile Include="QueryTool\Hibernate\HibernateDalBase.cs" />
     <Compile Include="QueryTool\Hibernate\HibernateDalFactoryBase.cs" />
@@ -123,7 +137,6 @@
     <Compile Include="QueryTool\ConditionGroup.cs" />
     <Compile Include="QueryTool\ConditionRelation.cs" />
     <Compile Include="QueryTool\ICondition.cs" />
-    <Compile Include="QueryTool\ConditionFactory.cs" />
     <Compile Include="Common\PageList.cs" />
     <Compile Include="QueryTool\SearchColumn.cs" />
   </ItemGroup>
@@ -141,7 +154,6 @@
     <None Include="NFramework.Key.snk" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="QueryTool\Mysql\" />
     <Folder Include="QueryTool\Oracle\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

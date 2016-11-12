@@ -100,6 +100,50 @@
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static IList<PropertyInfo> GetProperties<T>(T obj)
+        {
+            return obj.GetType().GetProperties();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static IList<FieldInfo> GetFields<T>(T obj)
+        {
+            return obj.GetType().GetFields();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static IList<PropertyInfo> GetProperties(object obj)
+        {
+            return obj.GetType().GetProperties();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static IList<FieldInfo> GetFields(object obj)
+        {
+            return obj.GetType().GetFields();
+        }
+
         #endregion
     }
 }

@@ -77,7 +77,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
             query.AppendLine(@"     ,@UpdateTime ");
             query.AppendLine(@"); ");
 
-            DBParamCollection paramCollection = new DBParamCollection();
+            DBParamCollection<DBParam> paramCollection = new DBParamCollection<DBParam>();
             paramCollection.Add(new DBParam("@PositionId", position.PositionId, DbType.String, 40));
             paramCollection.Add(new DBParam("@PositionCode", position.PositionCode, DbType.String, 13));
             paramCollection.Add(new DBParam("@CompanyId", position.CompanyId, DbType.String, 40));
@@ -110,10 +110,10 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     throw new ResponseException((int)ResultCode.NoDataInsert, position.PositionCode);
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 position.PositionId = string.Empty;
-                throw;
+                throw new Exception(ex.Message, ex);
             }
 
             return position;
@@ -156,14 +156,14 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     }
                     else
                     {
-                        tran.RollBack();
+                        tran.Rollback();
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                tran.RollBack();
-                throw;
+                tran.Rollback();
+                throw new Exception(ex.Message, ex);
             }
 
             return newPositionList;
@@ -206,9 +206,9 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message, ex);
             }
 
             return newPositionList;
@@ -300,7 +300,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
         public void Delete(string positionId, ICTransaction tran)
         {
             PositionSearcher querySearcher = new PositionSearcher();
-            querySearcher.PositionId.AddCondition(ConditionFactory.Equal(positionId));
+            querySearcher.PositionId.Equal(positionId);
             this.Delete(querySearcher, tran);
         }
 
@@ -376,7 +376,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     effectCount = MssqlHelper.ExecuteNonQuery(this.CurrentConnectionString, CommandType.Text, query.ToString(), queryParser.ParamCollection);
                 }
             }
-            catch (SqlException sex)
+            catch(SqlException sex)
             {
                 if (sex.ErrorCode == (int)ResultCode.FKError)
                 {
@@ -404,7 +404,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
         public Position FindSingle(string positionId, ICTransaction tran)
         {
             PositionSearcher positionSearcher = new PositionSearcher();
-            positionSearcher.PositionId.AddCondition(ConditionFactory.Equal(positionId));
+            positionSearcher.PositionId.Equal(positionId);
             IList<Position> positionList = this.FindList(positionSearcher);
             return (positionList == null || positionList.Count == 0) ? null : positionList[0];
         }
@@ -785,7 +785,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
             }
 
             position.UpdateTime = DateTime.Now;
-            DBParamCollection paramCollection = new DBParamCollection();
+            DBParamCollection<DBParam> paramCollection = new DBParamCollection<DBParam>();
             paramCollection.Add(new DBParam("@PositionId", position.PositionId, DbType.String, 40));
             paramCollection.Add(new DBParam("@PositionCode", position.PositionCode, DbType.String, 13));
             paramCollection.Add(new DBParam("@CompanyId", position.CompanyId, DbType.String, 40));
@@ -821,9 +821,9 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     throw new ResponseException((int)ResultCode.NoDataUpdate, position.PositionCode);
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message, ex);
             }
         }
 
@@ -847,10 +847,10 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     tran.Commit();
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                tran.RollBack();
-                throw;
+                tran.Rollback();
+                throw new Exception(ex.Message, ex);
             }
         }
 
@@ -871,9 +871,9 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message, ex);
             }
         }
 

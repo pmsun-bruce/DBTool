@@ -6,6 +6,7 @@ namespace NFramework.DBTool.Test.Searcher
     using System.Collections;
 
     using NFramework.DBTool.QueryTool;
+    using System.Data;
 
     #endregion
 
@@ -31,7 +32,7 @@ namespace NFramework.DBTool.Test.Searcher
             {
                 if (this.employeeId == null)
                 {
-                    this.employeeId = new SearchColumn(this, "EmployeeId");
+                    this.employeeId = new SearchColumn(this, "EmployeeId", DbType.AnsiString);
                     this.ConditionColumnList.Add(this.employeeId);
                 }
 
@@ -51,7 +52,7 @@ namespace NFramework.DBTool.Test.Searcher
             {
                 if (this.employeeCode == null)
                 {
-                    this.employeeCode = new SearchColumn(this, "EmployeeCode");
+                    this.employeeCode = new SearchColumn(this, "EmployeeCode", DbType.AnsiString);
                     this.ConditionColumnList.Add(this.employeeCode);
                 }
 
@@ -72,7 +73,7 @@ namespace NFramework.DBTool.Test.Searcher
             {
                 if (this.name == null)
                 {
-                    this.name = new SearchColumn(this, "Name");
+                    this.name = new SearchColumn(this, "Name", DbType.String);
                     this.ConditionColumnList.Add(this.name);
                 }
 
@@ -93,7 +94,7 @@ namespace NFramework.DBTool.Test.Searcher
             {
                 if (this.birthday == null)
                 {
-                    this.birthday = new SearchColumn(this, "Birthday");
+                    this.birthday = new SearchColumn(this, "Birthday", DbType.DateTime);
                     this.ConditionColumnList.Add(this.birthday);
                 }
 
@@ -114,7 +115,7 @@ namespace NFramework.DBTool.Test.Searcher
             {
                 if (this.sex == null)
                 {
-                    this.sex = new SearchColumn(this, "Sex");
+                    this.sex = new SearchColumn(this, "Sex", DbType.Int32);
                     this.ConditionColumnList.Add(this.sex);
                 }
 
@@ -135,7 +136,7 @@ namespace NFramework.DBTool.Test.Searcher
             {
                 if (this.companyId == null)
                 {
-                    this.companyId = new SearchColumn(this, "CompanyId");
+                    this.companyId = new SearchColumn(this, "CompanyId", DbType.AnsiString);
                     this.ConditionColumnList.Add(this.companyId);
                 }
 
@@ -156,7 +157,7 @@ namespace NFramework.DBTool.Test.Searcher
             {
                 if (this.departmentId == null)
                 {
-                    this.departmentId = new SearchColumn(this, "DepartmentId");
+                    this.departmentId = new SearchColumn(this, "DepartmentId", DbType.AnsiString);
                     this.ConditionColumnList.Add(this.departmentId);
                 }
 
@@ -177,7 +178,7 @@ namespace NFramework.DBTool.Test.Searcher
             {
                 if (this.positionId == null)
                 {
-                    this.positionId = new SearchColumn(this, "PositionId");
+                    this.positionId = new SearchColumn(this, "PositionId", DbType.AnsiString);
                     this.ConditionColumnList.Add(this.positionId);
                 }
 
@@ -198,7 +199,7 @@ namespace NFramework.DBTool.Test.Searcher
             {
                 if (this.rand == null)
                 {
-                    this.rand = new SearchColumn(this, "Rand");
+                    this.rand = new SearchColumn(this, "Rand", DbType.Int32);
                     this.ConditionColumnList.Add(this.rand);
                 }
 
@@ -219,7 +220,7 @@ namespace NFramework.DBTool.Test.Searcher
             {
                 if (this.rVersion == null)
                 {
-                    this.rVersion = new SearchColumn(this, "RVersion");
+                    this.rVersion = new SearchColumn(this, "RVersion", DbType.Int32);
                     this.ConditionColumnList.Add(this.rVersion);
                 }
 
@@ -240,7 +241,7 @@ namespace NFramework.DBTool.Test.Searcher
             {
                 if (this.status == null)
                 {
-                    this.status = new SearchColumn(this, "Status");
+                    this.status = new SearchColumn(this, "Status", DbType.Int32);
                     this.ConditionColumnList.Add(this.status);
                 }
 
@@ -261,7 +262,7 @@ namespace NFramework.DBTool.Test.Searcher
             {
                 if (this.createrId == null)
                 {
-                    this.createrId = new SearchColumn(this, "CreaterId");
+                    this.createrId = new SearchColumn(this, "CreaterId", DbType.AnsiString);
                     this.ConditionColumnList.Add(this.createrId);
                 }
 
@@ -282,7 +283,7 @@ namespace NFramework.DBTool.Test.Searcher
             {
                 if (this.createTime == null)
                 {
-                    this.createTime = new SearchColumn(this, "CreateTime");
+                    this.createTime = new SearchColumn(this, "CreateTime", DbType.DateTime);
                     this.ConditionColumnList.Add(this.createTime);
                 }
 
@@ -303,7 +304,7 @@ namespace NFramework.DBTool.Test.Searcher
             {
                 if (this.updatorId == null)
                 {
-                    this.updatorId = new SearchColumn(this, "UpdatorId");
+                    this.updatorId = new SearchColumn(this, "UpdatorId", DbType.AnsiString);
                     this.ConditionColumnList.Add(this.updatorId);
                 }
 
@@ -324,7 +325,7 @@ namespace NFramework.DBTool.Test.Searcher
             {
                 if (this.updateTime == null)
                 {
-                    this.updateTime = new SearchColumn(this, "UpdateTime");
+                    this.updateTime = new SearchColumn(this, "UpdateTime", DbType.DateTime);
                     this.ConditionColumnList.Add(this.updateTime);
                 }
 
@@ -345,7 +346,7 @@ namespace NFramework.DBTool.Test.Searcher
             {
                 if (this.startWorkDate == null)
                 {
-                    this.startWorkDate = new SearchColumn(this, "StartWorkDate");
+                    this.startWorkDate = new SearchColumn(this, "StartWorkDate", DbType.DateTime);
                     this.ConditionColumnList.Add(this.startWorkDate);
                 }
 
@@ -366,7 +367,7 @@ namespace NFramework.DBTool.Test.Searcher
             {
                 if (this.joinDate == null)
                 {
-                    this.joinDate = new SearchColumn(this, "JoinDate");
+                    this.joinDate = new SearchColumn(this, "JoinDate", DbType.DateTime);
                     this.ConditionColumnList.Add(this.joinDate);
                 }
 
@@ -398,6 +399,7 @@ namespace NFramework.DBTool.Test.Searcher
 
                 if (this.currCompany != null)
                 {
+                    this.currCompany.ConditionMaxIndex = this.ConditionMaxIndex;
                     this.RelationSearcherList.Add(this.currCompany);
                 }
             }
@@ -427,6 +429,7 @@ namespace NFramework.DBTool.Test.Searcher
 
                 if (this.currDepartment != null)
                 {
+                    this.currDepartment.ConditionMaxIndex = this.ConditionMaxIndex;
                     this.RelationSearcherList.Add(this.currDepartment);
                 }
             }
@@ -456,6 +459,7 @@ namespace NFramework.DBTool.Test.Searcher
 
                 if (this.currPosition != null)
                 {
+                    this.currPosition.ConditionMaxIndex = this.ConditionMaxIndex;
                     this.RelationSearcherList.Add(this.currPosition);
                 }
             }
@@ -469,8 +473,8 @@ namespace NFramework.DBTool.Test.Searcher
         /// 构造函数，无参
         /// </summary>
         public EmployeeSearcher()
+            : base("Employee")
 		{
-            this.TableName = "Employee"; 
 		}
 		
 		#endregion

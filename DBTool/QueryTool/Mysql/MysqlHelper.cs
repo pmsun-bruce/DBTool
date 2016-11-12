@@ -1,26 +1,14 @@
-﻿namespace NFramework.DBTool.QueryTool.Mssql
+﻿using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Linq;
+using System.Text;
+
+namespace NFramework.DBTool.QueryTool.Mysql
 {
-    #region Reference
-
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Data.Common;
-    using System.Data.SqlClient;
-    using System.Linq;
-    using System.Text;
-
-    using Microsoft.Practices.EnterpriseLibrary.Data;
-    using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
-
-    using NFramework.DBTool.Common;
-
-    #endregion
-
-    /// <summary>
-    /// MSSQL的数据库执行帮助类
-    /// </summary>
-    public class MssqlHelper
+    public class MysqlHelper
     {
         #region Fields & Properties
 
@@ -28,16 +16,7 @@
         /// 锁对象
         /// </summary>
         private static object lockKey = new object();
-
-        /// <summary>
-        /// 数据库连接池
-        /// </summary>
-        private static Dictionary<string, Database> DbBasePool
-        {
-            get;
-            set;
-        }
-
+        
         #endregion
 
         #region Public Static Methods
@@ -51,9 +30,7 @@
         /// <returns>返回连接对象</returns>
         public static DbConnection OpenNewConnection(string connectionString)
         {
-            Database dbBase = GetDatabase(connectionString);
-            DbConnection dbConn = dbBase.CreateConnection();
-            dbConn.Open();
+            DbConnection dbConn = new MySqlConnection(connectionString);
             return dbConn;
         }
 
@@ -73,33 +50,6 @@
             dbConn = null;
         }
 
-        /// <summary>
-        /// 开启新的数据库事务
-        /// </summary>
-        /// <param name="connectionString">数据库连接字符串</param>
-        /// <returns>返回事务对象</returns>
-        public static DbTransaction OpenNewTransaction(string connectionString)
-        {
-            DbConnection dbCon = OpenNewConnection(connectionString);
-            return dbCon.BeginTransaction();
-        }
-
-        /// <summary>
-        /// 关闭事务
-        /// </summary>
-        /// <param name="tran">需要关闭的事务对象</param>
-        public static void CloseTransaction(DbTransaction tran)
-        {
-            if (tran == null)
-            {
-                return;
-            }
-
-            CloseConnection(tran.Connection);
-            tran.Dispose();
-            tran = null;
-        }
-
         #endregion
 
         #region ExecuteNonQuery
@@ -111,10 +61,9 @@
         /// <param name="commandType">执行类型</param>
         /// <param name="query">需要执行的SQL语句</param>
         /// <returns>返回执行影响的行数</returns>
-        public static int ExecuteNonQuery(string connectionString, CommandType commandType, string query)
+        public static int ExecuteNonQuery(string connectionString, string query)
         {
-            int result = ExecuteNonQuery(connectionString, commandType, query, null);
-            return result;
+            return MySqlHelper.ExecuteNonQuery(connectionString, query);
         }
 
         /// <summary>
@@ -125,7 +74,7 @@
         /// <param name="query">需要执行的SQL语句</param>
         /// <param name="dbParamCollection">执行中需要用到的参数集合</param>
         /// <returns>返回执行影响的行数</returns>
-        public static int ExecuteNonQuery(string connectionString, CommandType commandType, string query, DBParamCollection dbParamCollection)
+        public static int ExecuteNonQuery(string connectionString, string query, DBParamCollection dbParamCollection)
         {
             int result = 0;
             Database dbBase = GetDatabase(connectionString);
@@ -343,19 +292,26 @@
                 dbCommand = dbBase.GetStoredProcCommand(query);
             }
 
-            dbCommand.Connection = dbBase.CreateConnection();
-            dbCommand.Connection.Open();
             AddParamToCommand(dbBase, dbCommand, dbParamCollection);
-            DbDataAdapter dataAdapter = dbBase.GetDataAdapter();
-            dataAdapter.SelectCommand = dbCommand;
 
             if (page != null)
             {
-                dataAdapter.Fill(result, page.StartRecord, page.PageSize, srcTableName);
+                using (DbDataAdapter dataAdapter = dbBase.GetDataAdapter())
+                {
+                    dbCommand.Connection = dbBase.CreateConnection();
+                    dbCommand.Connection.Open();
+                    dataAdapter.SelectCommand = dbCommand;
+                    dataAdapter.Fill(result, page.StartRecord, page.PageSize, srcTableName);
+                    dbCommand.Connection.Close();
+                    dbCommand.Connection.Dispose();
+                    dbCommand.Connection = null;
+                    dbCommand.Dispose();
+                    dbCommand = null;
+                }
             }
             else
             {
-                dataAdapter.Fill(result);
+                result = dbBase.ExecuteDataSet(dbCommand);
             }
 
             return result;
@@ -418,7 +374,7 @@
             DataSet result = new DataSet();
             Database dbBase = GetDatabase(tran.Connection.ConnectionString);
             DbCommand dbCommand = null;
-            
+
             if (commandType == CommandType.Text)
             {
                 dbCommand = dbBase.GetSqlStringCommand(query);
@@ -428,19 +384,21 @@
                 dbCommand = dbBase.GetStoredProcCommand(query);
             }
 
-            dbCommand.Connection = tran.Connection;
-            dbCommand.Transaction = tran;
             AddParamToCommand(dbBase, dbCommand, dbParamCollection);
-            DbDataAdapter dataAdapter = dbBase.GetDataAdapter();
-            dataAdapter.SelectCommand = dbCommand;
 
             if (page != null)
             {
-                dataAdapter.Fill(result, page.StartRecord, page.PageSize, srcTableName);
+                using (DbDataAdapter dataAdapter = dbBase.GetDataAdapter())
+                {
+                    dataAdapter.SelectCommand = dbCommand;
+                    dbCommand.Connection = tran.Connection;
+                    dbCommand.Transaction = tran;
+                    dataAdapter.Fill(result, page.StartRecord, page.PageSize, srcTableName);
+                }
             }
             else
             {
-                dataAdapter.Fill(result);
+                result = dbBase.ExecuteDataSet(dbCommand, tran);
             }
 
             return result;
@@ -664,7 +622,7 @@
             {
                 return;
             }
-            
+
             foreach (DbParameter dbParam in dbParamCollection)
             {
                 dbBase.AddInParameter(command, dbParam.ParameterName, dbParam.DbType, dbParam.Value);
@@ -682,7 +640,7 @@
         /// </summary>
         private MssqlHelper()
         {
-            
+
         }
 
         #endregion

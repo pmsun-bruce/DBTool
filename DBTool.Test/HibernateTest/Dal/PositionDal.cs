@@ -116,7 +116,7 @@ namespace NFramework.DBTool.Test.HibernateTest.Dal
                     HibernateHelper.FlushSession(session);
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 if (ihTran != null)
                 {
@@ -124,7 +124,7 @@ namespace NFramework.DBTool.Test.HibernateTest.Dal
                     HibernateHelper.FlushSession(session);
                 }
 
-                throw;
+                throw new Exception(ex.Message, ex);
             }
 
             return newPositionList;
@@ -611,14 +611,14 @@ namespace NFramework.DBTool.Test.HibernateTest.Dal
 
                 HibernateHelper.FlushSession(session);
             }
-            catch
+            catch(Exception ex)
             {
                 if (ihTran != null)
                 {
                     ihTran.Rollback();
                 }
 
-                throw;
+                throw new Exception(ex.Message, ex);
             }
         }
 

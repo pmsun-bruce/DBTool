@@ -9,7 +9,7 @@ for your own use before compile tests in VisualStudio.
 	<session-factory name="NHibernate.SpringSample">
 		<property name="connection.driver_class">NHibernate.Driver.SqlClientDriver</property>
 		<property name="connection.connection_string">
-            Persist Security Info=False;User ID=devuser;Pwd=1qazxsw2;Initial Catalog=DBToolSampleDB;Data Source=(local)
+            Server=IT11001312P1\SQLEX2008R2;database=DBToolSampleDB;User Id=sa;Pwd=1qazxsw2;
         </property>
         <!--property name="connection.connection_string">
             Persist Security Info=False;User ID=sa;Pwd=1qazxsw2;Initial Catalog=DBToolSampleDB;Data Source=IPAP11001312P1\SQLEXPRESS

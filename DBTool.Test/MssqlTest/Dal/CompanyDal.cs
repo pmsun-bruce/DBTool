@@ -77,7 +77,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
             query.AppendLine(@"    ,@UpdateTime ");
             query.AppendLine(@"); ");
 
-            DBParamCollection paramCollection = new DBParamCollection();
+            DBParamCollection<DBParam> paramCollection = new DBParamCollection<DBParam>();
             paramCollection.Add(new DBParam("@CompanyId", company.CompanyId, DbType.String, 40));
             paramCollection.Add(new DBParam("@CompanyCode", company.CompanyCode, DbType.String, 5));
             paramCollection.Add(new DBParam("@Name", company.Name, DbType.String, 200));
@@ -113,10 +113,10 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     throw new ResponseException((int)ResultCode.NoDataInsert, company.CompanyCode);
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 company.CompanyId = string.Empty;
-                throw;
+                throw new Exception(ex.Message, ex);
             }
 
             return company;
@@ -159,14 +159,14 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     }
                     else
                     {
-                        tran.RollBack();
+                        tran.Rollback();
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                tran.RollBack();
-                throw;
+                tran.Rollback();
+                throw new Exception(ex.Message, ex);
             }
 
             return newCompanyList;
@@ -209,9 +209,9 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message, ex);
             }
 
             return newCompanyList;
@@ -289,7 +289,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
         public void Delete(string companyId, ICTransaction tran)
         {
             CompanySearcher querySearcher = new CompanySearcher();
-            querySearcher.CompanyId.AddCondition(ConditionFactory.Equal(companyId));
+            querySearcher.CompanyId.Equal(companyId);
             this.Delete(querySearcher, tran);
         }
 
@@ -371,7 +371,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
         public Company FindSingle(string companyId, ICTransaction tran)
         {
             CompanySearcher companySearcher = new CompanySearcher();
-            companySearcher.CompanyId.AddCondition(ConditionFactory.Equal(companyId));
+            companySearcher.CompanyId.Equal(companyId);
             IList<Company> companyList = this.FindList(companySearcher);
             return (companyList == null || companyList.Count == 0) ? null : companyList[0];
         }
@@ -736,7 +736,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
             }
 
             company.UpdateTime = DateTime.Now;
-            DBParamCollection paramCollection = new DBParamCollection();
+            DBParamCollection<DBParam> paramCollection = new DBParamCollection<DBParam>();
             paramCollection.Add(new DBParam("@CompanyId", company.CompanyId, DbType.String, 40));
             paramCollection.Add(new DBParam("@CompanyCode", company.CompanyCode, DbType.String, 5));
             paramCollection.Add(new DBParam("@Name", company.Name, DbType.String, 200));
@@ -772,9 +772,9 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     throw new ResponseException((int)ResultCode.NoDataUpdate, company.CompanyCode);
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message, ex);
             }
         }
 
@@ -798,10 +798,10 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     tran.Commit();
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                tran.RollBack();
-                throw;
+                tran.Rollback();
+                throw new Exception(ex.Message, ex);
             }
         }
 
@@ -822,9 +822,9 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message, ex);
             }
         }
 

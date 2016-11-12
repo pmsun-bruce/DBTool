@@ -89,7 +89,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
             query.AppendLine(@"    ,@JoinDate ");
             query.AppendLine(@"); ");
 
-            DBParamCollection paramCollection = new DBParamCollection();
+            DBParamCollection<DBParam> paramCollection = new DBParamCollection<DBParam>();
             paramCollection.Add(new DBParam("@EmployeeId", employee.EmployeeId, DbType.String, 40));
             paramCollection.Add(new DBParam("@EmployeeCode", employee.EmployeeCode, DbType.String, 15));
             paramCollection.Add(new DBParam("@Name", employee.Name, DbType.String, 50));
@@ -128,10 +128,10 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     throw new ResponseException((int)ResultCode.NoDataInsert, employee.EmployeeCode);
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 employee.EmployeeId = string.Empty;
-                throw;
+                throw new Exception(ex.Message, ex);
             }
 
             return employee;
@@ -174,14 +174,14 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     }
                     else
                     {
-                        tran.RollBack();
+                        tran.Rollback();
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                tran.RollBack();
-                throw;
+                tran.Rollback();
+                throw new Exception(ex.Message, ex);
             }
 
             return newEmployeeList;
@@ -224,9 +224,9 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message, ex);
             }
 
             return newEmployeeList;
@@ -325,7 +325,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
         public void Delete(string employeeId, ICTransaction tran)
         {
             EmployeeSearcher querySearcher = new EmployeeSearcher();
-            querySearcher.EmployeeId.AddCondition(ConditionFactory.Equal(employeeId));
+            querySearcher.EmployeeId.Equal(employeeId);
             this.Delete(querySearcher, tran);
         }
 
@@ -407,7 +407,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     effectCount = MssqlHelper.ExecuteNonQuery(this.CurrentConnectionString, CommandType.Text, query.ToString(), queryParser.ParamCollection);
                 }
             }
-            catch (SqlException sex)
+            catch(SqlException sex)
             {
                 if (sex.ErrorCode == (int)ResultCode.FKError)
                 {
@@ -435,7 +435,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
         public Employee FindSingle(string employeeId, ICTransaction tran)
         {
             EmployeeSearcher employeeSearcher = new EmployeeSearcher();
-            employeeSearcher.EmployeeId.AddCondition(ConditionFactory.Equal(employeeId));
+            employeeSearcher.EmployeeId.Equal(employeeId);
             IList<Employee> employeeList = this.FindList(employeeSearcher);
             return (employeeList == null || employeeList.Count == 0) ? null : employeeList[0];
         }
@@ -896,7 +896,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
             }
 
             employee.UpdateTime = DateTime.Now;
-            DBParamCollection paramCollection = new DBParamCollection();
+            DBParamCollection<DBParam> paramCollection = new DBParamCollection<DBParam>();
             paramCollection.Add(new DBParam("@EmployeeId", employee.EmployeeId, DbType.String, 40));
             paramCollection.Add(new DBParam("@EmployeeCode", employee.EmployeeCode, DbType.String, 15));
             paramCollection.Add(new DBParam("@Name", employee.Name, DbType.String, 50));
@@ -938,9 +938,9 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     throw new ResponseException((int)ResultCode.NoDataUpdate, employee.EmployeeCode);
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message, ex);
             }
         }
 
@@ -964,10 +964,10 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     tran.Commit();
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                tran.RollBack();
-                throw;
+                tran.Rollback();
+                throw new Exception(ex.Message, ex);
             }
         }
 
@@ -988,9 +988,9 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message, ex);
             }
         }
 

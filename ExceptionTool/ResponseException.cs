@@ -14,6 +14,12 @@
     /// </summary>
     public class ResponseException : Exception
     {
+        public int ResultCode
+        {
+            get;
+            private set;
+        }
+
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -28,7 +34,7 @@
         /// <param name="message">消息字符串</param>
         public ResponseException(string message) : base(message)
         {
-
+            this.HResult = (int)NFramework.ExceptionTool.ResultCode.Failed;
         }
 
         /// <summary>
@@ -46,9 +52,9 @@
         /// </summary>
         /// <param name="message">消息字符串</param>
         /// <param name="innerException">内部异常</param>
-        public ResponseException(string message, ResponseException innerException) : base(message, innerException)
+        public ResponseException(string message, Exception innerException) : base(message, innerException)
         {
-
+            this.HResult = (int)NFramework.ExceptionTool.ResultCode.Failed;
         }
 
         /// <summary>
@@ -57,7 +63,7 @@
         /// <param name="hResult">反馈代码</param>
         /// <param name="message">消息字符串</param>
         /// <param name="innerException">内部异常</param>
-        public ResponseException(int hResult, string message, ResponseException innerException): base(message, innerException)
+        public ResponseException(int hResult, string message, Exception innerException): base(message, innerException)
         {
             this.HResult = hResult;
         }

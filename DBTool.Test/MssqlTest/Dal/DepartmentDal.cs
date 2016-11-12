@@ -75,7 +75,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
             query.AppendLine(@"    ,@UpdateTime ");
             query.AppendLine(@"); ");
 
-            DBParamCollection paramCollection = new DBParamCollection();
+            DBParamCollection<DBParam> paramCollection = new DBParamCollection<DBParam>();
             paramCollection.Add(new DBParam("@DepartmentId", department.DepartmentId, DbType.String, 40));
             paramCollection.Add(new DBParam("@DepartmentCode", department.DepartmentCode, DbType.String, 10));
             paramCollection.Add(new DBParam("@CompanyId", department.CompanyId, DbType.String, 40));
@@ -107,10 +107,10 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     throw new ResponseException((int)ResultCode.NoDataInsert, department.DepartmentCode);
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 department.DepartmentId = string.Empty;
-                throw;
+                throw new Exception(ex.Message, ex);
             }
 
             return department;
@@ -153,14 +153,14 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     }
                     else
                     {
-                        tran.RollBack();
+                        tran.Rollback();
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                tran.RollBack();
-                throw;
+                tran.Rollback();
+                throw new Exception(ex.Message, ex);
             }
 
             return newDepartmentList;
@@ -203,9 +203,9 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message, ex);
             }
 
             return newDepartmentList;
@@ -290,7 +290,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
         public void Delete(string departmentId, ICTransaction tran)
         {
             DepartmentSearcher querySearcher = new DepartmentSearcher();
-            querySearcher.DepartmentId.AddCondition(ConditionFactory.Equal(departmentId));
+            querySearcher.DepartmentId.Equal(departmentId);
             this.Delete(querySearcher, tran);
         }
 
@@ -358,7 +358,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     effectCount = MssqlHelper.ExecuteNonQuery(this.CurrentConnectionString, CommandType.Text, query.ToString(), queryParser.ParamCollection);
                 }
             }
-            catch (SqlException sex)
+            catch(SqlException sex)
             {
                 if (sex.ErrorCode == (int)ResultCode.FKError)
                 {
@@ -386,7 +386,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
         public Department FindSingle(string departmentId, ICTransaction tran)
         {
             DepartmentSearcher departmentSearcher = new DepartmentSearcher();
-            departmentSearcher.DepartmentId.AddCondition(ConditionFactory.Equal(departmentId));
+            departmentSearcher.DepartmentId.Equal(departmentId);
             IList<Department> departmentList = this.FindList(departmentSearcher);
             return (departmentList == null || departmentList.Count == 0) ? null : departmentList[0];
         }
@@ -747,7 +747,7 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
             }
 
             department.UpdateTime = DateTime.Now;
-            DBParamCollection paramCollection = new DBParamCollection();
+            DBParamCollection<DBParam> paramCollection = new DBParamCollection<DBParam>();
             paramCollection.Add(new DBParam("@DepartmentId", department.DepartmentId, DbType.String, 40));
             paramCollection.Add(new DBParam("@DepartmentCode", department.DepartmentCode, DbType.String, 10));
             paramCollection.Add(new DBParam("@CompanyId", department.CompanyId, DbType.String, 40));
@@ -782,9 +782,9 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     throw new ResponseException((int)ResultCode.NoDataUpdate, department.DepartmentCode);
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message, ex);
             }
         }
 
@@ -808,10 +808,10 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     tran.Commit();
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                tran.RollBack();
-                throw;
+                tran.Rollback();
+                throw new Exception(ex.Message, ex);
             }
         }
 
@@ -832,9 +832,9 @@ namespace NFramework.DBTool.Test.MSSQLTest.Dal
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message, ex);
             }
         }
 
